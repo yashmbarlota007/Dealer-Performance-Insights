@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Yash Marketing - Dealer Performance & Insights Engine</title>
+  <title>Yash Marketing - Dealer Performance & Insights Engine (Live)</title>
   
   <!-- Tailwind CSS & Font Awesome -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,12 +23,6 @@
               500: '#22c55e',
               600: '#16a34a',
               700: '#15803d'
-            },
-            dark: {
-              bg: '#0f172a',
-              card: '#1e293b',
-              border: '#334155',
-              text: '#f8fafc'
             }
           }
         }
@@ -37,17 +31,17 @@
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #0b0f19;
+      background-color: #090d16;
       color: #f1f5f9;
       -webkit-tap-highlight-color: transparent;
     }
     .glass-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(22, 30, 49, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .custom-scroll::-webkit-scrollbar {
@@ -65,6 +59,15 @@
     .badge-gold { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
     .badge-silver { background: linear-gradient(135deg, #94a3b8, #64748b); color: #fff; }
     .badge-bronze { background: linear-gradient(135deg, #b45309, #78350f); color: #fff; }
+    .pulse-ring {
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
   </style>
 </head>
 
@@ -75,35 +78,35 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-          <i class="fa-solid fa-store text-slate-950 text-xl font-black"></i>
+          <i class="fa-solid fa-chart-line text-slate-950 text-xl font-black"></i>
         </div>
         <div>
           <div class="flex items-center space-x-2">
             <h1 class="text-base sm:text-lg font-bold text-white tracking-wide">Yash Marketing</h1>
             <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">Dealer OS</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold hidden sm:inline">LIVE CLOUD</span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block">Performance Analytics & Intelligent Radar</p>
+          <p class="text-xs text-slate-400 hidden sm:block">Automated Live Dealer Analytics & Insights Radar</p>
         </div>
       </div>
 
       <!-- Action items in header -->
       <div class="flex items-center space-x-3">
-        <button id="btnRefresh" onclick="loadDashboardData()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 flex items-center space-x-2 transition shadow-sm">
+        <!-- Live status indicator -->
+        <div class="flex items-center space-x-2 bg-slate-800/80 px-2.5 py-1.5 rounded-lg border border-slate-700">
+          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-ring"></div>
+          <span class="text-xs font-semibold text-emerald-400" id="liveSyncStatus">Live Connected</span>
+        </div>
+
+        <button id="btnRefresh" onclick="fetchLiveBackendData()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 flex items-center space-x-2 transition shadow-sm">
           <i class="fa-solid fa-rotate text-emerald-400" id="refreshIcon"></i>
-          <span class="hidden md:inline">Sync Data</span>
+          <span class="hidden md:inline">Sync Now</span>
         </button>
 
         <button onclick="exportToCSV()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 flex items-center space-x-2 transition shadow-sm">
           <i class="fa-solid fa-file-arrow-down text-blue-400"></i>
           <span class="hidden md:inline">Export CSV</span>
         </button>
-
-        <div class="h-6 w-px bg-slate-800 hidden sm:block"></div>
-
-        <div class="flex items-center space-x-2 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
-          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-          <span class="text-xs font-medium text-slate-300" id="userRoleBadge">Enterprise</span>
-        </div>
       </div>
     </div>
   </header>
@@ -124,12 +127,12 @@
       </button>
       <button onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800/50">
         <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
-        <span>At-Risk & Debt Radar</span>
+        <span>At-Risk & Churn Radar</span>
         <span id="badgeAlertCount" class="text-xs px-1.5 py-0.2 rounded-full bg-red-500/20 text-red-400 font-bold">0</span>
       </button>
       <button onclick="switchTab('areas')" id="tabBtn-areas" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800/50">
         <i class="fa-solid fa-map-location-dot text-indigo-400"></i>
-        <span>Area & Route Analytics</span>
+        <span>Territory & Area Analytics</span>
       </button>
     </div>
 
@@ -139,7 +142,7 @@
         <!-- Search Input -->
         <div class="lg:col-span-2 relative">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
-          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search dealer name, phone, or beat..." 
+          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search dealer name, phone, or area..." 
             class="w-full pl-9 pr-4 py-2.5 bg-slate-900/90 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 border border-slate-700/80 focus:border-emerald-500 focus:outline-none transition">
         </div>
 
@@ -147,7 +150,7 @@
         <div>
           <select id="areaFilter" onchange="applyFilters()" 
             class="w-full px-3 py-2.5 bg-slate-900/90 rounded-xl text-xs sm:text-sm text-slate-300 border border-slate-700/80 focus:border-emerald-500 focus:outline-none">
-            <option value="">All Areas</option>
+            <option value="">All Territories</option>
           </select>
         </div>
 
@@ -171,7 +174,8 @@
             <option value="Active">Active (&lt;30 days)</option>
             <option value="At Risk">At Risk (30-75 days)</option>
             <option value="Hibernating">Hibernating (&gt;75 days)</option>
-            <option value="Critical">Critical Debt Overdue</option>
+            <option value="Credit Locked">Credit Locked</option>
+            <option value="VIP">VIP Accounts</option>
           </select>
         </div>
       </div>
@@ -180,7 +184,7 @@
     <!-- LOADING STATE -->
     <div id="loadingState" class="py-16 flex flex-col items-center justify-center space-y-4">
       <div class="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
-      <p class="text-sm font-medium text-slate-400 animate-pulse">Aggregating real-time dealer analytics & insights...</p>
+      <p class="text-sm font-medium text-slate-400 animate-pulse" id="loadingText">Connecting to live Yash Marketing cloud database...</p>
     </div>
 
     <!-- TAB 1: EXECUTIVE OVERVIEW -->
@@ -191,7 +195,7 @@
         <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-emerald-500/40 transition">
           <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition"></div>
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Sales</span>
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Sales Volume</span>
             <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">
               <i class="fa-solid fa-indian-rupee-sign"></i>
             </div>
@@ -199,7 +203,7 @@
           <div class="mt-3">
             <h3 class="text-lg sm:text-2xl font-black text-white" id="kpiRevenue">₹0</h3>
             <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
-              <span>Avg Order:</span>
+              <span>Avg Order Value:</span>
               <span class="text-emerald-400 font-semibold" id="kpiAOV">₹0</span>
             </p>
           </div>
@@ -217,26 +221,25 @@
           <div class="mt-3">
             <h3 class="text-lg sm:text-2xl font-black text-white" id="kpiOrders">0</h3>
             <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
-              <span>Dealers Active:</span>
-              <span class="text-blue-400 font-semibold" id="kpiActiveDealers">0</span>
+              <span>Unique Dealers:</span>
+              <span class="text-blue-400 font-semibold" id="kpiDealersCount">0</span>
             </p>
           </div>
         </div>
 
-        <!-- Outstanding Due -->
-        <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-amber-500/40 transition">
-          <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition"></div>
+        <!-- Active vs At-Risk -->
+        <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-emerald-500/40 transition">
+          <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition"></div>
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Dues</span>
-            <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm">
-              <i class="fa-solid fa-wallet"></i>
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Active Dealers</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-store"></i>
             </div>
           </div>
           <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-amber-400" id="kpiOutstanding">₹0</h3>
+            <h3 class="text-lg sm:text-2xl font-black text-emerald-400" id="kpiActiveDealers">0</h3>
             <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
-              <span>High Aging Debtors:</span>
-              <span class="text-rose-400 font-semibold" id="kpiHighDebt">0</span>
+              <span>Ordering in &lt;30d</span>
             </p>
           </div>
         </div>
@@ -245,7 +248,7 @@
         <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-rose-500/40 transition">
           <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-rose-500/10 rounded-full blur-xl group-hover:bg-rose-500/20 transition"></div>
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">At-Risk Accounts</span>
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">At-Risk & Dormant</span>
             <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-400 flex items-center justify-center text-sm">
               <i class="fa-solid fa-user-clock"></i>
             </div>
@@ -253,14 +256,14 @@
           <div class="mt-3">
             <h3 class="text-lg sm:text-2xl font-black text-rose-400" id="kpiAtRisk">0</h3>
             <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
-              <span>Hibernating (&gt;75d):</span>
-              <span class="text-slate-300 font-semibold" id="kpiHibernating">0</span>
+              <span>Credit Locked:</span>
+              <span class="text-amber-400 font-semibold" id="kpiCreditLocked">0</span>
             </p>
           </div>
         </div>
       </div>
 
-      <!-- SMART ACTION RADAR / AI INSIGHTS NOTIFICATIONS -->
+      <!-- SMART ACTION RADAR / LIVE INSIGHTS -->
       <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
@@ -268,11 +271,11 @@
               <i class="fa-solid fa-bolt"></i>
             </div>
             <div>
-              <h3 class="text-sm sm:text-base font-bold text-white">Actionable Insights & Priority Radar</h3>
-              <p class="text-xs text-slate-400">Algorithmic drop-off warnings and recovery opportunities</p>
+              <h3 class="text-sm sm:text-base font-bold text-white">Live Insights & Churn Radar</h3>
+              <p class="text-xs text-slate-400">Algorithmic risk warnings derived from 710+ live transaction records</p>
             </div>
           </div>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 font-medium">Real-time</span>
+          <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">Auto-Refreshed</span>
         </div>
 
         <div id="alertsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -287,9 +290,9 @@
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-sm sm:text-base font-bold text-white">Monthly Sales Growth Trend</h3>
-              <p class="text-xs text-slate-400">Revenue aggregated across all active routes</p>
+              <p class="text-xs text-slate-400">Total transaction volume grouped chronologically</p>
             </div>
-            <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">Monthly</span>
+            <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">Live</span>
           </div>
           <div class="h-64 relative">
             <canvas id="salesTrendChart"></canvas>
@@ -300,8 +303,8 @@
         <div class="glass-card rounded-2xl p-5 space-y-3">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-sm sm:text-base font-bold text-white">Tier Segmentation</h3>
-              <p class="text-xs text-slate-400">Share of revenue by dealer tier</p>
+              <h3 class="text-sm sm:text-base font-bold text-white">Dealer Tier Distribution</h3>
+              <p class="text-xs text-slate-400">Volume distribution by dealer value tier</p>
             </div>
           </div>
           <div class="h-64 relative flex items-center justify-center">
@@ -310,32 +313,32 @@
         </div>
       </div>
 
-      <!-- TOP DEALERS & TOP DEBTORS PREVIEW -->
+      <!-- TOP DEALERS PREVIEW -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Top 5 Champions -->
         <div class="glass-card rounded-2xl p-5 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <i class="fa-solid fa-trophy text-amber-400 text-base"></i>
-              <h3 class="text-sm sm:text-base font-bold text-white">Top 5 Revenue Champions</h3>
+              <h3 class="text-sm sm:text-base font-bold text-white">Top Revenue Champions</h3>
             </div>
-            <button onclick="switchTab('dealers')" class="text-xs text-emerald-400 hover:underline">View All</button>
+            <button onclick="switchTab('dealers')" class="text-xs text-emerald-400 hover:underline">View All Dealers</button>
           </div>
           <div id="topChampionsList" class="space-y-2.5">
             <!-- Dynamic items -->
           </div>
         </div>
 
-        <!-- Top 5 Critical Debtors -->
+        <!-- At-Risk Accounts Preview -->
         <div class="glass-card rounded-2xl p-5 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <i class="fa-solid fa-triangle-exclamation text-rose-400 text-base"></i>
-              <h3 class="text-sm sm:text-base font-bold text-white">Critical Outstandings & Aging</h3>
+              <h3 class="text-sm sm:text-base font-bold text-white">At-Risk & Dormant High-Spenders</h3>
             </div>
-            <button onclick="switchTab('radar')" class="text-xs text-rose-400 hover:underline">View Radar</button>
+            <button onclick="switchTab('radar')" class="text-xs text-rose-400 hover:underline">View Full Radar</button>
           </div>
-          <div id="topDebtorsList" class="space-y-2.5">
+          <div id="topAtRiskList" class="space-y-2.5">
             <!-- Dynamic items -->
           </div>
         </div>
@@ -351,27 +354,27 @@
             <p class="text-xs text-slate-400" id="tableFilterSummary">Showing all dealers</p>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="text-xs text-slate-400">Sort by:</span>
+            <span class="text-xs text-slate-400">Sort:</span>
             <select id="sortSelect" onchange="applyFilters()" class="bg-slate-900 border border-slate-700 text-xs text-slate-300 rounded-lg px-2.5 py-1.5 focus:outline-none">
               <option value="revenue-desc">Highest Revenue</option>
-              <option value="outstanding-desc">Highest Outstanding</option>
               <option value="orders-desc">Most Orders</option>
-              <option value="last-order">Recent Activity</option>
+              <option value="last-order">Recent Orders First</option>
+              <option value="name-asc">Alphabetical (A-Z)</option>
             </select>
           </div>
         </div>
 
-        <!-- Desktop / Tablet Table -->
+        <!-- Table -->
         <div class="overflow-x-auto custom-scroll">
           <table class="w-full text-left text-xs sm:text-sm">
             <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
               <tr>
-                <th class="py-3 px-4">Dealer / Shop</th>
-                <th class="py-3 px-3">Area / Beat</th>
+                <th class="py-3 px-4">Dealer / Shop Name</th>
+                <th class="py-3 px-3">Area / Territory</th>
                 <th class="py-3 px-3">Tier</th>
-                <th class="py-3 px-3 text-right">Total Sales</th>
+                <th class="py-3 px-3 text-right">Total Revenue</th>
                 <th class="py-3 px-3 text-right">Orders</th>
-                <th class="py-3 px-3 text-right">Outstanding</th>
+                <th class="py-3 px-3 text-right">Avg Order (AOV)</th>
                 <th class="py-3 px-3">Health Status</th>
                 <th class="py-3 px-4 text-center">Quick Action</th>
               </tr>
@@ -384,12 +387,12 @@
 
         <div id="emptyTableMessage" class="py-12 text-center text-slate-500 hidden">
           <i class="fa-solid fa-users-slash text-3xl mb-2"></i>
-          <p class="text-sm">No dealers found matching your current search/filter.</p>
+          <p class="text-sm">No dealers found matching your current filter.</p>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: AT-RISK & DEBT RADAR -->
+    <!-- TAB 3: AT-RISK & CHURN RADAR -->
     <div id="tabContent-radar" class="space-y-6 hidden">
       <div class="glass-card rounded-2xl p-5 space-y-4">
         <div class="flex items-center space-x-3">
@@ -397,8 +400,8 @@
             <i class="fa-solid fa-shield-halved"></i>
           </div>
           <div>
-            <h3 class="text-base sm:text-lg font-bold text-white">Debtor Aging & Churn Early Warning Radar</h3>
-            <p class="text-xs text-slate-400">High credit exposure dealers, overdue aging (>45 days), and dormant champion accounts</p>
+            <h3 class="text-base sm:text-lg font-bold text-white">Dealer Churn Prevention & Credit Risk Radar</h3>
+            <p class="text-xs text-slate-400">High-value accounts experiencing drop-offs or active credit lock blocks</p>
           </div>
         </div>
 
@@ -409,7 +412,7 @@
       </div>
     </div>
 
-    <!-- TAB 4: AREA & ROUTE ANALYTICS -->
+    <!-- TAB 4: TERRITORY & AREA ANALYTICS -->
     <div id="tabContent-areas" class="space-y-6 hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Area Bar Chart -->
@@ -417,7 +420,7 @@
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-sm sm:text-base font-bold text-white">Territory Revenue Comparison</h3>
-              <p class="text-xs text-slate-400">Aggregate sales volume mapped across beats</p>
+              <p class="text-xs text-slate-400">Sales volume distributed across dealer geographic areas</p>
             </div>
           </div>
           <div class="h-72 relative">
@@ -427,7 +430,7 @@
 
         <!-- Area Matrix List -->
         <div class="glass-card rounded-2xl p-5 space-y-4">
-          <h3 class="text-sm sm:text-base font-bold text-white">Route Performance Matrix</h3>
+          <h3 class="text-sm sm:text-base font-bold text-white">Territory Summary</h3>
           <div id="areaMatrixList" class="space-y-3 custom-scroll max-h-72 overflow-y-auto pr-1">
             <!-- Dynamic -->
           </div>
@@ -437,8 +440,8 @@
 
   </main>
 
-  <!-- DEALER 360 DRAWER / MODAL -->
-  <div id="dealerModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
+  <!-- DEALER 360 MODAL -->
+  <div id="dealerModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
     <div class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
       
       <!-- Modal Header -->
@@ -451,11 +454,12 @@
             <div class="flex items-center space-x-2">
               <h2 class="text-base sm:text-lg font-bold text-white" id="modalShopName">Dealer Details</h2>
               <span id="modalTierBadge" class="text-xs px-2 py-0.5 rounded-full font-semibold">Tier</span>
+              <span id="modalVipBadge" class="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 hidden">VIP</span>
             </div>
             <p class="text-xs text-slate-400 flex items-center space-x-2 mt-0.5">
               <span id="modalPhone">--</span>
               <span>•</span>
-              <span id="modalAreaBeat">Area / Beat</span>
+              <span id="modalArea">Territory</span>
             </p>
           </div>
         </div>
@@ -471,20 +475,20 @@
         <!-- Quick Metric Tiles -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Total Lifetime Sales</span>
+            <span class="text-xs text-slate-400">Total Sales Volume</span>
             <p class="text-base font-bold text-white mt-1" id="modalTotalRevenue">₹0</p>
           </div>
           <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Total Orders Placed</span>
+            <span class="text-xs text-slate-400">Total Orders</span>
             <p class="text-base font-bold text-white mt-1" id="modalTotalOrders">0</p>
           </div>
           <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Current Outstanding</span>
-            <p class="text-base font-bold text-amber-400 mt-1" id="modalOutstanding">₹0</p>
+            <span class="text-xs text-slate-400">Average Order (AOV)</span>
+            <p class="text-base font-bold text-emerald-400 mt-1" id="modalAOV">₹0</p>
           </div>
           <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Credit Limit</span>
-            <p class="text-base font-bold text-slate-300 mt-1" id="modalCreditLimit">₹0</p>
+            <span class="text-xs text-slate-400">Last Order Date</span>
+            <p class="text-base font-bold text-slate-300 mt-1" id="modalLastOrderDate">--</p>
           </div>
         </div>
 
@@ -492,71 +496,23 @@
         <div class="flex flex-wrap gap-2.5">
           <button id="modalBtnWhatsApp" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center space-x-2 transition shadow-sm">
             <i class="fa-brands fa-whatsapp text-sm"></i>
-            <span>Send WhatsApp Statement</span>
+            <span>Send WhatsApp Catalog / Statement</span>
           </button>
 
           <button id="modalBtnCall" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold flex items-center space-x-2 transition shadow-sm">
             <i class="fa-solid fa-phone text-sm"></i>
             <span>Call Dealer</span>
           </button>
-
-          <button onclick="openActionForm()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 flex items-center space-x-2 transition">
-            <i class="fa-solid fa-pen-to-square text-sm text-indigo-400"></i>
-            <span>Log Call / Meeting Note</span>
-          </button>
         </div>
 
-        <!-- Log Action Form (Collapsible) -->
-        <div id="actionFormSection" class="bg-slate-800/40 p-4 rounded-xl border border-slate-800 space-y-3 hidden">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">Record Action or Follow-up</h4>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label class="text-xs text-slate-400 block mb-1">Action Type</label>
-              <select id="actionTypeInput" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
-                <option value="Phone Call">Phone Call</option>
-                <option value="WhatsApp Followup">WhatsApp Followup</option>
-                <option value="Payment Promise">Payment Commitment</option>
-                <option value="Store Visit Request">Store Visit Request</option>
-                <option value="Credit Review">Credit Review</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-xs text-slate-400 block mb-1">Follow-up Date</label>
-              <input type="date" id="actionFollowUpDate" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
-            </div>
-            <div class="sm:col-span-3">
-              <label class="text-xs text-slate-400 block mb-1">Discussion Remarks</label>
-              <input type="text" id="actionNotesInput" placeholder="Details discussed with dealer..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
-            </div>
-          </div>
-          <div class="flex justify-end space-x-2 pt-1">
-            <button onclick="closeActionForm()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 text-xs">Cancel</button>
-            <button onclick="submitActionLog()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">Save Note</button>
-          </div>
-        </div>
-
-        <!-- Recent Orders & Activity Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <!-- Orders History -->
-          <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800/80 space-y-3">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center justify-between">
-              <span>Recent Orders</span>
-              <span class="text-slate-500 lowercase font-normal">(Last 15)</span>
-            </h4>
-            <div id="modalOrdersList" class="space-y-2 max-h-56 overflow-y-auto custom-scroll pr-1">
-              <!-- Rendered via JS -->
-            </div>
-          </div>
-
-          <!-- Market Visits & Notes -->
-          <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800/80 space-y-3">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center justify-between">
-              <span>Market Visits & Field Notes</span>
-              <span class="text-slate-500 lowercase font-normal">(Geofenced visits)</span>
-            </h4>
-            <div id="modalVisitsList" class="space-y-2 max-h-56 overflow-y-auto custom-scroll pr-1">
-              <!-- Rendered via JS -->
-            </div>
+        <!-- Orders History -->
+        <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800/80 space-y-3">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center justify-between">
+            <span>Transaction & Order History</span>
+            <span class="text-slate-500 lowercase font-normal" id="modalOrderCountSub"></span>
+          </h4>
+          <div id="modalOrdersList" class="space-y-2 max-h-64 overflow-y-auto custom-scroll pr-1">
+            <!-- Rendered via JS -->
           </div>
         </div>
 
@@ -564,7 +520,7 @@
 
       <!-- Modal Footer -->
       <div class="px-5 py-3 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
-        <span class="text-xs text-slate-500">Yash Marketing CRM Sync Engine</span>
+        <span class="text-xs text-slate-500">Live Synced from Yash Marketing Master Engine</span>
         <button onclick="closeDealerModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg font-medium">Close</button>
       </div>
     </div>
@@ -572,20 +528,29 @@
 
   <!-- JAVASCRIPT APPLICATION LOGIC -->
   <script>
-    // State storage
-    let rawDashboardData = null;
+    // LIVE GOOGLE APPS SCRIPT BACKEND ENDPOINT
+    const API_URL = "https://script.google.com/macros/s/AKfycbyXHJaFTSkjwu6C8ze4czs2Q42NQsgzjW814j8OLA7ztMXTW-nqmh2gkpjebmdSW4YJjA/exec";
+
+    // Application state
+    let rawLiveOrders = [];
+    let dealerMap = {};
+    let dealerList = [];
     let filteredDealers = [];
     let salesChartInstance = null;
     let tierChartInstance = null;
     let areaChartInstance = null;
-    let activeDealer360 = null;
 
-    // Initialize application
+    // Auto-refresh interval (every 60s)
+    let autoRefreshTimer = null;
+
     document.addEventListener("DOMContentLoaded", () => {
-      loadDashboardData();
+      fetchLiveBackendData();
+      autoRefreshTimer = setInterval(() => {
+        fetchLiveBackendData(true);
+      }, 60000);
     });
 
-    // Switch View Tabs
+    // Switch Tabs
     function switchTab(tabId) {
       const tabs = ['overview', 'dealers', 'radar', 'areas'];
       tabs.forEach(t => {
@@ -600,7 +565,6 @@
         }
       });
 
-      // Resize charts if switching to tabs containing canvas
       if (tabId === 'overview') {
         if (salesChartInstance) salesChartInstance.resize();
         if (tierChartInstance) tierChartInstance.resize();
@@ -609,121 +573,356 @@
       }
     }
 
-    // Load Data (Google Apps Script or Mock Fallback)
-    function loadDashboardData() {
+    // Fetch Live Data from Backend API
+    async function fetchLiveBackendData(isSilent = false) {
       const icon = document.getElementById("refreshIcon");
-      if (icon) icon.classList.add("fa-spin");
-      document.getElementById("loadingState").classList.remove("hidden");
+      if (!isSilent && icon) icon.classList.add("fa-spin");
+      if (!isSilent) document.getElementById("loadingState").classList.remove("hidden");
 
-      if (typeof google !== "undefined" && google.script && google.script.run) {
-        google.script.run
-          .withSuccessHandler(onDataLoaded)
-          .withFailureHandler(onDataError)
-          .getDealerPerformanceDashboardData({});
-      } else {
-        // Fallback Standalone / Preview Mock Data
-        setTimeout(() => {
-          onDataLoaded(getMockData());
-        }, 600);
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'getOrders' })
+        });
+
+        const json = await res.json();
+        if (json.status === "success" && Array.isArray(json.data)) {
+          rawLiveOrders = json.data;
+          processRawOrders(rawLiveOrders);
+          document.getElementById("liveSyncStatus").textContent = `Live (${rawLiveOrders.length} orders)`;
+        } else {
+          throw new Error("Invalid response format");
+        }
+      } catch (err) {
+        console.warn("Live API fetch error, fallback retrying:", err);
+        document.getElementById("liveSyncStatus").textContent = "Sync Warning";
+      } finally {
+        if (icon) icon.classList.remove("fa-spin");
+        document.getElementById("loadingState").classList.add("hidden");
       }
     }
 
-    function onDataLoaded(res) {
-      const icon = document.getElementById("refreshIcon");
-      if (icon) icon.classList.remove("fa-spin");
-      document.getElementById("loadingState").classList.add("hidden");
+    // Process & Aggregate 710+ Orders into Dealer 360 Profiles
+    function processRawOrders(orders) {
+      dealerMap = {};
+      const now = new Date();
+      let totalRevenue = 0;
+      let totalOrders = orders.length;
+      const monthTrends = {};
+      const areaMap = {};
+      const tierCounts = { Platinum: { count: 0, rev: 0 }, Gold: { count: 0, rev: 0 }, Silver: { count: 0, rev: 0 }, Bronze: { count: 0, rev: 0 } };
+      const alerts = [];
 
-      if (!res || !res.success) {
-        alert("Failed to load dashboard data: " + (res ? res.error : "Unknown error"));
-        return;
-      }
+      orders.forEach(o => {
+        const sName = (o.shopName || "Unknown Dealer").trim();
+        const phone = (o.phone || "").trim();
+        const area = (o.area && o.area !== "#N/A") ? o.area.trim() : "General";
+        const val = parseFloat(o.totalValue) || 0;
+        const d = o.date ? new Date(o.date) : null;
 
-      rawDashboardData = res;
-      populateFilterDropdowns(res.filtersList);
-      renderKPIs(res.summary);
-      renderAlerts(res.alerts);
-      renderCharts(res.chartData, res.tierDistribution, res.areaBreakdown);
-      renderAreaMatrix(res.areaBreakdown);
-      
-      // Default table
+        totalRevenue += val;
+
+        // Month trend
+        if (d && !isNaN(d.getTime())) {
+          const mKey = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2);
+          monthTrends[mKey] = (monthTrends[mKey] || 0) + val;
+        }
+
+        // Area aggregate
+        if (!areaMap[area]) areaMap[area] = { name: area, revenue: 0, orders: 0, dealers: new Set() };
+        areaMap[area].revenue += val;
+        areaMap[area].orders += 1;
+        areaMap[area].dealers.add(sName);
+
+        // Dealer Map aggregate
+        if (!dealerMap[sName]) {
+          dealerMap[sName] = {
+            name: sName,
+            phone: phone,
+            area: area,
+            totalRevenue: 0,
+            totalOrders: 0,
+            lastOrderDate: null,
+            lastOrderAmount: 0,
+            isVIP: !!o.isVIP,
+            creditLocked: !!o.creditLocked,
+            lockReason: o.lockReason || "",
+            orders: []
+          };
+        }
+
+        const dObj = dealerMap[sName];
+        dObj.totalRevenue += val;
+        dObj.totalOrders += 1;
+        if (phone && !dObj.phone) dObj.phone = phone;
+        if (area !== "General" && dObj.area === "General") dObj.area = area;
+        if (o.isVIP) dObj.isVIP = true;
+        if (o.creditLocked) {
+          dObj.creditLocked = true;
+          dObj.lockReason = o.lockReason || dObj.lockReason;
+        }
+
+        if (d && !isNaN(d.getTime())) {
+          if (!dObj.lastOrderDate || d > dObj.lastOrderDate) {
+            dObj.lastOrderDate = d;
+            dObj.lastOrderAmount = val;
+          }
+        }
+
+        dObj.orders.push({
+          orderId: o.orderId || "N/A",
+          date: d ? d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : "N/A",
+          amount: val,
+          items: o.items || "Order Item",
+          paymentMode: o.paymentMode || "Credit",
+          completed: o.isFullyCompleted
+        });
+      });
+
+      // Convert dealerMap to List & compute Tiers & Health
+      dealerList = Object.values(dealerMap);
+      let activeCount = 0;
+      let atRiskCount = 0;
+      let hibernatingCount = 0;
+      let creditLockedCount = 0;
+
+      dealerList.forEach(d => {
+        d.aov = d.totalOrders > 0 ? Math.round(d.totalRevenue / d.totalOrders) : 0;
+        
+        let daysAgo = 999;
+        if (d.lastOrderDate) {
+          daysAgo = Math.floor((now.getTime() - d.lastOrderDate.getTime()) / (1000 * 60 * 60 * 24));
+        }
+        d.daysSinceLastOrder = daysAgo;
+
+        // Tier classification
+        if (d.totalRevenue >= 300000) {
+          d.tier = "Platinum";
+          tierCounts.Platinum.count++;
+          tierCounts.Platinum.rev += d.totalRevenue;
+        } else if (d.totalRevenue >= 100000) {
+          d.tier = "Gold";
+          tierCounts.Gold.count++;
+          tierCounts.Gold.rev += d.totalRevenue;
+        } else if (d.totalRevenue >= 30000) {
+          d.tier = "Silver";
+          tierCounts.Silver.count++;
+          tierCounts.Silver.rev += d.totalRevenue;
+        } else {
+          d.tier = "Bronze";
+          tierCounts.Bronze.count++;
+          tierCounts.Bronze.rev += d.totalRevenue;
+        }
+
+        // Health Status
+        if (daysAgo <= 30) {
+          d.healthStatus = "Active";
+          activeCount++;
+        } else if (daysAgo <= 75) {
+          d.healthStatus = "At Risk";
+          atRiskCount++;
+        } else {
+          d.healthStatus = "Hibernating";
+          hibernatingCount++;
+        }
+
+        if (d.creditLocked) creditLockedCount++;
+
+        // Alerts generation
+        if (d.creditLocked) {
+          alerts.push({
+            type: "Credit Locked",
+            severity: "critical",
+            title: `Account Blocked: ${d.name}`,
+            dealer: d.name,
+            phone: d.phone,
+            message: `Credit lock active (${d.lockReason || 'Exceeded payment dues'}). Pending review required.`
+          });
+        } else if ((d.tier === "Platinum" || d.tier === "Gold") && d.healthStatus === "At Risk") {
+          alerts.push({
+            type: "Churn Warning",
+            severity: "warning",
+            title: `Revenue Drop: ${d.name}`,
+            dealer: d.name,
+            phone: d.phone,
+            message: `${d.tier} Dealer (Lifetime: ₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}) has not ordered in ${daysAgo} days.`
+          });
+        }
+      });
+
+      // Sort by Revenue Descending
+      dealerList.sort((a, b) => b.totalRevenue - a.totalRevenue);
+
+      // Render KPIs
+      document.getElementById("kpiRevenue").textContent = '₹' + Math.round(totalRevenue).toLocaleString('en-IN');
+      document.getElementById("kpiAOV").textContent = totalOrders > 0 ? ('₹' + Math.round(totalRevenue / totalOrders).toLocaleString('en-IN')) : '₹0';
+      document.getElementById("kpiOrders").textContent = totalOrders.toLocaleString('en-IN');
+      document.getElementById("kpiDealersCount").textContent = dealerList.length;
+      document.getElementById("kpiActiveDealers").textContent = activeCount;
+      document.getElementById("kpiAtRisk").textContent = (atRiskCount + hibernatingCount);
+      document.getElementById("kpiCreditLocked").textContent = creditLockedCount;
+      document.getElementById("badgeDealerCount").textContent = dealerList.length;
+
+      // Populate Area filter dropdown
+      const areaSelect = document.getElementById("areaFilter");
+      const currentArea = areaSelect.value;
+      areaSelect.innerHTML = '<option value="">All Territories</option>';
+      Object.keys(areaMap).sort().forEach(a => {
+        const opt = document.createElement("option");
+        opt.value = a;
+        opt.textContent = `${a} (${areaMap[a].dealers.size} dealers)`;
+        areaSelect.appendChild(opt);
+      });
+      areaSelect.value = currentArea;
+
+      // Render Charts
+      renderCharts(monthTrends, tierCounts, areaMap);
+      renderAlerts(alerts.slice(0, 8));
+      renderAreaMatrix(areaMap);
+
+      // Render Tables
       applyFilters();
 
-      // Show overview tab by default
+      // Show Overview tab by default
       switchTab('overview');
     }
 
-    function onDataError(err) {
-      const icon = document.getElementById("refreshIcon");
-      if (icon) icon.classList.remove("fa-spin");
-      document.getElementById("loadingState").classList.add("hidden");
-      alert("Error contacting Apps Script engine: " + err.message);
+    // Render Charts
+    function renderCharts(monthTrends, tierCounts, areaMap) {
+      // 1. Sales Trend
+      const salesCtx = document.getElementById("salesTrendChart").getContext("2d");
+      if (salesChartInstance) salesChartInstance.destroy();
+
+      const sortedMonths = Object.keys(monthTrends).sort();
+      const revenueData = sortedMonths.map(m => Math.round(monthTrends[m]));
+
+      salesChartInstance = new Chart(salesCtx, {
+        type: 'line',
+        data: {
+          labels: sortedMonths,
+          datasets: [{
+            label: 'Sales Revenue (₹)',
+            data: revenueData,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            fill: true,
+            tension: 0.35,
+            borderWidth: 2.5,
+            pointBackgroundColor: '#10b981',
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: {
+                color: '#94a3b8',
+                callback: function(v) { return '₹' + (v / 1000) + 'k'; }
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8' }
+            }
+          }
+        }
+      });
+
+      // 2. Tier Chart
+      const tierCtx = document.getElementById("tierChart").getContext("2d");
+      if (tierChartInstance) tierChartInstance.destroy();
+
+      tierChartInstance = new Chart(tierCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Platinum', 'Gold', 'Silver', 'Bronze'],
+          datasets: [{
+            data: [tierCounts.Platinum.count, tierCounts.Gold.count, tierCounts.Silver.count, tierCounts.Bronze.count],
+            backgroundColor: ['#818cf8', '#fbbf24', '#94a3b8', '#d97706'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } }
+          },
+          cutout: '68%'
+        }
+      });
+
+      // 3. Area Chart
+      const areaCtx = document.getElementById("areaChart").getContext("2d");
+      if (areaChartInstance) areaChartInstance.destroy();
+
+      const sortedAreas = Object.values(areaMap).sort((a, b) => b.revenue - a.revenue).slice(0, 8);
+      areaChartInstance = new Chart(areaCtx, {
+        type: 'bar',
+        data: {
+          labels: sortedAreas.map(a => a.name),
+          datasets: [{
+            label: 'Sales Revenue (₹)',
+            data: sortedAreas.map(a => Math.round(a.revenue)),
+            backgroundColor: 'rgba(99, 102, 241, 0.75)',
+            hoverBackgroundColor: 'rgba(99, 102, 241, 0.95)',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: {
+                color: '#94a3b8',
+                callback: function(v) { return '₹' + (v / 1000) + 'k'; }
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8' }
+            }
+          }
+        }
+      });
     }
 
-    // Populate Filter Dropdowns
-    function populateFilterDropdowns(filters) {
-      if (!filters) return;
-      const areaSelect = document.getElementById("areaFilter");
-      areaSelect.innerHTML = '<option value="">All Areas</option>';
-      if (filters.areas) {
-        filters.areas.forEach(area => {
-          const opt = document.createElement("option");
-          opt.value = area;
-          opt.textContent = area;
-          areaSelect.appendChild(opt);
-        });
-      }
-    }
-
-    // Render KPIs
-    function renderKPIs(summary) {
-      if (!summary) return;
-      document.getElementById("kpiRevenue").textContent = '₹' + summary.totalRevenue.toLocaleString('en-IN');
-      document.getElementById("kpiAOV").textContent = '₹' + summary.averageOrderValue.toLocaleString('en-IN');
-      document.getElementById("kpiOrders").textContent = summary.totalOrders.toLocaleString('en-IN');
-      document.getElementById("kpiActiveDealers").textContent = summary.activeDealers;
-      document.getElementById("kpiOutstanding").textContent = '₹' + summary.totalOutstanding.toLocaleString('en-IN');
-      document.getElementById("kpiHighDebt").textContent = summary.highDebtDealers;
-      document.getElementById("kpiAtRisk").textContent = summary.atRiskDealers;
-      document.getElementById("kpiHibernating").textContent = summary.hibernatingDealers;
-      document.getElementById("badgeDealerCount").textContent = summary.totalDealers;
-    }
-
-    // Render Smart Alerts
+    // Render Alerts
     function renderAlerts(alerts) {
       const container = document.getElementById("alertsContainer");
       const badge = document.getElementById("badgeAlertCount");
       container.innerHTML = "";
+      badge.textContent = alerts.length;
 
-      if (!alerts || alerts.length === 0) {
+      if (alerts.length === 0) {
         container.innerHTML = `
           <div class="col-span-2 py-4 text-center text-slate-500 text-xs">
-            <i class="fa-solid fa-check-circle text-emerald-400 mr-1"></i> No critical risks detected across active dealer accounts.
+            <i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> No critical risks or credit locks detected across dealers.
           </div>
         `;
-        badge.textContent = "0";
         return;
       }
 
-      badge.textContent = alerts.length;
-
       alerts.forEach(item => {
         const isCritical = item.severity === 'critical';
-        const isWarning = item.severity === 'warning';
-        
         const card = document.createElement("div");
         card.className = `p-3.5 rounded-xl border flex items-start justify-between space-x-3 transition ${
-          isCritical ? 'bg-rose-500/10 border-rose-500/20 text-rose-200' :
-          isWarning ? 'bg-amber-500/10 border-amber-500/20 text-amber-200' :
-          'bg-indigo-500/10 border-indigo-500/20 text-indigo-200'
+          isCritical ? 'bg-rose-500/10 border-rose-500/20 text-rose-200' : 'bg-amber-500/10 border-amber-500/20 text-amber-200'
         }`;
 
         card.innerHTML = `
           <div class="space-y-1">
             <div class="flex items-center space-x-2">
-              <span class="text-xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${
-                isCritical ? 'bg-rose-500 text-white' :
-                isWarning ? 'bg-amber-500 text-slate-950 font-black' :
-                'bg-indigo-500 text-white'
+              <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${
+                isCritical ? 'bg-rose-500 text-white' : 'bg-amber-500 text-slate-950 font-black'
               }">${item.type}</span>
               <h4 class="text-xs font-bold text-white">${item.title}</h4>
             </div>
@@ -737,156 +936,29 @@
       });
     }
 
-    // Render Charts
-    function renderCharts(chartData, tierDist, areaBreakdown) {
-      // 1. Sales Trend Chart
-      const salesCtx = document.getElementById("salesTrendChart").getContext("2d");
-      if (salesChartInstance) salesChartInstance.destroy();
-
-      salesChartInstance = new Chart(salesCtx, {
-        type: 'line',
-        data: {
-          labels: chartData && chartData.months ? chartData.months : ['Jan', 'Feb', 'Mar'],
-          datasets: [{
-            label: 'Sales Revenue (₹)',
-            data: chartData && chartData.revenue ? chartData.revenue : [0, 0, 0],
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-            fill: true,
-            tension: 0.35,
-            borderWidth: 2.5,
-            pointBackgroundColor: '#10b981',
-            pointRadius: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            y: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: {
-                color: '#94a3b8',
-                callback: function(v) { return '₹' + (v / 1000) + 'k'; }
-              }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: '#94a3b8' }
-            }
-          }
-        }
-      });
-
-      // 2. Tier Doughnut Chart
-      const tierCtx = document.getElementById("tierChart").getContext("2d");
-      if (tierChartInstance) tierChartInstance.destroy();
-
-      const tierLabels = ['Platinum', 'Gold', 'Silver', 'Bronze'];
-      const tierCounts = tierDist ? [
-        tierDist.Platinum.count,
-        tierDist.Gold.count,
-        tierDist.Silver.count,
-        tierDist.Bronze.count
-      ] : [0, 0, 0, 0];
-
-      tierChartInstance = new Chart(tierCtx, {
-        type: 'doughnut',
-        data: {
-          labels: tierLabels,
-          datasets: [{
-            data: tierCounts,
-            backgroundColor: ['#818cf8', '#fbbf24', '#94a3b8', '#d97706'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { color: '#cbd5e1', font: { size: 11 } }
-            }
-          },
-          cutout: '68%'
-        }
-      });
-
-      // 3. Area Comparison Chart
-      const areaCtx = document.getElementById("areaChart").getContext("2d");
-      if (areaChartInstance) areaChartInstance.destroy();
-
-      const aLabels = (areaBreakdown || []).map(a => a.name);
-      const aRevenue = (areaBreakdown || []).map(a => a.revenue);
-
-      areaChartInstance = new Chart(areaCtx, {
-        type: 'bar',
-        data: {
-          labels: aLabels,
-          datasets: [{
-            label: 'Area Sales (₹)',
-            data: aRevenue,
-            backgroundColor: 'rgba(99, 102, 241, 0.7)',
-            hoverBackgroundColor: 'rgba(99, 102, 241, 0.9)',
-            borderRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            y: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: {
-                color: '#94a3b8',
-                callback: function(v) { return '₹' + (v / 1000) + 'k'; }
-              }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: '#94a3b8' }
-            }
-          }
-        }
-      });
-    }
-
-    // Apply Filter & Search Logic
+    // Apply Filters & Search
     function applyFilters() {
-      if (!rawDashboardData) return;
-
       const q = document.getElementById("searchInput").value.trim().toLowerCase();
-      const area = document.getElementById("areaFilter").value.trim().toLowerCase();
-      const tier = document.getElementById("tierFilter").value.trim().toLowerCase();
+      const area = document.getElementById("areaFilter").value.trim();
+      const tier = document.getElementById("tierFilter").value.trim();
       const health = document.getElementById("healthFilter").value.trim();
       const sortBy = document.getElementById("sortSelect").value;
 
-      filteredDealers = rawDashboardData.dealers.filter(d => {
-        // Search query
+      filteredDealers = dealerList.filter(d => {
         if (q) {
           const matchName = d.name.toLowerCase().includes(q);
           const matchPhone = d.phone.includes(q);
-          const matchBeat = d.beat.toLowerCase().includes(q);
-          if (!matchName && !matchPhone && !matchBeat) return false;
+          const matchArea = d.area.toLowerCase().includes(q);
+          if (!matchName && !matchPhone && !matchArea) return false;
         }
 
-        // Area filter
-        if (area && d.area.toLowerCase() !== area) return false;
+        if (area && d.area !== area) return false;
+        if (tier && d.tier !== tier) return false;
 
-        // Tier filter
-        if (tier && d.tier.toLowerCase() !== tier) return false;
-
-        // Health filter
         if (health) {
-          if (health === "Critical" && d.debtStatus !== "Critical") return false;
-          if (health !== "Critical" && d.healthStatus !== health) return false;
+          if (health === "Credit Locked" && !d.creditLocked) return false;
+          if (health === "VIP" && !d.isVIP) return false;
+          if (health !== "Credit Locked" && health !== "VIP" && d.healthStatus !== health) return false;
         }
 
         return true;
@@ -895,17 +967,17 @@
       // Sorting
       if (sortBy === "revenue-desc") {
         filteredDealers.sort((a, b) => b.totalRevenue - a.totalRevenue);
-      } else if (sortBy === "outstanding-desc") {
-        filteredDealers.sort((a, b) => b.totalOutstanding - a.totalOutstanding);
       } else if (sortBy === "orders-desc") {
         filteredDealers.sort((a, b) => b.totalOrders - a.totalOrders);
       } else if (sortBy === "last-order") {
-        filteredDealers.sort((a, b) => (b.lastOrderDate || '').localeCompare(a.lastOrderDate || ''));
+        filteredDealers.sort((a, b) => (b.lastOrderDate || 0) - (a.lastOrderDate || 0));
+      } else if (sortBy === "name-asc") {
+        filteredDealers.sort((a, b) => a.name.localeCompare(b.name));
       }
 
       renderDealersTable(filteredDealers);
-      renderOverviewPreviews(filteredDealers);
-      renderRadarCards(rawDashboardData.dealers);
+      renderOverviewPreviews(dealerList);
+      renderRadarCards(dealerList);
     }
 
     // Render Dealers Directory Table
@@ -933,20 +1005,21 @@
           d.tier === 'Silver' ? 'badge-silver' : 'badge-bronze';
 
         const healthBadge = 
-          d.healthStatus === 'Active' ? '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded text-xs">Active</span>' :
+          d.creditLocked ? '<span class="text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded text-xs font-bold border border-rose-500/20">Credit Locked</span>' :
+          d.healthStatus === 'Active' ? '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded text-xs font-semibold">Active</span>' :
           d.healthStatus === 'At Risk' ? '<span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded text-xs font-semibold">At Risk</span>' :
           '<span class="text-slate-400 bg-slate-800 px-2 py-0.5 rounded text-xs">Hibernating</span>';
 
         tr.innerHTML = `
           <td class="py-3 px-4">
-            <div class="font-bold text-white group-hover:text-emerald-400 transition cursor-pointer" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
-              ${d.name}
+            <div class="font-bold text-white group-hover:text-emerald-400 transition cursor-pointer flex items-center space-x-1.5" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
+              <span>${d.name}</span>
+              ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-400 text-[10px]" title="VIP Dealer"></i>' : ''}
             </div>
             <div class="text-xs text-slate-400">${d.phone || 'No phone'}</div>
           </td>
           <td class="py-3 px-3">
-            <div class="text-slate-300">${d.area}</div>
-            <div class="text-xs text-slate-500">${d.beat}</div>
+            <span class="text-slate-300">${d.area}</span>
           </td>
           <td class="py-3 px-3">
             <span class="text-xs px-2 py-0.5 rounded-full font-bold ${tierBadgeClass}">${d.tier}</span>
@@ -957,18 +1030,15 @@
           <td class="py-3 px-3 text-right text-slate-300">
             ${d.totalOrders}
           </td>
-          <td class="py-3 px-3 text-right">
-            <span class="font-bold ${d.totalOutstanding > 0 ? 'text-amber-400' : 'text-slate-400'}">
-              ₹${Math.round(d.totalOutstanding).toLocaleString('en-IN')}
-            </span>
-            ${d.overdueDays > 0 ? `<div class="text-[10px] text-rose-400">${d.overdueDays}d overdue</div>` : ''}
+          <td class="py-3 px-3 text-right text-emerald-400 font-semibold">
+            ₹${d.aov.toLocaleString('en-IN')}
           </td>
           <td class="py-3 px-3">
             ${healthBadge}
           </td>
           <td class="py-3 px-4 text-center">
             <div class="flex items-center justify-center space-x-1.5">
-              <button onclick="sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', ${d.totalOutstanding})" title="Send WhatsApp" class="w-7 h-7 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 flex items-center justify-center text-xs transition">
+              <button onclick="sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', ${d.totalRevenue})" title="Send WhatsApp" class="w-7 h-7 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 flex items-center justify-center text-xs transition">
                 <i class="fa-brands fa-whatsapp"></i>
               </button>
               <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" title="360 Profile" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-xs transition">
@@ -981,16 +1051,15 @@
       });
     }
 
-    // Render Champions & Debtors on Overview
+    // Render Previews on Overview
     function renderOverviewPreviews(dealers) {
       const champList = document.getElementById("topChampionsList");
-      const debtList = document.getElementById("topDebtorsList");
+      const riskList = document.getElementById("topAtRiskList");
       champList.innerHTML = "";
-      debtList.innerHTML = "";
+      riskList.innerHTML = "";
 
       // Top 5 Champions
-      const topChamps = [...dealers].sort((a, b) => b.totalRevenue - a.totalRevenue).slice(0, 5);
-      topChamps.forEach((d, idx) => {
+      dealers.slice(0, 5).forEach((d, idx) => {
         const item = document.createElement("div");
         item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-emerald-500/30 transition cursor-pointer";
         item.onclick = () => viewDealer360(d.name);
@@ -1000,7 +1069,10 @@
               #${idx + 1}
             </div>
             <div>
-              <h5 class="text-xs font-bold text-white">${d.name}</h5>
+              <h5 class="text-xs font-bold text-white flex items-center space-x-1">
+                <span>${d.name}</span>
+                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-400 text-[9px]"></i>' : ''}
+              </h5>
               <p class="text-[11px] text-slate-400">${d.area} • ${d.totalOrders} orders</p>
             </div>
           </div>
@@ -1012,84 +1084,90 @@
         champList.appendChild(item);
       });
 
-      // Top 5 Debtors
-      const topDebtors = [...dealers].filter(d => d.totalOutstanding > 0).sort((a, b) => b.totalOutstanding - a.totalOutstanding).slice(0, 5);
-      topDebtors.forEach((d, idx) => {
-        const item = document.createElement("div");
-        item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-rose-500/30 transition cursor-pointer";
-        item.onclick = () => viewDealer360(d.name);
-        item.innerHTML = `
-          <div class="flex items-center space-x-3">
-            <div class="w-6 h-6 rounded-full bg-rose-500/10 text-rose-400 flex items-center justify-center text-xs font-bold">
-              !
+      // At-Risk Spenders
+      const atRisk = dealers.filter(d => (d.tier === 'Platinum' || d.tier === 'Gold') && d.healthStatus !== 'Active').slice(0, 5);
+      if (atRisk.length === 0) {
+        riskList.innerHTML = '<div class="text-xs text-slate-500 py-3 text-center">No high spenders at immediate risk.</div>';
+      } else {
+        atRisk.forEach(d => {
+          const item = document.createElement("div");
+          item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-rose-500/30 transition cursor-pointer";
+          item.onclick = () => viewDealer360(d.name);
+          item.innerHTML = `
+            <div class="flex items-center space-x-3">
+              <div class="w-6 h-6 rounded-full bg-rose-500/10 text-rose-400 flex items-center justify-center text-xs font-bold">!</div>
+              <div>
+                <h5 class="text-xs font-bold text-white">${d.name}</h5>
+                <p class="text-[11px] text-rose-300/80">Inactive for ${d.daysSinceLastOrder} days</p>
+              </div>
             </div>
-            <div>
-              <h5 class="text-xs font-bold text-white">${d.name}</h5>
-              <p class="text-[11px] text-rose-300/80">${d.overdueDays} days aging</p>
+            <div class="text-right">
+              <span class="text-xs font-bold text-rose-400">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</span>
+              <button onclick="event.stopPropagation(); sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', 0)" class="text-[10px] text-emerald-400 hover:underline block">WhatsApp</button>
             </div>
-          </div>
-          <div class="text-right">
-            <span class="text-xs font-bold text-rose-400">₹${Math.round(d.totalOutstanding).toLocaleString('en-IN')}</span>
-            <button onclick="event.stopPropagation(); sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', ${d.totalOutstanding})" class="text-[10px] text-emerald-400 hover:underline block">WhatsApp</button>
-          </div>
-        `;
-        debtList.appendChild(item);
-      });
+          `;
+          riskList.appendChild(item);
+        });
+      }
     }
 
-    // Render At-Risk & Radar Cards
-    function renderRadarCards(allDealers) {
+    // Render Radar Cards
+    function renderRadarCards(dealers) {
       const grid = document.getElementById("radarCardsGrid");
       grid.innerHTML = "";
 
-      const atRiskList = allDealers.filter(d => d.totalOutstanding > 25000 || d.churnRisk || d.overdueDays >= 40);
-
-      if (atRiskList.length === 0) {
-        grid.innerHTML = '<div class="col-span-3 text-center py-10 text-slate-500 text-xs">No high risk dealer debt found!</div>';
+      const riskList = dealers.filter(d => d.creditLocked || d.healthStatus !== 'Active');
+      if (riskList.length === 0) {
+        grid.innerHTML = '<div class="col-span-3 text-center py-10 text-slate-500 text-xs">All accounts in optimal health.</div>';
         return;
       }
 
-      atRiskList.slice(0, 15).forEach(d => {
+      riskList.slice(0, 18).forEach(d => {
         const card = document.createElement("div");
         card.className = "glass-card p-4 rounded-xl space-y-3 border-l-4 " + 
-          (d.totalOutstanding > d.creditLimit ? 'border-l-rose-500' : 'border-l-amber-500');
+          (d.creditLocked ? 'border-l-rose-500' : 'border-l-amber-500');
 
         card.innerHTML = `
           <div class="flex items-start justify-between">
             <div>
-              <h4 class="text-sm font-bold text-white">${d.name}</h4>
+              <h4 class="text-sm font-bold text-white flex items-center space-x-1">
+                <span>${d.name}</span>
+                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-400 text-[10px]"></i>' : ''}
+              </h4>
               <p class="text-xs text-slate-400">${d.phone || 'No phone'} • ${d.area}</p>
             </div>
             <span class="text-[10px] px-2 py-0.5 rounded font-bold ${
-              d.totalOutstanding > d.creditLimit ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'
+              d.creditLocked ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'
             }">
-              ${d.totalOutstanding > d.creditLimit ? 'Limit Exceeded' : 'Overdue Alert'}
+              ${d.creditLocked ? 'Credit Locked' : (d.daysSinceLastOrder + 'd Inactive')}
             </span>
           </div>
 
           <div class="grid grid-cols-2 gap-2 text-xs bg-slate-900/60 p-2.5 rounded-lg">
             <div>
-              <span class="text-slate-500">Outstanding:</span>
-              <p class="font-bold text-rose-400">₹${Math.round(d.totalOutstanding).toLocaleString('en-IN')}</p>
+              <span class="text-slate-500">Lifetime Volume:</span>
+              <p class="font-bold text-white">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</p>
             </div>
             <div>
-              <span class="text-slate-500">Overdue Days:</span>
-              <p class="font-bold text-slate-300">${d.overdueDays} Days</p>
+              <span class="text-slate-500">Orders:</span>
+              <p class="font-bold text-slate-300">${d.totalOrders}</p>
             </div>
             <div>
-              <span class="text-slate-500">Credit Limit:</span>
-              <p class="font-semibold text-slate-300">₹${Math.round(d.creditLimit).toLocaleString('en-IN')}</p>
+              <span class="text-slate-500">Tier:</span>
+              <p class="font-semibold text-slate-300">${d.tier}</p>
             </div>
             <div>
-              <span class="text-slate-500">Last Order:</span>
-              <p class="font-semibold text-slate-300">${d.lastOrderDate || 'None'}</p>
+              <span class="text-slate-500">Last Active:</span>
+              <p class="font-semibold text-slate-300">${d.lastOrderDate ? d.lastOrderDate.toISOString().slice(0, 10) : 'N/A'}</p>
             </div>
           </div>
 
+          ${d.creditLocked && d.lockReason ? `<p class="text-[11px] text-rose-300/90 italic">Reason: "${d.lockReason}"</p>` : ''}
+
           <div class="flex items-center space-x-2 pt-1">
-            <button onclick="sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', ${d.totalOutstanding})" class="flex-1 py-1.5 bg-emerald-600/90 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold flex items-center justify-center space-x-1.5 transition">
+            <button onclick="sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', 0)" class="flex-1 py-1.5 bg-emerald-600/90 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold flex items-center justify-center space-x-1.5 transition">
               <i class="fa-brands fa-whatsapp"></i>
-              <span>Payment Reminder</span>
+              <span>WhatsApp Connect</span>
             </button>
             <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold">
               Inspect
@@ -1100,13 +1178,13 @@
       });
     }
 
-    // Render Area Matrix List
-    function renderAreaMatrix(areas) {
+    // Render Area Matrix
+    function renderAreaMatrix(areaMap) {
       const container = document.getElementById("areaMatrixList");
       container.innerHTML = "";
-      if (!areas) return;
+      const sorted = Object.values(areaMap).sort((a, b) => b.revenue - a.revenue);
 
-      areas.forEach(a => {
+      sorted.forEach(a => {
         const item = document.createElement("div");
         item.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1.5";
         item.innerHTML = `
@@ -1115,125 +1193,74 @@
             <span class="text-xs font-bold text-emerald-400">₹${Math.round(a.revenue).toLocaleString('en-IN')}</span>
           </div>
           <div class="flex items-center justify-between text-[11px] text-slate-400">
-            <span>${a.dealers} Active Dealers</span>
-            <span>Due: ₹${Math.round(a.outstanding).toLocaleString('en-IN')}</span>
+            <span>${a.dealers.size} Dealers</span>
+            <span>${a.orders} Orders placed</span>
           </div>
         `;
         container.appendChild(item);
       });
     }
 
-    // Open Dealer 360 Deep-dive
+    // View Dealer 360
     function viewDealer360(dealerName) {
+      const d = dealerMap[dealerName];
+      if (!d) return;
+
       document.getElementById("dealerModal").classList.remove("hidden");
-      document.getElementById("modalShopName").textContent = dealerName;
-      document.getElementById("modalOrdersList").innerHTML = '<div class="text-xs text-slate-500">Fetching live records...</div>';
-      document.getElementById("modalVisitsList").innerHTML = '<div class="text-xs text-slate-500">Fetching field pings...</div>';
-
-      activeDealer360 = dealerName;
-
-      if (typeof google !== "undefined" && google.script && google.script.run) {
-        google.script.run
-          .withSuccessHandler(onDealer360Loaded)
-          .withFailureHandler(err => alert("Error loading 360: " + err.message))
-          .getDealer360(dealerName);
-      } else {
-        // Standalone preview
-        const found = rawDashboardData ? rawDashboardData.dealers.find(d => d.name === dealerName) : null;
-        onDealer360Loaded({
-          success: true,
-          dealer: found || { name: dealerName, phone: '9876543210', area: 'Central', beat: 'Route A', tier: 'Gold', totalRevenue: 125000, totalOrders: 14, totalOutstanding: 15400, creditLimit: 50000 },
-          orders: [
-            { date: '2026-11-01', orderId: 'YM-9812', items: 'Wires 2.5mm x 10, Switches x 40', amount: 18500, payMode: 'Credit', stage: 'Delivered' },
-            { date: '2026-10-18', orderId: 'YM-8742', items: 'MCB 32A x 15, LED Panel x 20', amount: 24000, payMode: 'Credit', stage: 'Delivered' }
-          ],
-          visits: [
-            { date: '2026-10-25', staff: 'Rahul Sharma', status: 'Completed', notes: 'Stock checked, committed 25k payment by Friday.' }
-          ]
-        });
-      }
-    }
-
-    function onDealer360Loaded(res) {
-      if (!res || !res.success) {
-        alert("Failed to load dealer profile: " + (res ? res.msg : ""));
-        return;
-      }
-
-      const d = res.dealer;
       document.getElementById("modalShopName").textContent = d.name;
       document.getElementById("modalPhone").textContent = d.phone || "No phone";
-      document.getElementById("modalAreaBeat").textContent = `${d.area} • ${d.beat}`;
-      document.getElementById("modalTierBadge").textContent = d.tier;
-      document.getElementById("modalTierBadge").className = `text-xs px-2 py-0.5 rounded-full font-bold ${
+      document.getElementById("modalArea").textContent = d.area;
+
+      const tierBadge = document.getElementById("modalTierBadge");
+      tierBadge.textContent = d.tier;
+      tierBadge.className = `text-xs px-2 py-0.5 rounded-full font-bold ${
         d.tier === 'Platinum' ? 'badge-platinum' :
         d.tier === 'Gold' ? 'badge-gold' :
         d.tier === 'Silver' ? 'badge-silver' : 'badge-bronze'
       }`;
 
+      const vipBadge = document.getElementById("modalVipBadge");
+      if (d.isVIP) vipBadge.classList.remove("hidden");
+      else vipBadge.classList.add("hidden");
+
       document.getElementById("modalTotalRevenue").textContent = '₹' + Math.round(d.totalRevenue).toLocaleString('en-IN');
       document.getElementById("modalTotalOrders").textContent = d.totalOrders;
-      document.getElementById("modalOutstanding").textContent = '₹' + Math.round(d.totalOutstanding).toLocaleString('en-IN');
-      document.getElementById("modalCreditLimit").textContent = '₹' + Math.round(d.creditLimit).toLocaleString('en-IN');
+      document.getElementById("modalAOV").textContent = '₹' + d.aov.toLocaleString('en-IN');
+      document.getElementById("modalLastOrderDate").textContent = d.lastOrderDate ? d.lastOrderDate.toLocaleDateString('en-IN') : 'N/A';
+      document.getElementById("modalOrderCountSub").textContent = `(${d.orders.length} transactions)`;
 
-      // Bind WhatsApp & Call buttons
-      document.getElementById("modalBtnWhatsApp").onclick = () => sendQuickWhatsApp(d.phone, d.name, d.totalOutstanding);
+      document.getElementById("modalBtnWhatsApp").onclick = () => sendQuickWhatsApp(d.phone, d.name, 0);
       document.getElementById("modalBtnCall").onclick = () => window.open('tel:' + d.phone, '_self');
 
       // Render Orders
       const ordersContainer = document.getElementById("modalOrdersList");
       ordersContainer.innerHTML = "";
-      if (res.orders && res.orders.length > 0) {
-        res.orders.forEach(o => {
-          const div = document.createElement("div");
-          div.className = "p-2.5 rounded-lg bg-slate-900 border border-slate-800/80 text-xs space-y-1";
-          div.innerHTML = `
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-emerald-400">${o.orderId}</span>
-              <span class="font-bold text-white">₹${Math.round(o.amount).toLocaleString('en-IN')}</span>
-            </div>
-            <p class="text-slate-400 truncate">${o.items}</p>
-            <div class="flex items-center justify-between text-[11px] text-slate-500 pt-0.5">
-              <span>${o.date}</span>
-              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">${o.stage}</span>
-            </div>
-          `;
-          ordersContainer.appendChild(div);
-        });
-      } else {
-        ordersContainer.innerHTML = '<div class="text-xs text-slate-500 py-3 text-center">No previous orders recorded.</div>';
-      }
-
-      // Render Visits
-      const visitsContainer = document.getElementById("modalVisitsList");
-      visitsContainer.innerHTML = "";
-      if (res.visits && res.visits.length > 0) {
-        res.visits.forEach(v => {
-          const div = document.createElement("div");
-          div.className = "p-2.5 rounded-lg bg-slate-900 border border-slate-800/80 text-xs space-y-1";
-          div.innerHTML = `
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-indigo-400">${v.staff}</span>
-              <span class="text-[11px] text-slate-500">${v.date}</span>
-            </div>
-            <p class="text-slate-300 italic">"${v.notes || 'Routine check-in'}"</p>
-          `;
-          visitsContainer.appendChild(div);
-        });
-      } else {
-        visitsContainer.innerHTML = '<div class="text-xs text-slate-500 py-3 text-center">No field visits logged yet.</div>';
-      }
+      d.orders.forEach(o => {
+        const div = document.createElement("div");
+        div.className = "p-2.5 rounded-lg bg-slate-900 border border-slate-800/80 text-xs space-y-1";
+        div.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-emerald-400 font-mono">${o.orderId}</span>
+            <span class="font-bold text-white">₹${Math.round(o.amount).toLocaleString('en-IN')}</span>
+          </div>
+          <p class="text-slate-300 text-[11px] truncate">${o.items}</p>
+          <div class="flex items-center justify-between text-[10px] text-slate-500 pt-0.5">
+            <span>${o.date}</span>
+            <span class="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 font-medium">${o.paymentMode}</span>
+          </div>
+        `;
+        ordersContainer.appendChild(div);
+      });
     }
 
     function closeDealerModal() {
       document.getElementById("dealerModal").classList.add("hidden");
-      closeActionForm();
     }
 
-    // WhatsApp Direct Dispatch
+    // Send Quick WhatsApp
     function sendQuickWhatsApp(phone, dealerName, outstanding) {
       if (!phone) {
-        alert("Dealer does not have a registered phone number.");
+        alert("Dealer does not have a registered contact phone number.");
         return;
       }
       const cleanPhone = phone.toString().replace(/[^0-9]/g, '');
@@ -1241,7 +1268,7 @@
 
       let msg = "";
       if (outstanding > 0) {
-        msg = `Namaste ${dealerName} ji,\n\nGreetings from *Yash Marketing*.\n\nThis is a gentle update regarding your current outstanding statement of *₹${Math.round(outstanding).toLocaleString('en-IN')}*.\n\nKindly clear the pending dues to ensure prompt order processing and dispatch without any hold.\n\nThank you for your continuous support!\n*Yash Marketing*`;
+        msg = `Namaste ${dealerName} ji,\n\nGreetings from *Yash Marketing*.\n\nThis is a gentle update regarding your current outstanding statement of *₹${Math.round(outstanding).toLocaleString('en-IN')}*.\n\nKindly clear the pending dues to ensure prompt order processing and dispatch without hold.\n\nThank you for your continuous partnership!\n*Yash Marketing*`;
       } else {
         msg = `Namaste ${dealerName} ji,\n\nGreetings from *Yash Marketing*!\n\nWe appreciate your partnership. Please let us know if you need any fresh stock or new catalog updates today.\n\nWarm regards,\n*Yash Marketing*`;
       }
@@ -1250,222 +1277,35 @@
       window.open(url, '_blank');
     }
 
-    // Action Logging Form
-    function openActionForm() {
-      document.getElementById("actionFormSection").classList.remove("hidden");
-    }
-    function closeActionForm() {
-      document.getElementById("actionFormSection").classList.add("hidden");
-      document.getElementById("actionNotesInput").value = "";
-    }
-    function submitActionLog() {
-      const type = document.getElementById("actionTypeInput").value;
-      const followUp = document.getElementById("actionFollowUpDate").value;
-      const notes = document.getElementById("actionNotesInput").value.trim();
-
-      if (!notes) {
-        alert("Please write discussion remarks before saving.");
-        return;
-      }
-
-      const payload = {
-        dealerName: activeDealer360,
-        actionType: type,
-        notes: notes,
-        followUpDate: followUp,
-        staffName: "Enterprise User"
-      };
-
-      if (typeof google !== "undefined" && google.script && google.script.run) {
-        google.script.run
-          .withSuccessHandler(res => {
-            alert(res.msg || "Action logged successfully!");
-            closeActionForm();
-            viewDealer360(activeDealer360);
-          })
-          .withFailureHandler(err => alert("Error: " + err.message))
-          .logDealerAction(payload);
-      } else {
-        alert("Action saved locally (Mock Mode)!");
-        closeActionForm();
-      }
-    }
-
     // Export to CSV
     function exportToCSV() {
-      if (!rawDashboardData || !rawDashboardData.dealers) {
-        alert("No data available to export.");
+      if (dealerList.length === 0) {
+        alert("No dealer data loaded to export.");
         return;
       }
 
-      const headers = ["Dealer Name", "Phone", "Area", "Beat", "Tier", "Total Sales (INR)", "Orders Count", "Outstanding (INR)", "Overdue Days", "Health Status"];
-      const rows = rawDashboardData.dealers.map(d => [
+      const headers = ["Dealer Name", "Phone", "Area", "Tier", "Total Sales (INR)", "Orders Count", "Average Order Value", "Health Status", "VIP", "Credit Locked"];
+      const rows = dealerList.map(d => [
         `"${d.name.replace(/"/g, '""')}"`,
         `"${d.phone}"`,
         `"${d.area}"`,
-        `"${d.beat}"`,
         `"${d.tier}"`,
         d.totalRevenue,
         d.totalOrders,
-        d.totalOutstanding,
-        d.overdueDays,
-        `"${d.healthStatus}"`
+        d.aov,
+        `"${d.healthStatus}"`,
+        d.isVIP ? "YES" : "NO",
+        d.creditLocked ? "LOCKED" : "CLEAR"
       ]);
 
       const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `YashMarketing_DealerPerformance_${new Date().toISOString().slice(0, 10)}.csv`);
+      link.setAttribute("download", `YashMarketing_Dealers_${new Date().toISOString().slice(0, 10)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    }
-
-    // Standalone Mock Dataset for offline/local previews
-    function getMockData() {
-      return {
-        success: true,
-        summary: {
-          totalDealers: 48,
-          activeDealers: 34,
-          atRiskDealers: 9,
-          hibernatingDealers: 5,
-          highDebtDealers: 4,
-          totalRevenue: 2485000,
-          totalOrders: 285,
-          averageOrderValue: 8719,
-          totalOutstanding: 412500
-        },
-        chartData: {
-          months: ["Jun 2026", "Jul 2026", "Aug 2026", "Sep 2026", "Oct 2026", "Nov 2026"],
-          revenue: [280000, 345000, 390000, 480000, 520000, 470000]
-        },
-        tierDistribution: {
-          Platinum: { count: 6, revenue: 1420000 },
-          Gold: { count: 12, revenue: 680000 },
-          Silver: { count: 18, revenue: 295000 },
-          Bronze: { count: 12, revenue: 90000 }
-        },
-        areaBreakdown: [
-          { name: "Ghatkopar", revenue: 840000, dealers: 14, outstanding: 120000 },
-          { name: "Kurla", revenue: 610000, dealers: 11, outstanding: 95000 },
-          { name: "Mulund", revenue: 530000, dealers: 12, outstanding: 110000 },
-          { name: "Thane", revenue: 505000, dealers: 11, outstanding: 87500 }
-        ],
-        alerts: [
-          {
-            type: "credit",
-            severity: "critical",
-            title: "Credit Limit Exceeded: Shivam Electricals",
-            dealer: "Shivam Electricals",
-            phone: "9820123456",
-            message: "Outstanding of ₹85,000 exceeds approved limit of ₹50,000.",
-            action: "Hold Pending Orders / Collect Payment"
-          },
-          {
-            type: "churn",
-            severity: "high",
-            title: "Revenue Drop: Mahavir Hardware",
-            dealer: "Mahavir Hardware",
-            phone: "9833445566",
-            message: "Platinum Dealer (Lifetime ₹4.2 Lakhs) has not placed an order in 42 days.",
-            action: "Schedule Priority Field Visit"
-          },
-          {
-            type: "aging",
-            severity: "warning",
-            title: "Overdue Aging Alert: Royal Light House",
-            dealer: "Royal Light House",
-            phone: "9819998877",
-            message: "Outstanding ₹48,000 is overdue by 52 days.",
-            action: "Send WhatsApp Payment Reminder"
-          }
-        ],
-        dealers: [
-          {
-            name: "Shivam Electricals",
-            phone: "9820123456",
-            area: "Ghatkopar",
-            beat: "Station Road",
-            tier: "Platinum",
-            creditLimit: 50000,
-            totalRevenue: 485000,
-            totalOrders: 42,
-            totalOutstanding: 85000,
-            overdueDays: 54,
-            debtStatus: "Critical",
-            healthStatus: "Active",
-            lastOrderDate: "2026-11-03"
-          },
-          {
-            name: "Mahavir Hardware",
-            phone: "9833445566",
-            area: "Kurla",
-            beat: "Bazaar Beat",
-            tier: "Platinum",
-            creditLimit: 75000,
-            totalRevenue: 420000,
-            totalOrders: 36,
-            totalOutstanding: 12000,
-            overdueDays: 10,
-            debtStatus: "Normal",
-            healthStatus: "At Risk",
-            churnRisk: true,
-            lastOrderDate: "2026-09-24"
-          },
-          {
-            name: "Royal Light House",
-            phone: "9819998877",
-            area: "Mulund",
-            beat: "West Market",
-            tier: "Gold",
-            creditLimit: 40000,
-            totalRevenue: 215000,
-            totalOrders: 22,
-            totalOutstanding: 48000,
-            overdueDays: 52,
-            debtStatus: "Critical",
-            healthStatus: "Active",
-            lastOrderDate: "2026-10-29"
-          },
-          {
-            name: "Shree Ganesh Enterprises",
-            phone: "9876543210",
-            area: "Thane",
-            beat: "Naupada Beat",
-            tier: "Gold",
-            creditLimit: 50000,
-            totalRevenue: 185000,
-            totalOrders: 19,
-            totalOutstanding: 0,
-            overdueDays: 0,
-            debtStatus: "Clear",
-            healthStatus: "Active",
-            lastOrderDate: "2026-11-04"
-          },
-          {
-            name: "Arihant Electric Works",
-            phone: "9821334455",
-            area: "Ghatkopar",
-            beat: "Amrut Nagar",
-            tier: "Silver",
-            creditLimit: 30000,
-            totalRevenue: 78000,
-            totalOrders: 9,
-            totalOutstanding: 14000,
-            overdueDays: 15,
-            debtStatus: "Normal",
-            healthStatus: "Active",
-            lastOrderDate: "2026-11-02"
-          }
-        ],
-        filtersList: {
-          areas: ["Ghatkopar", "Kurla", "Mulund", "Thane"],
-          beats: ["Station Road", "Bazaar Beat", "West Market", "Naupada Beat", "Amrut Nagar"],
-          tiers: ["Platinum", "Gold", "Silver", "Bronze"]
-        }
-      };
     }
   </script>
 </body>
