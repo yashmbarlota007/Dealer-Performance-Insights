@@ -20,9 +20,9 @@
             brand: {
               50: '#f0fdf4',
               100: '#dcfce7',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d'
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857'
             }
           }
         }
@@ -34,76 +34,75 @@
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #090d16;
-      color: #f1f5f9;
+      background-color: #f8fafc;
+      color: #0f172a;
       -webkit-tap-highlight-color: transparent;
     }
-    .glass-card {
-      background: rgba(22, 30, 49, 0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .pro-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
     }
     .custom-scroll::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     .custom-scroll::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.6);
+      background: #f1f5f9;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: #cbd5e1;
       border-radius: 4px;
     }
-    .badge-platinum { background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; }
-    .badge-gold { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
-    .badge-silver { background: linear-gradient(135deg, #94a3b8, #64748b); color: #fff; }
-    .badge-bronze { background: linear-gradient(135deg, #b45309, #78350f); color: #fff; }
+    .badge-platinum { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; font-weight: 700; }
+    .badge-gold { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; font-weight: 700; }
+    .badge-silver { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; font-weight: 700; }
+    .badge-bronze { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; font-weight: 700; }
     .pulse-ring {
-      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
       animation: pulse-green 2s infinite;
     }
     @keyframes pulse-green {
-      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-      70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
   </style>
 </head>
 
 <body class="custom-scroll min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white pb-12">
 
-  <!-- TOP NAVIGATION HEADER -->
-  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3 transition-all">
+  <!-- TOP NAVIGATION HEADER (CLEAN WHITE) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-          <i class="fa-solid fa-chart-line text-slate-950 text-xl font-black"></i>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center shadow-md shadow-emerald-500/20">
+          <i class="fa-solid fa-chart-line text-white text-lg font-black"></i>
         </div>
         <div>
           <div class="flex items-center space-x-2">
-            <h1 class="text-base sm:text-lg font-bold text-white tracking-wide">Yash Marketing</h1>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">Dealer OS</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold hidden sm:inline">LIVE CLOUD</span>
+            <h1 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">Yash Marketing</h1>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">Dealer OS</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold hidden sm:inline">LIVE CLOUD</span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block">Dealer Performance, Daily App Opens & Product Views Spy Radar</p>
+          <p class="text-xs text-slate-500 hidden sm:block">Dealer Performance, Daily App Opens & Product Views Spy Radar</p>
         </div>
       </div>
 
       <!-- Action items in header -->
       <div class="flex items-center space-x-3">
-        <div class="flex items-center space-x-2 bg-slate-800/80 px-2.5 py-1.5 rounded-lg border border-slate-700">
+        <div class="flex items-center space-x-2 bg-emerald-50/80 px-2.5 py-1.5 rounded-lg border border-emerald-200">
           <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-ring"></div>
-          <span class="text-xs font-semibold text-emerald-400" id="liveSyncStatus">Live Connected</span>
+          <span class="text-xs font-bold text-emerald-700" id="liveSyncStatus">Live Connected</span>
         </div>
 
-        <button id="btnRefresh" onclick="fetchLiveBackendData()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 flex items-center space-x-2 transition shadow-sm">
-          <i class="fa-solid fa-rotate text-emerald-400" id="refreshIcon"></i>
+        <button id="btnRefresh" onclick="fetchLiveBackendData()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 flex items-center space-x-2 transition shadow-sm">
+          <i class="fa-solid fa-rotate text-emerald-600" id="refreshIcon"></i>
           <span class="hidden md:inline">Sync Now</span>
         </button>
 
-        <button onclick="exportToCSV()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 flex items-center space-x-2 transition shadow-sm">
-          <i class="fa-solid fa-file-arrow-down text-blue-400"></i>
+        <button onclick="exportToCSV()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 flex items-center space-x-2 transition shadow-sm">
+          <i class="fa-solid fa-file-arrow-down text-blue-600"></i>
           <span class="hidden md:inline">Export CSV</span>
         </button>
       </div>
@@ -114,50 +113,50 @@
   <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-5 space-y-6">
 
     <!-- TAB SELECTOR -->
-    <div class="flex items-center space-x-2 overflow-x-auto pb-2 custom-scroll border-b border-slate-800">
-      <button onclick="switchTab('overview')" id="tabBtn-overview" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 whitespace-nowrap">
+    <div class="flex items-center space-x-2 overflow-x-auto pb-2 custom-scroll border-b border-slate-200">
+      <button onclick="switchTab('overview')" id="tabBtn-overview" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm whitespace-nowrap">
         <i class="fa-solid fa-chart-pie"></i>
         <span>Executive Insights</span>
       </button>
 
-      <button onclick="switchTab('telemetry')" id="tabBtn-telemetry" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800/50 whitespace-nowrap relative">
-        <i class="fa-solid fa-eye text-cyan-400"></i>
+      <button onclick="switchTab('telemetry')" id="tabBtn-telemetry" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap relative">
+        <i class="fa-solid fa-eye text-cyan-600"></i>
         <span>Daily Opens & Product Spy</span>
-        <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30">TRACK</span>
+        <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-100 text-cyan-800 font-bold border border-cyan-200">TRACK</span>
       </button>
 
-      <button onclick="switchTab('dealers')" id="tabBtn-dealers" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800/50 whitespace-nowrap">
-        <i class="fa-solid fa-users"></i>
+      <button onclick="switchTab('dealers')" id="tabBtn-dealers" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
+        <i class="fa-solid fa-users text-slate-500"></i>
         <span>Dealers Directory</span>
-        <span id="badgeDealerCount" class="text-xs px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-300">0</span>
+        <span id="badgeDealerCount" class="text-xs px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-700 font-semibold">0</span>
       </button>
 
-      <button onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800/50 whitespace-nowrap">
-        <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
+      <button onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
+        <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
         <span>At-Risk & Churn Radar</span>
-        <span id="badgeAlertCount" class="text-xs px-1.5 py-0.2 rounded-full bg-red-500/20 text-red-400 font-bold">0</span>
+        <span id="badgeAlertCount" class="text-xs px-1.5 py-0.2 rounded-full bg-rose-100 text-rose-700 font-bold border border-rose-200">0</span>
       </button>
 
-      <button onclick="switchTab('areas')" id="tabBtn-areas" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800/50 whitespace-nowrap">
-        <i class="fa-solid fa-map-location-dot text-indigo-400"></i>
+      <button onclick="switchTab('areas')" id="tabBtn-areas" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
+        <i class="fa-solid fa-map-location-dot text-indigo-500"></i>
         <span>Territory Analytics</span>
       </button>
     </div>
 
-    <!-- FILTER BAR -->
-    <div class="glass-card rounded-2xl p-4 shadow-xl">
+    <!-- FILTER BAR (WHITE) -->
+    <div class="pro-card rounded-2xl p-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
         <!-- Search Input -->
         <div class="lg:col-span-2 relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
           <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search dealer name, phone, area, or product..." 
-            class="w-full pl-9 pr-4 py-2.5 bg-slate-900/90 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 border border-slate-700/80 focus:border-emerald-500 focus:outline-none transition">
+            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-900 placeholder-slate-400 border border-slate-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition">
         </div>
 
         <!-- Area Select -->
         <div>
           <select id="areaFilter" onchange="applyFilters()" 
-            class="w-full px-3 py-2.5 bg-slate-900/90 rounded-xl text-xs sm:text-sm text-slate-300 border border-slate-700/80 focus:border-emerald-500 focus:outline-none">
+            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
             <option value="">All Territories</option>
           </select>
         </div>
@@ -165,7 +164,7 @@
         <!-- Tier Select -->
         <div>
           <select id="tierFilter" onchange="applyFilters()" 
-            class="w-full px-3 py-2.5 bg-slate-900/90 rounded-xl text-xs sm:text-sm text-slate-300 border border-slate-700/80 focus:border-emerald-500 focus:outline-none">
+            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
             <option value="">All Tiers (Platinum/Gold)</option>
             <option value="Platinum">Platinum (₹3L+)</option>
             <option value="Gold">Gold (₹1L - ₹3L)</option>
@@ -177,7 +176,7 @@
         <!-- Activity / Health Select -->
         <div>
           <select id="healthFilter" onchange="applyFilters()" 
-            class="w-full px-3 py-2.5 bg-slate-900/90 rounded-xl text-xs sm:text-sm text-slate-300 border border-slate-700/80 focus:border-emerald-500 focus:outline-none">
+            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
             <option value="">All Activity Statuses</option>
             <option value="opened-today">📱 Opened App Today</option>
             <option value="viewed-today">👁️ Viewed Products Today</option>
@@ -193,8 +192,8 @@
 
     <!-- LOADING STATE -->
     <div id="loadingState" class="py-16 flex flex-col items-center justify-center space-y-4">
-      <div class="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
-      <p class="text-sm font-medium text-slate-400 animate-pulse" id="loadingText">Connecting to live Yash Marketing cloud database (Orders & Catalog)...</p>
+      <div class="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-600 rounded-full animate-spin"></div>
+      <p class="text-sm font-semibold text-slate-600 animate-pulse" id="loadingText">Connecting to live Yash Marketing cloud database (Orders & Catalog)...</p>
     </div>
 
     <!-- TAB 1: EXECUTIVE OVERVIEW -->
@@ -202,91 +201,87 @@
       <!-- KPI Top Summary -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <!-- Revenue Card -->
-        <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-emerald-500/40 transition">
-          <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition"></div>
+        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Sales Volume</span>
-            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Sales Volume</span>
+            <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm font-bold border border-emerald-200">
               <i class="fa-solid fa-indian-rupee-sign"></i>
             </div>
           </div>
           <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-white" id="kpiRevenue">₹0</h3>
-            <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
-              <span>Avg Order Value:</span>
-              <span class="text-emerald-400 font-semibold" id="kpiAOV">₹0</span>
+            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiRevenue">₹0</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
+              <span>Avg Order:</span>
+              <span class="text-emerald-700 font-bold" id="kpiAOV">₹0</span>
             </p>
           </div>
         </div>
 
         <!-- Orders Count -->
-        <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-blue-500/40 transition">
-          <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition"></div>
+        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-blue-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Orders</span>
-            <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Orders</span>
+            <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm border border-blue-200">
               <i class="fa-solid fa-cart-shopping"></i>
             </div>
           </div>
           <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-white" id="kpiOrders">0</h3>
-            <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
+            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiOrders">0</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
               <span>Unique Dealers:</span>
-              <span class="text-blue-400 font-semibold" id="kpiDealersCount">0</span>
+              <span class="text-blue-700 font-bold" id="kpiDealersCount">0</span>
             </p>
           </div>
         </div>
 
         <!-- Today's App Opens -->
-        <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-cyan-500/40 transition cursor-pointer" onclick="switchTab('telemetry')">
-          <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-500/20 transition"></div>
+        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-cyan-400 hover:shadow-md transition cursor-pointer" onclick="switchTab('telemetry')">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Today's App Opens</span>
-            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Today's App Opens</span>
+            <div class="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-sm border border-cyan-200">
               <i class="fa-solid fa-mobile-screen"></i>
             </div>
           </div>
           <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-cyan-400" id="kpiTodayOpens">0</h3>
-            <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
+            <h3 class="text-lg sm:text-2xl font-black text-cyan-700" id="kpiTodayOpens">0</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
               <span>Dealers Opened Today:</span>
-              <span class="text-white font-semibold" id="kpiDealersOpenedToday">0</span>
+              <span class="text-slate-800 font-bold" id="kpiDealersOpenedToday">0</span>
             </p>
           </div>
         </div>
 
         <!-- Product Views Today -->
-        <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-purple-500/40 transition cursor-pointer" onclick="switchTab('telemetry')">
-          <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition"></div>
+        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-purple-400 hover:shadow-md transition cursor-pointer" onclick="switchTab('telemetry')">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Product Views Today</span>
-            <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Product Views Today</span>
+            <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm border border-purple-200">
               <i class="fa-solid fa-eye"></i>
             </div>
           </div>
           <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-purple-400" id="kpiTodayViews">0</h3>
-            <p class="text-xs text-slate-400 mt-1 flex items-center space-x-1">
+            <h3 class="text-lg sm:text-2xl font-black text-purple-700" id="kpiTodayViews">0</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
               <span>Catalog SKUs:</span>
-              <span class="text-slate-300 font-semibold" id="kpiCatalogCount">1,141</span>
+              <span class="text-slate-800 font-bold" id="kpiCatalogCount">1,141</span>
             </p>
           </div>
         </div>
       </div>
 
       <!-- SMART ACTION RADAR / LIVE INSIGHTS -->
-      <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-4">
+      <div class="pro-card rounded-2xl p-4 sm:p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
-            <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm">
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm border border-indigo-200">
               <i class="fa-solid fa-bolt"></i>
             </div>
             <div>
-              <h3 class="text-sm sm:text-base font-bold text-white">Live Insights & Churn Radar</h3>
-              <p class="text-xs text-slate-400">Algorithmic risk warnings derived from 721+ live transaction records</p>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Live Insights & Churn Radar</h3>
+              <p class="text-xs text-slate-500">Algorithmic risk warnings derived from 721+ live transaction records</p>
             </div>
           </div>
-          <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">Auto-Refreshed</span>
+          <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">Auto-Refreshed</span>
         </div>
 
         <div id="alertsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -297,13 +292,13 @@
       <!-- CHARTS ROW -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Sales Velocity Trend -->
-        <div class="lg:col-span-2 glass-card rounded-2xl p-5 space-y-3">
+        <div class="lg:col-span-2 pro-card rounded-2xl p-5 space-y-3">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-sm sm:text-base font-bold text-white">Monthly Sales Growth Trend</h3>
-              <p class="text-xs text-slate-400">Total transaction volume grouped chronologically</p>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Monthly Sales Growth Trend</h3>
+              <p class="text-xs text-slate-500">Total transaction volume grouped chronologically</p>
             </div>
-            <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">Live</span>
+            <span class="text-xs text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">Live</span>
           </div>
           <div class="h-64 relative">
             <canvas id="salesTrendChart"></canvas>
@@ -311,11 +306,11 @@
         </div>
 
         <!-- Tier Revenue Breakdown -->
-        <div class="glass-card rounded-2xl p-5 space-y-3">
+        <div class="pro-card rounded-2xl p-5 space-y-3">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-sm sm:text-base font-bold text-white">Dealer Tier Distribution</h3>
-              <p class="text-xs text-slate-400">Volume distribution by dealer value tier</p>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Dealer Tier Distribution</h3>
+              <p class="text-xs text-slate-500">Volume distribution by dealer value tier</p>
             </div>
           </div>
           <div class="h-64 relative flex items-center justify-center">
@@ -327,13 +322,13 @@
       <!-- TOP DEALERS PREVIEW -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Top 5 Champions -->
-        <div class="glass-card rounded-2xl p-5 space-y-4">
+        <div class="pro-card rounded-2xl p-5 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
-              <i class="fa-solid fa-trophy text-amber-400 text-base"></i>
-              <h3 class="text-sm sm:text-base font-bold text-white">Top Revenue Champions</h3>
+              <i class="fa-solid fa-trophy text-amber-500 text-base"></i>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Top Revenue Champions</h3>
             </div>
-            <button onclick="switchTab('dealers')" class="text-xs text-emerald-400 hover:underline">View All Dealers</button>
+            <button onclick="switchTab('dealers')" class="text-xs text-emerald-700 hover:text-emerald-800 font-bold hover:underline">View All Dealers</button>
           </div>
           <div id="topChampionsList" class="space-y-2.5">
             <!-- Dynamic items -->
@@ -341,13 +336,13 @@
         </div>
 
         <!-- Most Active App Openers Today -->
-        <div class="glass-card rounded-2xl p-5 space-y-4">
+        <div class="pro-card rounded-2xl p-5 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
-              <i class="fa-solid fa-fire text-orange-400 text-base"></i>
-              <h3 class="text-sm sm:text-base font-bold text-white">Today's Most Active App Openers</h3>
+              <i class="fa-solid fa-fire text-orange-500 text-base"></i>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Today's Most Active App Openers</h3>
             </div>
-            <button onclick="switchTab('telemetry')" class="text-xs text-cyan-400 hover:underline">View Spy Radar</button>
+            <button onclick="switchTab('telemetry')" class="text-xs text-cyan-700 hover:text-cyan-800 font-bold hover:underline">View Spy Radar</button>
           </div>
           <div id="topOpenersList" class="space-y-2.5">
             <!-- Dynamic items -->
@@ -359,60 +354,60 @@
     <!-- TAB 2: DAILY OPENS & PRODUCT SPY RADAR -->
     <div id="tabContent-telemetry" class="space-y-6 hidden">
       <!-- Telemetry Highlights Banner -->
-      <div class="glass-card rounded-2xl p-5 space-y-4 border-l-4 border-l-cyan-500">
+      <div class="pro-card rounded-2xl p-5 space-y-4 border-l-4 border-l-cyan-500">
         <div class="flex items-center justify-between flex-wrap gap-3">
           <div class="flex items-center space-x-3">
-            <div class="w-11 h-11 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl font-black">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl font-black border border-cyan-200">
               <i class="fa-solid fa-radar"></i>
             </div>
             <div>
-              <h3 class="text-base sm:text-lg font-bold text-white">Dealer App Activity & Product Browsing Intelligence</h3>
-              <p class="text-xs text-slate-400">Har dealer har roj kitni baar app khol raha hai aur kaunse products browse kar raha hai uska live tracking</p>
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Dealer App Activity & Product Browsing Intelligence</h3>
+              <p class="text-xs text-slate-500">Har dealer har roj kitni baar app khol raha hai aur kaunse products browse kar raha hai uska live tracking</p>
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 font-semibold border border-cyan-500/20">
-              <i class="fa-solid fa-satellite-dish mr-1 text-cyan-400"></i> Active Telemetry Radar
+            <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 font-bold border border-cyan-200">
+              <i class="fa-solid fa-satellite-dish mr-1 text-cyan-600"></i> Active Telemetry Radar
             </span>
           </div>
         </div>
 
         <!-- 4 Quick Telemetry Stats -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
-          <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Total Opens Today</span>
-            <h4 class="text-xl font-black text-cyan-400 mt-1" id="spyTotalOpensToday">0</h4>
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="text-xs font-semibold text-slate-500">Total Opens Today</span>
+            <h4 class="text-xl font-black text-cyan-700 mt-1" id="spyTotalOpensToday">0</h4>
             <p class="text-[11px] text-slate-500 mt-0.5">Across all mobile & PWA users</p>
           </div>
-          <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Active Dealers Today</span>
-            <h4 class="text-xl font-black text-emerald-400 mt-1" id="spyActiveDealersToday">0</h4>
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="text-xs font-semibold text-slate-500">Active Dealers Today</span>
+            <h4 class="text-xl font-black text-emerald-700 mt-1" id="spyActiveDealersToday">0</h4>
             <p class="text-[11px] text-slate-500 mt-0.5">Opened app at least once</p>
           </div>
-          <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Catalog Products Inspected</span>
-            <h4 class="text-xl font-black text-purple-400 mt-1" id="spyProductViewsCount">0</h4>
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="text-xs font-semibold text-slate-500">Catalog Products Inspected</span>
+            <h4 class="text-xl font-black text-purple-700 mt-1" id="spyProductViewsCount">0</h4>
             <p class="text-[11px] text-slate-500 mt-0.5">SKU detail impressions</p>
           </div>
-          <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Hot Buying Intent Leads</span>
-            <h4 class="text-xl font-black text-amber-400 mt-1" id="spyHighIntentLeadsCount">0</h4>
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="text-xs font-semibold text-slate-500">Hot Buying Intent Leads</span>
+            <h4 class="text-xl font-black text-amber-700 mt-1" id="spyHighIntentLeadsCount">0</h4>
             <p class="text-[11px] text-slate-500 mt-0.5">Viewed 3x+ without ordering</p>
           </div>
         </div>
       </div>
 
       <!-- MOST VIEWED PRODUCTS LEADERBOARD -->
-      <div class="glass-card rounded-2xl p-5 space-y-4">
+      <div class="pro-card rounded-2xl p-5 space-y-4">
         <div class="flex items-center justify-between flex-wrap gap-2">
           <div>
-            <h3 class="text-sm sm:text-base font-bold text-white flex items-center space-x-2">
-              <i class="fa-solid fa-fire text-amber-400"></i>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 flex items-center space-x-2">
+              <i class="fa-solid fa-fire text-amber-500"></i>
               <span>Most Viewed Products (Market Demand Leaderboard)</span>
             </h3>
-            <p class="text-xs text-slate-400">Dealers kaunse products sabse zyada dekh rahe hain</p>
+            <p class="text-xs text-slate-500">Dealers kaunse products sabse zyada dekh rahe hain</p>
           </div>
-          <span class="text-xs text-slate-400">Top browsed items</span>
+          <span class="text-xs text-slate-500 font-medium">Top browsed items</span>
         </div>
 
         <div id="mostViewedProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
@@ -421,24 +416,24 @@
       </div>
 
       <!-- DEALER LIVE BROWSING & OPENS RADAR FEED -->
-      <div class="glass-card rounded-2xl p-5 space-y-4">
+      <div class="pro-card rounded-2xl p-5 space-y-4">
         <div class="flex items-center justify-between flex-wrap gap-2">
           <div>
-            <h3 class="text-sm sm:text-base font-bold text-white flex items-center space-x-2">
-              <i class="fa-solid fa-list-check text-cyan-400"></i>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 flex items-center space-x-2">
+              <i class="fa-solid fa-list-check text-cyan-600"></i>
               <span>Dealer Daily Opens & Product Interest Roster</span>
             </h3>
-            <p class="text-xs text-slate-400">Dealer-wise daily open frequency aur unka specific product preference</p>
+            <p class="text-xs text-slate-500">Dealer-wise daily open frequency aur unka specific product preference</p>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="text-xs text-slate-400">Showing top active dealers</span>
+            <span class="text-xs text-slate-500 font-medium">Showing top active dealers</span>
           </div>
         </div>
 
         <!-- Roster Table -->
         <div class="overflow-x-auto custom-scroll">
           <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+            <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wider border-b border-slate-200 font-bold">
               <tr>
                 <th class="py-3 px-4">Dealer Name</th>
                 <th class="py-3 px-3">Area</th>
@@ -449,7 +444,7 @@
                 <th class="py-3 px-4 text-center">Action</th>
               </tr>
             </thead>
-            <tbody id="telemetryTableBody" class="divide-y divide-slate-800/60 font-medium">
+            <tbody id="telemetryTableBody" class="divide-y divide-slate-100 font-medium">
               <!-- Rendered via JS -->
             </tbody>
           </table>
@@ -459,15 +454,15 @@
 
     <!-- TAB 3: DEALERS DIRECTORY & PERFORMANCE TABLE -->
     <div id="tabContent-dealers" class="space-y-4 hidden">
-      <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-        <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between flex-wrap gap-2">
+      <div class="pro-card rounded-2xl overflow-hidden shadow-sm">
+        <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2 bg-slate-50/50">
           <div>
-            <h3 class="text-sm sm:text-base font-bold text-white">Dealers Directory & Performance Matrix</h3>
-            <p class="text-xs text-slate-400" id="tableFilterSummary">Showing all dealers</p>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Dealers Directory & Performance Matrix</h3>
+            <p class="text-xs text-slate-500" id="tableFilterSummary">Showing all dealers</p>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="text-xs text-slate-400">Sort:</span>
-            <select id="sortSelect" onchange="applyFilters()" class="bg-slate-900 border border-slate-700 text-xs text-slate-300 rounded-lg px-2.5 py-1.5 focus:outline-none">
+            <span class="text-xs font-semibold text-slate-500">Sort:</span>
+            <select id="sortSelect" onchange="applyFilters()" class="bg-white border border-slate-300 text-xs text-slate-700 font-medium rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-emerald-500">
               <option value="revenue-desc">Highest Revenue</option>
               <option value="opens-desc">Most App Opens Today</option>
               <option value="orders-desc">Most Orders</option>
@@ -480,7 +475,7 @@
         <!-- Table -->
         <div class="overflow-x-auto custom-scroll">
           <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+            <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wider border-b border-slate-200 font-bold">
               <tr>
                 <th class="py-3 px-4">Dealer / Shop Name</th>
                 <th class="py-3 px-3">Area / Territory</th>
@@ -493,29 +488,29 @@
                 <th class="py-3 px-4 text-center">Quick Action</th>
               </tr>
             </thead>
-            <tbody id="dealersTableBody" class="divide-y divide-slate-800/60 font-medium">
+            <tbody id="dealersTableBody" class="divide-y divide-slate-100 font-medium">
               <!-- Rendered via JS -->
             </tbody>
           </table>
         </div>
 
-        <div id="emptyTableMessage" class="py-12 text-center text-slate-500 hidden">
-          <i class="fa-solid fa-users-slash text-3xl mb-2"></i>
-          <p class="text-sm">No dealers found matching your current filter.</p>
+        <div id="emptyTableMessage" class="py-12 text-center text-slate-400 hidden">
+          <i class="fa-solid fa-users-slash text-3xl mb-2 text-slate-300"></i>
+          <p class="text-sm font-semibold">No dealers found matching your current filter.</p>
         </div>
       </div>
     </div>
 
     <!-- TAB 4: AT-RISK & CHURN RADAR -->
     <div id="tabContent-radar" class="space-y-6 hidden">
-      <div class="glass-card rounded-2xl p-5 space-y-4">
+      <div class="pro-card rounded-2xl p-5 space-y-4">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-lg font-bold">
+          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold border border-rose-200">
             <i class="fa-solid fa-shield-halved"></i>
           </div>
           <div>
-            <h3 class="text-base sm:text-lg font-bold text-white">Dealer Churn Prevention & Credit Risk Radar</h3>
-            <p class="text-xs text-slate-400">High-value accounts experiencing drop-offs or active credit lock blocks</p>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Dealer Churn Prevention & Credit Risk Radar</h3>
+            <p class="text-xs text-slate-500">High-value accounts experiencing drop-offs or active credit lock blocks</p>
           </div>
         </div>
 
@@ -530,11 +525,11 @@
     <div id="tabContent-areas" class="space-y-6 hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Area Bar Chart -->
-        <div class="lg:col-span-2 glass-card rounded-2xl p-5 space-y-3">
+        <div class="lg:col-span-2 pro-card rounded-2xl p-5 space-y-3">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-sm sm:text-base font-bold text-white">Territory Revenue Comparison</h3>
-              <p class="text-xs text-slate-400">Sales volume distributed across dealer geographic areas</p>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Territory Revenue Comparison</h3>
+              <p class="text-xs text-slate-500">Sales volume distributed across dealer geographic areas</p>
             </div>
           </div>
           <div class="h-72 relative">
@@ -543,8 +538,8 @@
         </div>
 
         <!-- Area Matrix List -->
-        <div class="glass-card rounded-2xl p-5 space-y-4">
-          <h3 class="text-sm sm:text-base font-bold text-white">Territory Summary</h3>
+        <div class="pro-card rounded-2xl p-5 space-y-4">
+          <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Territory Summary</h3>
           <div id="areaMatrixList" class="space-y-3 custom-scroll max-h-72 overflow-y-auto pr-1">
             <!-- Dynamic -->
           </div>
@@ -554,23 +549,23 @@
 
   </main>
 
-  <!-- DEALER 360 MODAL (WITH PRODUCT SPY & OPENS SECTION) -->
-  <div id="dealerModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
-    <div class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+  <!-- DEALER 360 MODAL (PROFESSIONAL WHITE) -->
+  <div id="dealerModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
       
       <!-- Modal Header -->
-      <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/70">
+      <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/80">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg font-bold border border-emerald-500/20">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-bold border border-emerald-200">
             <i class="fa-solid fa-shop"></i>
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h2 class="text-base sm:text-lg font-bold text-white" id="modalShopName">Dealer Details</h2>
-              <span id="modalTierBadge" class="text-xs px-2 py-0.5 rounded-full font-semibold">Tier</span>
-              <span id="modalVipBadge" class="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 hidden">VIP</span>
+              <h2 class="text-base sm:text-lg font-extrabold text-slate-900" id="modalShopName">Dealer Details</h2>
+              <span id="modalTierBadge" class="text-xs px-2 py-0.5 rounded-full font-bold">Tier</span>
+              <span id="modalVipBadge" class="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 font-bold border border-amber-300 hidden">VIP</span>
             </div>
-            <p class="text-xs text-slate-400 flex items-center space-x-2 mt-0.5">
+            <p class="text-xs text-slate-500 flex items-center space-x-2 mt-0.5 font-medium">
               <span id="modalPhone">--</span>
               <span>•</span>
               <span id="modalArea">Territory</span>
@@ -578,65 +573,65 @@
           </div>
         </div>
 
-        <button onclick="closeDealerModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <button onclick="closeDealerModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
       <!-- Modal Body (Scrollable) -->
-      <div class="p-5 overflow-y-auto custom-scroll space-y-6 flex-grow">
+      <div class="p-5 overflow-y-auto custom-scroll space-y-6 flex-grow bg-slate-50/30">
         
         <!-- Quick Metric Tiles -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Total Sales Volume</span>
-            <p class="text-base font-bold text-white mt-1" id="modalTotalRevenue">₹0</p>
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500">Total Sales Volume</span>
+            <p class="text-base font-black text-slate-900 mt-1" id="modalTotalRevenue">₹0</p>
           </div>
-          <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Total Orders</span>
-            <p class="text-base font-bold text-white mt-1" id="modalTotalOrders">0</p>
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500">Total Orders</span>
+            <p class="text-base font-black text-slate-900 mt-1" id="modalTotalOrders">0</p>
           </div>
-          <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Today's App Opens</span>
-            <p class="text-base font-bold text-cyan-400 mt-1" id="modalOpensToday">0</p>
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500">Today's App Opens</span>
+            <p class="text-base font-black text-cyan-700 mt-1" id="modalOpensToday">0</p>
           </div>
-          <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-800">
-            <span class="text-xs text-slate-400">Last App Open</span>
-            <p class="text-base font-bold text-slate-300 mt-1 text-xs truncate" id="modalLastOpenTime">--</p>
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500">Last App Open</span>
+            <p class="text-base font-black text-slate-700 mt-1 text-xs truncate" id="modalLastOpenTime">--</p>
           </div>
         </div>
 
         <!-- 1-Click Action Bar -->
         <div class="flex flex-wrap gap-2.5">
-          <button id="modalBtnWhatsApp" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center space-x-2 transition shadow-sm">
+          <button id="modalBtnWhatsApp" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center space-x-2 transition shadow-sm">
             <i class="fa-brands fa-whatsapp text-sm"></i>
             <span>Send WhatsApp Greeting / Pitch</span>
           </button>
 
-          <button id="modalBtnCall" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold flex items-center space-x-2 transition shadow-sm">
+          <button id="modalBtnCall" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center space-x-2 transition shadow-sm">
             <i class="fa-solid fa-phone text-sm"></i>
             <span>Call Dealer</span>
           </button>
         </div>
 
-        <!-- PRODUCTS VIEWED & BROWSING INTELLIGENCE (NEW SECTION) -->
-        <div class="bg-slate-950/60 p-4 rounded-xl border border-cyan-500/30 space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center space-x-2">
-              <i class="fa-solid fa-eye text-cyan-400"></i>
+        <!-- PRODUCTS VIEWED & BROWSING INTELLIGENCE -->
+        <div class="bg-white p-4 rounded-xl border border-cyan-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h4 class="text-xs font-bold text-cyan-800 uppercase tracking-wider flex items-center space-x-2">
+              <i class="fa-solid fa-eye text-cyan-600"></i>
               <span>Products Viewed By This Dealer</span>
             </h4>
-            <span class="text-xs text-slate-500" id="modalProductViewsCount">0 products tracked</span>
+            <span class="text-xs font-semibold text-slate-500" id="modalProductViewsCount">0 products tracked</span>
           </div>
           
-          <div id="modalViewedProductsList" class="space-y-2 max-h-52 overflow-y-auto custom-scroll pr-1">
+          <div id="modalViewedProductsList" class="space-y-2 max-h-56 overflow-y-auto custom-scroll pr-1">
             <!-- Dynamic product view items -->
           </div>
         </div>
 
         <!-- Orders History -->
-        <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800/80 space-y-3">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center justify-between">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center justify-between border-b border-slate-100 pb-2">
             <span>Transaction & Order History</span>
             <span class="text-slate-500 lowercase font-normal" id="modalOrderCountSub"></span>
           </h4>
@@ -648,9 +643,9 @@
       </div>
 
       <!-- Modal Footer -->
-      <div class="px-5 py-3 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
-        <span class="text-xs text-slate-500">Live Synced with Yash Marketing Cloud Engine</span>
-        <button onclick="closeDealerModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg font-medium">Close</button>
+      <div class="px-5 py-3 border-t border-slate-200 bg-slate-50/80 flex items-center justify-between">
+        <span class="text-xs font-medium text-slate-500">Live Synced with Yash Marketing Cloud Engine</span>
+        <button onclick="closeDealerModal()" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs rounded-lg font-bold border border-slate-300 shadow-sm">Close</button>
       </div>
     </div>
   </div>
@@ -687,10 +682,10 @@
         const content = document.getElementById(`tabContent-${t}`);
         if (!btn || !content) return;
         if (t === tabId) {
-          btn.className = "tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 whitespace-nowrap";
+          btn.className = "tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm whitespace-nowrap";
           content.classList.remove('hidden');
         } else {
-          btn.className = "tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800/50 whitespace-nowrap";
+          btn.className = "tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap";
           content.classList.add('hidden');
         }
       });
@@ -797,7 +792,6 @@
             creditLocked: !!o.creditLocked,
             lockReason: o.lockReason || "",
             orders: [],
-            // Daily Opens & Product Views Telemetry fields
             appOpensToday: 0,
             lastOpenTimeStr: "",
             viewedProducts: [],
@@ -878,7 +872,6 @@
 
         // Calculate Daily App Opens for this dealer
         const hash = getStableHash(d.name + d.phone);
-        // Active / Platinum / Gold dealers open app more often
         let baseOpens = (d.tier === 'Platinum') ? 4 : (d.tier === 'Gold' ? 3 : 1);
         let dailyNoise = (hash % 5);
         let opensToday = Math.max(0, baseOpens + dailyNoise - (daysAgo > 60 ? 3 : 0));
@@ -896,7 +889,6 @@
         // Assign Products Viewed by this dealer from live catalog
         d.viewedProducts = [];
         if (products.length > 0) {
-          // Select 2 to 5 relevant products from the 1,141 catalog items
           const numViewed = (hash % 4) + 2;
           for (let pIdx = 0; pIdx < numViewed; pIdx++) {
             const prodIndex = (hash * (pIdx + 7) + pIdx * 19) % products.length;
@@ -923,7 +915,6 @@
 
               totalProductViewsCount += viewCount;
 
-              // Aggregate globally
               if (!productViewsGlobalCounter[pCode]) {
                 productViewsGlobalCounter[pCode] = {
                   code: pCode,
@@ -942,11 +933,9 @@
           }
         }
 
-        // Sort viewed products by view count
         d.viewedProducts.sort((a, b) => b.views - a.views);
         d.topViewedProduct = d.viewedProducts[0] || null;
 
-        // Buying Intent Level
         if (d.topViewedProduct && d.topViewedProduct.views >= 5 && opensToday >= 3) {
           d.intentLevel = "High Buying Intent";
           highIntentLeadsCount++;
@@ -989,13 +978,10 @@
         }
       });
 
-      // Sort Global Most Viewed Products
       globalMostViewedProducts = Object.values(productViewsGlobalCounter).sort((a, b) => b.totalViews - a.totalViews);
 
-      // Sort Dealers by Revenue Descending by default
       dealerList.sort((a, b) => b.totalRevenue - a.totalRevenue);
 
-      // Update KPI Elements
       document.getElementById("kpiRevenue").textContent = '₹' + Math.round(totalRevenue).toLocaleString('en-IN');
       document.getElementById("kpiAOV").textContent = totalOrders > 0 ? ('₹' + Math.round(totalRevenue / totalOrders).toLocaleString('en-IN')) : '₹0';
       document.getElementById("kpiOrders").textContent = totalOrders.toLocaleString('en-IN');
@@ -1005,13 +991,11 @@
       document.getElementById("kpiTodayViews").textContent = totalProductViewsCount;
       document.getElementById("badgeDealerCount").textContent = dealerList.length;
 
-      // Telemetry Banner Stats
       document.getElementById("spyTotalOpensToday").textContent = totalOpensTodaySum;
       document.getElementById("spyActiveDealersToday").textContent = dealersOpenedTodayCount;
       document.getElementById("spyProductViewsCount").textContent = totalProductViewsCount;
       document.getElementById("spyHighIntentLeadsCount").textContent = highIntentLeadsCount;
 
-      // Area filter options
       const areaSelect = document.getElementById("areaFilter");
       const currentArea = areaSelect.value;
       areaSelect.innerHTML = '<option value="">All Territories</option>';
@@ -1023,7 +1007,6 @@
       });
       areaSelect.value = currentArea;
 
-      // Render Visual Components
       renderCharts(monthTrends, tierCounts, areaMap);
       renderAlerts(alerts.slice(0, 8));
       renderAreaMatrix(areaMap);
@@ -1031,11 +1014,10 @@
       renderTelemetryRoster(dealerList);
       applyFilters();
 
-      // Show Overview tab by default
       switchTab('overview');
     }
 
-    // Render Charts
+    // Render Charts (Light Mode)
     function renderCharts(monthTrends, tierCounts, areaMap) {
       const salesCtx = document.getElementById("salesTrendChart").getContext("2d");
       if (salesChartInstance) salesChartInstance.destroy();
@@ -1050,12 +1032,12 @@
           datasets: [{
             label: 'Sales Revenue (₹)',
             data: revenueData,
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderColor: '#059669',
+            backgroundColor: 'rgba(16, 185, 129, 0.08)',
             fill: true,
             tension: 0.35,
             borderWidth: 2.5,
-            pointBackgroundColor: '#10b981',
+            pointBackgroundColor: '#059669',
             pointRadius: 4
           }]
         },
@@ -1065,15 +1047,16 @@
           plugins: { legend: { display: false } },
           scales: {
             y: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              grid: { color: 'rgba(0, 0, 0, 0.05)' },
               ticks: {
-                color: '#94a3b8',
+                color: '#64748b',
+                font: { weight: '600' },
                 callback: function(v) { return '₹' + (v / 1000) + 'k'; }
               }
             },
             x: {
               grid: { display: false },
-              ticks: { color: '#94a3b8' }
+              ticks: { color: '#64748b', font: { weight: '600' } }
             }
           }
         }
@@ -1088,15 +1071,16 @@
           labels: ['Platinum', 'Gold', 'Silver', 'Bronze'],
           datasets: [{
             data: [tierCounts.Platinum.count, tierCounts.Gold.count, tierCounts.Silver.count, tierCounts.Bronze.count],
-            backgroundColor: ['#818cf8', '#fbbf24', '#94a3b8', '#d97706'],
-            borderWidth: 0
+            backgroundColor: ['#6366f1', '#f59e0b', '#64748b', '#ea580c'],
+            borderWidth: 2,
+            borderColor: '#ffffff'
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
-            legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } }
+            legend: { position: 'bottom', labels: { color: '#334155', font: { size: 11, weight: '600' } } }
           },
           cutout: '68%'
         }
@@ -1113,8 +1097,8 @@
           datasets: [{
             label: 'Sales Revenue (₹)',
             data: sortedAreas.map(a => Math.round(a.revenue)),
-            backgroundColor: 'rgba(99, 102, 241, 0.75)',
-            hoverBackgroundColor: 'rgba(99, 102, 241, 0.95)',
+            backgroundColor: 'rgba(79, 70, 229, 0.85)',
+            hoverBackgroundColor: 'rgba(79, 70, 229, 1)',
             borderRadius: 6
           }]
         },
@@ -1124,22 +1108,23 @@
           plugins: { legend: { display: false } },
           scales: {
             y: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              grid: { color: 'rgba(0, 0, 0, 0.05)' },
               ticks: {
-                color: '#94a3b8',
+                color: '#64748b',
+                font: { weight: '600' },
                 callback: function(v) { return '₹' + (v / 1000) + 'k'; }
               }
             },
             x: {
               grid: { display: false },
-              ticks: { color: '#94a3b8' }
+              ticks: { color: '#64748b', font: { weight: '600' } }
             }
           }
         }
       });
     }
 
-    // Render Alerts
+    // Render Alerts (Light Mode)
     function renderAlerts(alerts) {
       const container = document.getElementById("alertsContainer");
       const badge = document.getElementById("badgeAlertCount");
@@ -1148,8 +1133,8 @@
 
       if (alerts.length === 0) {
         container.innerHTML = `
-          <div class="col-span-2 py-4 text-center text-slate-500 text-xs">
-            <i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> No critical risks or credit locks detected across dealers.
+          <div class="col-span-2 py-4 text-center text-slate-500 text-xs font-semibold">
+            <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> No critical risks or credit locks detected across dealers.
           </div>
         `;
         return;
@@ -1159,25 +1144,25 @@
         const isCritical = item.severity === 'critical';
         const isOpp = item.severity === 'opportunity';
         const card = document.createElement("div");
-        card.className = `p-3.5 rounded-xl border flex items-start justify-between space-x-3 transition ${
-          isCritical ? 'bg-rose-500/10 border-rose-500/20 text-rose-200' :
-          isOpp ? 'bg-amber-500/10 border-amber-500/20 text-amber-200' :
-          'bg-indigo-500/10 border-indigo-500/20 text-indigo-200'
+        card.className = `p-3.5 rounded-xl border flex items-start justify-between space-x-3 transition shadow-sm ${
+          isCritical ? 'bg-rose-50/70 border-rose-200 text-rose-900' :
+          isOpp ? 'bg-amber-50/70 border-amber-200 text-amber-900' :
+          'bg-indigo-50/70 border-indigo-200 text-indigo-900'
         }`;
 
         card.innerHTML = `
           <div class="space-y-1">
             <div class="flex items-center space-x-2">
-              <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${
-                isCritical ? 'bg-rose-500 text-white' :
+              <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded ${
+                isCritical ? 'bg-rose-600 text-white' :
                 isOpp ? 'bg-amber-500 text-slate-950 font-black' :
-                'bg-indigo-500 text-white'
+                'bg-indigo-600 text-white'
               }">${item.type}</span>
-              <h4 class="text-xs font-bold text-white">${item.title}</h4>
+              <h4 class="text-xs font-bold text-slate-900">${item.title}</h4>
             </div>
-            <p class="text-xs opacity-90">${item.message}</p>
+            <p class="text-xs opacity-90 font-medium">${item.message}</p>
           </div>
-          <button onclick="viewDealer360('${item.dealer.replace(/'/g, "\\'")}')" class="px-2.5 py-1.5 bg-slate-900/80 hover:bg-slate-900 text-white rounded-lg text-xs font-medium border border-slate-700 whitespace-nowrap shadow-sm">
+          <button onclick="viewDealer360('${item.dealer.replace(/'/g, "\\'")}')" class="px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-800 rounded-lg text-xs font-bold border border-slate-300 whitespace-nowrap shadow-sm transition">
             Inspect
           </button>
         `;
@@ -1185,33 +1170,33 @@
       });
     }
 
-    // Render Most Viewed Products in Telemetry Tab
+    // Render Most Viewed Products in Telemetry Tab (Light Mode)
     function renderMostViewedProducts(productsList) {
       const grid = document.getElementById("mostViewedProductsGrid");
       grid.innerHTML = "";
 
       if (!productsList || productsList.length === 0) {
-        grid.innerHTML = '<div class="col-span-3 text-center py-6 text-slate-500 text-xs">Catalog product view data syncing...</div>';
+        grid.innerHTML = '<div class="col-span-3 text-center py-6 text-slate-500 text-xs font-semibold">Catalog product view data syncing...</div>';
         return;
       }
 
       productsList.forEach((p, idx) => {
         const card = document.createElement("div");
-        card.className = "p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition flex items-center space-x-3 group";
+        card.className = "p-3.5 rounded-xl bg-white border border-slate-200 hover:border-cyan-400 hover:shadow-md transition flex items-center space-x-3 group";
 
         card.innerHTML = `
-          <div class="w-16 h-16 rounded-xl bg-slate-950 border border-slate-800 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
+          <div class="w-16 h-16 rounded-xl bg-slate-50 border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
             <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain group-hover:scale-105 transition" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
           </div>
           <div class="flex-grow min-w-0 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">${p.brand || 'Yash SKU'}</span>
-              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">#${idx + 1} Trending</span>
+              <span class="text-[10px] font-extrabold text-cyan-700 uppercase tracking-wider">${p.brand || 'Yash SKU'}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-100 text-cyan-800 font-bold border border-cyan-200">#${idx + 1} Trending</span>
             </div>
-            <h4 class="text-xs font-bold text-white truncate" title="${p.name}">${p.name}</h4>
+            <h4 class="text-xs font-bold text-slate-900 truncate" title="${p.name}">${p.name}</h4>
             <div class="flex items-center justify-between pt-0.5 text-xs">
-              <span class="font-extrabold text-emerald-400">₹${Number(p.price).toLocaleString('en-IN')}</span>
-              <span class="text-[11px] text-slate-400 font-medium"><i class="fa-solid fa-eye text-cyan-400 mr-1"></i>${p.totalViews} views (${p.uniqueDealers.size} dealers)</span>
+              <span class="font-black text-emerald-600">₹${Number(p.price).toLocaleString('en-IN')}</span>
+              <span class="text-[11px] text-slate-500 font-semibold"><i class="fa-solid fa-eye text-cyan-600 mr-1"></i>${p.totalViews} views (${p.uniqueDealers.size} dealers)</span>
             </div>
           </div>
         `;
@@ -1219,7 +1204,7 @@
       });
     }
 
-    // Render Telemetry Roster Table
+    // Render Telemetry Roster Table (Light Mode)
     function renderTelemetryRoster(dealers) {
       const tbody = document.getElementById("telemetryTableBody");
       tbody.innerHTML = "";
@@ -1228,43 +1213,43 @@
 
       activeDealers.forEach(d => {
         const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-800/40 transition";
+        tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
 
         const intentBadge = 
-          d.intentLevel === "High Buying Intent" ? '<span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold text-[10px] border border-amber-500/30">🔥 High Intent</span>' :
-          d.intentLevel === "Moderate Interest" ? '<span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold text-[10px]">Browsing Products</span>' :
-          '<span class="text-slate-500 text-[10px]">Normal</span>';
+          d.intentLevel === "High Buying Intent" ? '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[10px] border border-amber-300">🔥 High Intent</span>' :
+          d.intentLevel === "Moderate Interest" ? '<span class="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 font-bold text-[10px] border border-cyan-200">Browsing Products</span>' :
+          '<span class="text-slate-400 text-[10px] font-semibold">Normal</span>';
 
         const topP = d.topViewedProduct;
 
         tr.innerHTML = `
           <td class="py-3 px-4">
-            <div class="font-bold text-white hover:text-cyan-400 cursor-pointer" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
+            <div class="font-bold text-slate-900 hover:text-cyan-700 cursor-pointer" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
               ${d.name}
             </div>
-            <div class="text-[11px] text-slate-400">${d.phone || 'No phone'}</div>
+            <div class="text-[11px] text-slate-500 font-medium">${d.phone || 'No phone'}</div>
           </td>
-          <td class="py-3 px-3 text-slate-300 text-xs">${d.area}</td>
+          <td class="py-3 px-3 text-slate-700 text-xs font-semibold">${d.area}</td>
           <td class="py-3 px-3 text-center">
             ${d.appOpensToday > 0 ? 
-              `<span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold text-xs border border-cyan-500/30"><i class="fa-solid fa-mobile-screen mr-1"></i>${d.appOpensToday} opens today</span>` : 
-              `<span class="text-slate-500 text-xs">0 opens today</span>`}
+              `<span class="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 font-bold text-xs border border-cyan-200"><i class="fa-solid fa-mobile-screen mr-1 text-cyan-600"></i>${d.appOpensToday} opens today</span>` : 
+              `<span class="text-slate-400 text-xs font-semibold">0 opens today</span>`}
           </td>
-          <td class="py-3 px-3 text-xs text-slate-400">${d.lastOpenTimeStr}</td>
+          <td class="py-3 px-3 text-xs text-slate-500 font-medium">${d.lastOpenTimeStr}</td>
           <td class="py-3 px-4">
             ${topP ? `
               <div class="flex items-center space-x-2">
-                <img src="${topP.image}" class="w-7 h-7 rounded object-contain bg-slate-950 p-0.5 border border-slate-800" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
+                <img src="${topP.image}" class="w-8 h-8 rounded-lg object-contain bg-slate-50 p-0.5 border border-slate-200" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
                 <div>
-                  <div class="text-xs font-semibold text-white truncate max-w-[200px]" title="${topP.name}">${topP.name}</div>
-                  <div class="text-[10px] text-emerald-400">₹${Number(topP.price).toLocaleString('en-IN')} • ${topP.views} views</div>
+                  <div class="text-xs font-bold text-slate-900 truncate max-w-[200px]" title="${topP.name}">${topP.name}</div>
+                  <div class="text-[10px] text-emerald-600 font-bold">₹${Number(topP.price).toLocaleString('en-IN')} • ${topP.views} views</div>
                 </div>
               </div>
-            ` : '<span class="text-slate-500 text-xs">No catalog views</span>'}
+            ` : '<span class="text-slate-400 text-xs font-medium">No catalog views</span>'}
           </td>
           <td class="py-3 px-3 text-center">${intentBadge}</td>
           <td class="py-3 px-4 text-center">
-            <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${topP ? topP.name.replace(/'/g, "\\'") : ''}', '${topP ? topP.price : ''}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center justify-center space-x-1 mx-auto transition shadow-sm">
+            <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${topP ? topP.name.replace(/'/g, "\\'") : ''}', '${topP ? topP.price : ''}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 mx-auto transition shadow-sm">
               <i class="fa-brands fa-whatsapp"></i>
               <span>Pitch Product</span>
             </button>
@@ -1322,7 +1307,7 @@
       renderRadarCards(dealerList);
     }
 
-    // Render Dealers Directory Table
+    // Render Dealers Directory Table (Light Mode)
     function renderDealersTable(dealers) {
       const tbody = document.getElementById("dealersTableBody");
       const emptyMsg = document.getElementById("emptyTableMessage");
@@ -1339,7 +1324,7 @@
 
       dealers.forEach(d => {
         const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-800/40 transition group";
+        tr.className = "hover:bg-slate-50 transition border-b border-slate-100 group";
 
         const tierBadgeClass = 
           d.tier === 'Platinum' ? 'badge-platinum' :
@@ -1347,53 +1332,53 @@
           d.tier === 'Silver' ? 'badge-silver' : 'badge-bronze';
 
         const healthBadge = 
-          d.creditLocked ? '<span class="text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded text-xs font-bold border border-rose-500/20">Credit Locked</span>' :
-          d.healthStatus === 'Active' ? '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded text-xs font-semibold">Active</span>' :
-          d.healthStatus === 'At Risk' ? '<span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded text-xs font-semibold">At Risk</span>' :
-          '<span class="text-slate-400 bg-slate-800 px-2 py-0.5 rounded text-xs">Hibernating</span>';
+          d.creditLocked ? '<span class="text-rose-700 bg-rose-50 px-2 py-0.5 rounded text-xs font-bold border border-rose-200">Credit Locked</span>' :
+          d.healthStatus === 'Active' ? '<span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-xs font-bold border border-emerald-200">Active</span>' :
+          d.healthStatus === 'At Risk' ? '<span class="text-amber-800 bg-amber-50 px-2 py-0.5 rounded text-xs font-bold border border-amber-200">At Risk</span>' :
+          '<span class="text-slate-600 bg-slate-100 px-2 py-0.5 rounded text-xs font-semibold">Hibernating</span>';
 
         const topP = d.topViewedProduct;
 
         tr.innerHTML = `
           <td class="py-3 px-4">
-            <div class="font-bold text-white group-hover:text-emerald-400 transition cursor-pointer flex items-center space-x-1.5" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
+            <div class="font-extrabold text-slate-900 group-hover:text-emerald-700 transition cursor-pointer flex items-center space-x-1.5" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
               <span>${d.name}</span>
-              ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-400 text-[10px]" title="VIP Dealer"></i>' : ''}
+              ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-500 text-[10px]" title="VIP Dealer"></i>' : ''}
             </div>
-            <div class="text-xs text-slate-400">${d.phone || 'No phone'}</div>
+            <div class="text-xs text-slate-500 font-medium">${d.phone || 'No phone'}</div>
           </td>
           <td class="py-3 px-3">
-            <span class="text-slate-300 text-xs">${d.area}</span>
+            <span class="text-slate-700 text-xs font-semibold">${d.area}</span>
           </td>
           <td class="py-3 px-3">
-            <span class="text-xs px-2 py-0.5 rounded-full font-bold ${tierBadgeClass}">${d.tier}</span>
+            <span class="text-xs px-2 py-0.5 rounded-full ${tierBadgeClass}">${d.tier}</span>
           </td>
           <td class="py-3 px-3 text-center">
             ${d.appOpensToday > 0 ? 
-              `<span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold text-xs"><i class="fa-solid fa-mobile-screen mr-1"></i>${d.appOpensToday} opens</span>` : 
-              `<span class="text-slate-500 text-xs">0 opens</span>`}
+              `<span class="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 font-bold text-xs border border-cyan-200"><i class="fa-solid fa-mobile-screen mr-1 text-cyan-600"></i>${d.appOpensToday} opens</span>` : 
+              `<span class="text-slate-400 text-xs font-medium">0 opens</span>`}
           </td>
-          <td class="py-3 px-3 text-right font-bold text-white">
+          <td class="py-3 px-3 text-right font-black text-slate-900">
             ₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}
           </td>
-          <td class="py-3 px-3 text-right text-slate-300">
+          <td class="py-3 px-3 text-right text-slate-700 font-bold">
             ${d.totalOrders}
           </td>
           <td class="py-3 px-4">
             ${topP ? `
-              <div class="text-xs text-slate-200 font-medium truncate max-w-[180px]" title="${topP.name}">${topP.name}</div>
-              <div class="text-[10px] text-cyan-400"><i class="fa-solid fa-eye mr-1"></i>${topP.views} views</div>
-            ` : '<span class="text-slate-500 text-xs">--</span>'}
+              <div class="text-xs text-slate-900 font-semibold truncate max-w-[180px]" title="${topP.name}">${topP.name}</div>
+              <div class="text-[10px] text-cyan-700 font-bold"><i class="fa-solid fa-eye mr-1"></i>${topP.views} views</div>
+            ` : '<span class="text-slate-400 text-xs">--</span>'}
           </td>
           <td class="py-3 px-3">
             ${healthBadge}
           </td>
           <td class="py-3 px-4 text-center">
             <div class="flex items-center justify-center space-x-1.5">
-              <button onclick="sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', ${d.totalRevenue})" title="Send WhatsApp" class="w-7 h-7 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 flex items-center justify-center text-xs transition">
+              <button onclick="sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', ${d.totalRevenue})" title="Send WhatsApp" class="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-600 text-emerald-600 hover:text-white flex items-center justify-center text-sm transition border border-emerald-200">
                 <i class="fa-brands fa-whatsapp"></i>
               </button>
-              <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" title="360 Profile" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-xs transition">
+              <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" title="360 Profile" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-xs transition border border-slate-300">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </button>
             </div>
@@ -1403,114 +1388,112 @@
       });
     }
 
-    // Render Overview Previews
+    // Render Overview Previews (Light Mode)
     function renderOverviewPreviews(dealers) {
       const champList = document.getElementById("topChampionsList");
       const openersList = document.getElementById("topOpenersList");
       champList.innerHTML = "";
       openersList.innerHTML = "";
 
-      // Champions
       dealers.slice(0, 5).forEach((d, idx) => {
         const item = document.createElement("div");
-        item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-emerald-500/30 transition cursor-pointer";
+        item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-400 hover:bg-white transition cursor-pointer shadow-sm";
         item.onclick = () => viewDealer360(d.name);
         item.innerHTML = `
           <div class="flex items-center space-x-3">
-            <div class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold">#${idx + 1}</div>
+            <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold">#${idx + 1}</div>
             <div>
-              <h5 class="text-xs font-bold text-white flex items-center space-x-1">
+              <h5 class="text-xs font-bold text-slate-900 flex items-center space-x-1">
                 <span>${d.name}</span>
-                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-400 text-[9px]"></i>' : ''}
+                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-500 text-[9px]"></i>' : ''}
               </h5>
-              <p class="text-[11px] text-slate-400">${d.area} • ${d.totalOrders} orders</p>
+              <p class="text-[11px] text-slate-500 font-medium">${d.area} • ${d.totalOrders} orders</p>
             </div>
           </div>
           <div class="text-right">
-            <span class="text-xs font-bold text-emerald-400">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</span>
-            <div class="text-[10px] text-slate-500">${d.tier}</div>
+            <span class="text-xs font-black text-emerald-700">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</span>
+            <div class="text-[10px] text-slate-500 font-semibold">${d.tier}</div>
           </div>
         `;
         champList.appendChild(item);
       });
 
-      // Top Openers Today
       const topOpeners = [...dealers].sort((a, b) => b.appOpensToday - a.appOpensToday).slice(0, 5);
       topOpeners.forEach((d, idx) => {
         const item = document.createElement("div");
-        item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/30 transition cursor-pointer";
+        item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-cyan-400 hover:bg-white transition cursor-pointer shadow-sm";
         item.onclick = () => viewDealer360(d.name);
         item.innerHTML = `
           <div class="flex items-center space-x-3">
-            <div class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-mobile"></i></div>
+            <div class="w-6 h-6 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-mobile"></i></div>
             <div>
-              <h5 class="text-xs font-bold text-white">${d.name}</h5>
-              <p class="text-[11px] text-cyan-300/80">${d.lastOpenTimeStr} • ${d.area}</p>
+              <h5 class="text-xs font-bold text-slate-900">${d.name}</h5>
+              <p class="text-[11px] text-slate-500 font-medium">${d.lastOpenTimeStr} • ${d.area}</p>
             </div>
           </div>
           <div class="text-right">
-            <span class="text-xs font-black text-cyan-400">${d.appOpensToday} opens today</span>
-            <div class="text-[10px] text-slate-500">${d.topViewedProduct ? d.topViewedProduct.brand : 'Browsing'}</div>
+            <span class="text-xs font-black text-cyan-800">${d.appOpensToday} opens today</span>
+            <div class="text-[10px] text-slate-500 font-semibold">${d.topViewedProduct ? d.topViewedProduct.brand : 'Browsing'}</div>
           </div>
         `;
         openersList.appendChild(item);
       });
     }
 
-    // Render Radar Cards
+    // Render Radar Cards (Light Mode)
     function renderRadarCards(dealers) {
       const grid = document.getElementById("radarCardsGrid");
       grid.innerHTML = "";
 
       const riskList = dealers.filter(d => d.creditLocked || d.intentLevel === "High Buying Intent" || d.healthStatus !== 'Active');
       if (riskList.length === 0) {
-        grid.innerHTML = '<div class="col-span-3 text-center py-10 text-slate-500 text-xs">All accounts in optimal health.</div>';
+        grid.innerHTML = '<div class="col-span-3 text-center py-10 text-slate-500 text-xs font-semibold">All accounts in optimal health.</div>';
         return;
       }
 
       riskList.slice(0, 18).forEach(d => {
         const isIntent = d.intentLevel === "High Buying Intent";
         const card = document.createElement("div");
-        card.className = "glass-card p-4 rounded-xl space-y-3 border-l-4 " + 
+        card.className = "pro-card p-4 rounded-xl space-y-3 border-l-4 " + 
           (d.creditLocked ? 'border-l-rose-500' : isIntent ? 'border-l-amber-500' : 'border-l-cyan-500');
 
         card.innerHTML = `
           <div class="flex items-start justify-between">
             <div>
-              <h4 class="text-sm font-bold text-white flex items-center space-x-1">
+              <h4 class="text-sm font-bold text-slate-900 flex items-center space-x-1">
                 <span>${d.name}</span>
-                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-400 text-[10px]"></i>' : ''}
+                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-500 text-[10px]"></i>' : ''}
               </h4>
-              <p class="text-xs text-slate-400">${d.phone || 'No phone'} • ${d.area}</p>
+              <p class="text-xs text-slate-500 font-medium">${d.phone || 'No phone'} • ${d.area}</p>
             </div>
             <span class="text-[10px] px-2 py-0.5 rounded font-bold ${
-              d.creditLocked ? 'bg-rose-500/20 text-rose-400' : isIntent ? 'bg-amber-500/20 text-amber-300' : 'bg-cyan-500/20 text-cyan-300'
+              d.creditLocked ? 'bg-rose-100 text-rose-800 border border-rose-200' : isIntent ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-cyan-100 text-cyan-800 border border-cyan-200'
             }">
               ${d.creditLocked ? 'Credit Locked' : isIntent ? '🔥 Hot Buyer Lead' : (d.daysSinceLastOrder + 'd Inactive')}
             </span>
           </div>
 
-          <div class="grid grid-cols-2 gap-2 text-xs bg-slate-900/60 p-2.5 rounded-lg">
+          <div class="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-lg border border-slate-200">
             <div>
-              <span class="text-slate-500">App Opens Today:</span>
-              <p class="font-bold text-cyan-400">${d.appOpensToday} Opens</p>
+              <span class="text-slate-500 font-medium">App Opens Today:</span>
+              <p class="font-extrabold text-cyan-700">${d.appOpensToday} Opens</p>
             </div>
             <div>
-              <span class="text-slate-500">Lifetime Revenue:</span>
-              <p class="font-bold text-white">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</p>
+              <span class="text-slate-500 font-medium">Lifetime Revenue:</span>
+              <p class="font-extrabold text-slate-900">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</p>
             </div>
             <div class="col-span-2">
-              <span class="text-slate-500">Interested Product:</span>
-              <p class="font-semibold text-emerald-400 truncate">${d.topViewedProduct ? (d.topViewedProduct.name + ' (' + d.topViewedProduct.views + ' views)') : 'General Catalog'}</p>
+              <span class="text-slate-500 font-medium">Interested Product:</span>
+              <p class="font-bold text-emerald-700 truncate">${d.topViewedProduct ? (d.topViewedProduct.name + ' (' + d.topViewedProduct.views + ' views)') : 'General Catalog'}</p>
             </div>
           </div>
 
           <div class="flex items-center space-x-2 pt-1">
-            <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${d.topViewedProduct ? d.topViewedProduct.name.replace(/'/g, "\\'") : ''}', '${d.topViewedProduct ? d.topViewedProduct.price : ''}')" class="flex-1 py-1.5 bg-emerald-600/90 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold flex items-center justify-center space-x-1.5 transition">
+            <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${d.topViewedProduct ? d.topViewedProduct.name.replace(/'/g, "\\'") : ''}', '${d.topViewedProduct ? d.topViewedProduct.price : ''}')" class="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition shadow-sm">
               <i class="fa-brands fa-whatsapp"></i>
               <span>Pitch via WhatsApp</span>
             </button>
-            <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold">
+            <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-lg text-xs font-bold shadow-sm">
               Inspect
             </button>
           </div>
@@ -1519,7 +1502,7 @@
       });
     }
 
-    // Render Area Matrix
+    // Render Area Matrix (Light Mode)
     function renderAreaMatrix(areaMap) {
       const container = document.getElementById("areaMatrixList");
       container.innerHTML = "";
@@ -1527,13 +1510,13 @@
 
       sorted.forEach(a => {
         const item = document.createElement("div");
-        item.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1.5";
+        item.className = "p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5";
         item.innerHTML = `
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-white">${a.name}</span>
-            <span class="text-xs font-bold text-emerald-400">₹${Math.round(a.revenue).toLocaleString('en-IN')}</span>
+            <span class="text-xs font-bold text-slate-900">${a.name}</span>
+            <span class="text-xs font-black text-emerald-700">₹${Math.round(a.revenue).toLocaleString('en-IN')}</span>
           </div>
-          <div class="flex items-center justify-between text-[11px] text-slate-400">
+          <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
             <span>${a.dealers.size} Dealers</span>
             <span>${a.orders} Orders placed</span>
           </div>
@@ -1573,7 +1556,7 @@
       document.getElementById("modalBtnWhatsApp").onclick = () => sendQuickWhatsApp(d.phone, d.name, 0);
       document.getElementById("modalBtnCall").onclick = () => window.open('tel:' + d.phone, '_self');
 
-      // Render Viewed Products for this Dealer
+      // Render Viewed Products for this Dealer (Light Mode)
       const productsContainer = document.getElementById("modalViewedProductsList");
       productsContainer.innerHTML = "";
       document.getElementById("modalProductViewsCount").textContent = `${d.viewedProducts.length} products browsed`;
@@ -1581,21 +1564,21 @@
       if (d.viewedProducts && d.viewedProducts.length > 0) {
         d.viewedProducts.forEach(vp => {
           const div = document.createElement("div");
-          div.className = "p-2.5 rounded-xl bg-slate-900 border border-slate-800/80 flex items-center justify-between space-x-3";
+          div.className = "p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between space-x-3";
           div.innerHTML = `
             <div class="flex items-center space-x-3 min-w-0">
-              <img src="${vp.image}" class="w-11 h-11 rounded-lg object-contain bg-slate-950 p-1 border border-slate-800 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
+              <img src="${vp.image}" class="w-12 h-12 rounded-lg object-contain bg-white p-1 border border-slate-200 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
               <div class="min-w-0">
-                <span class="text-[10px] text-cyan-400 font-bold uppercase">${vp.brand} • ${vp.category}</span>
-                <h5 class="text-xs font-bold text-white truncate max-w-[280px]" title="${vp.name}">${vp.name}</h5>
-                <div class="text-[11px] text-emerald-400 font-bold">Dealer Price: ₹${Number(vp.price).toLocaleString('en-IN')}</div>
+                <span class="text-[10px] text-cyan-800 font-extrabold uppercase">${vp.brand} • ${vp.category}</span>
+                <h5 class="text-xs font-bold text-slate-900 truncate max-w-[280px]" title="${vp.name}">${vp.name}</h5>
+                <div class="text-[11px] text-emerald-700 font-black">Dealer Price: ₹${Number(vp.price).toLocaleString('en-IN')}</div>
               </div>
             </div>
             <div class="text-right flex-shrink-0">
-              <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-black text-xs block mb-1">
+              <span class="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 font-black text-xs block mb-1 border border-cyan-200">
                 <i class="fa-solid fa-eye mr-1"></i>${vp.views} Views
               </span>
-              <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${vp.name.replace(/'/g, "\\'")}', '${vp.price}')" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[10px] font-bold transition">
+              <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${vp.name.replace(/'/g, "\\'")}', '${vp.price}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-bold transition shadow-sm">
                 WhatsApp Offer
               </button>
             </div>
@@ -1603,24 +1586,24 @@
           productsContainer.appendChild(div);
         });
       } else {
-        productsContainer.innerHTML = '<div class="text-xs text-slate-500 py-3 text-center">No recent product views logged for this dealer.</div>';
+        productsContainer.innerHTML = '<div class="text-xs text-slate-500 py-3 text-center font-medium">No recent product views logged for this dealer.</div>';
       }
 
-      // Render Orders
+      // Render Orders (Light Mode)
       const ordersContainer = document.getElementById("modalOrdersList");
       ordersContainer.innerHTML = "";
       d.orders.forEach(o => {
         const div = document.createElement("div");
-        div.className = "p-2.5 rounded-lg bg-slate-900 border border-slate-800/80 text-xs space-y-1";
+        div.className = "p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs space-y-1";
         div.innerHTML = `
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-400 font-mono">${o.orderId}</span>
-            <span class="font-bold text-white">₹${Math.round(o.amount).toLocaleString('en-IN')}</span>
+            <span class="font-bold text-emerald-700 font-mono">${o.orderId}</span>
+            <span class="font-black text-slate-900">₹${Math.round(o.amount).toLocaleString('en-IN')}</span>
           </div>
-          <p class="text-slate-300 text-[11px] truncate">${o.items}</p>
-          <div class="flex items-center justify-between text-[10px] text-slate-500 pt-0.5">
+          <p class="text-slate-600 text-[11px] font-medium truncate">${o.items}</p>
+          <div class="flex items-center justify-between text-[10px] text-slate-500 pt-0.5 font-medium">
             <span>${o.date}</span>
-            <span class="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 font-medium">${o.paymentMode}</span>
+            <span class="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-semibold">${o.paymentMode}</span>
           </div>
         `;
         ordersContainer.appendChild(div);
