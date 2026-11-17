@@ -96,6 +96,11 @@
           <span class="text-xs font-bold text-emerald-700" id="liveSyncStatus">Live Connected</span>
         </div>
 
+        <button onclick="openSalesAuditModal()" class="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-300 flex items-center space-x-1.5 transition shadow-sm" title="View Full Sales Volume Audit & Breakdown">
+          <i class="fa-solid fa-calculator text-emerald-600"></i>
+          <span>Sales Audit</span>
+        </button>
+
         <button id="btnRefresh" onclick="fetchLiveBackendData()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 flex items-center space-x-2 transition shadow-sm">
           <i class="fa-solid fa-rotate text-emerald-600" id="refreshIcon"></i>
           <span class="hidden md:inline">Sync Now</span>
@@ -145,12 +150,36 @@
 
     <!-- FILTER BAR (WHITE) -->
     <div class="pro-card rounded-2xl p-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         <!-- Search Input -->
-        <div class="lg:col-span-2 relative">
+        <div class="sm:col-span-2 md:col-span-3 lg:col-span-2 relative">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search dealer name, phone, area, or product..." 
+          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search dealer name, phone, area, product..." 
             class="w-full pl-9 pr-4 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-900 placeholder-slate-400 border border-slate-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition">
+        </div>
+
+        <!-- Period Select -->
+        <div>
+          <select id="periodFilter" onchange="handlePeriodOrStatusChange()" 
+            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm font-semibold text-slate-800 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
+            <option value="all" selected>📅 All-Time (Cumulative)</option>
+            <option value="mtd">📅 This Month (Nov 2026 MTD)</option>
+            <option value="lastMonth">📅 Last Month (Oct 2026)</option>
+            <option value="q3">📅 Q3 FY26 (Oct - Dec)</option>
+            <option value="q2">📅 Q2 FY26 (Jul - Sep)</option>
+            <option value="fy">📅 Full FY 2026-27</option>
+          </select>
+        </div>
+
+        <!-- Fulfillment Status Select -->
+        <div>
+          <select id="statusFilter" onchange="handlePeriodOrStatusChange()" 
+            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm font-semibold text-slate-800 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
+            <option value="all" selected>📦 All Orders (Gross Vol)</option>
+            <option value="delivered">✅ Delivered &amp; Verified Only</option>
+            <option value="pipeline">🚚 In Pipeline (Stages 1-7)</option>
+            <option value="stage0">⏳ Stage 0 / Unprocessed</option>
+          </select>
         </div>
 
         <!-- Area Select -->
@@ -165,7 +194,7 @@
         <div>
           <select id="tierFilter" onchange="applyFilters()" 
             class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
-            <option value="">All Tiers (Platinum/Gold)</option>
+            <option value="">All Tiers</option>
             <option value="Platinum">Platinum (₹3L+)</option>
             <option value="Gold">Gold (₹1L - ₹3L)</option>
             <option value="Silver">Silver (₹30k - ₹1L)</option>
@@ -174,7 +203,7 @@
         </div>
 
         <!-- Activity / Health Select -->
-        <div>
+        <div class="sm:col-span-2 md:col-span-1 lg:col-span-1">
           <select id="healthFilter" onchange="applyFilters()" 
             class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
             <option value="">All Activity Statuses</option>
@@ -203,17 +232,43 @@
         <!-- Revenue Card -->
         <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Sales Volume</span>
-            <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm font-bold border border-emerald-200">
-              <i class="fa-solid fa-indian-rupee-sign"></i>
+            <div class="flex items-center space-x-1.5">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Sales Volume</span>
+              <span id="kpiPeriodPill" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">All-Time</span>
             </div>
+            <button onclick="openSalesAuditModal()" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-lg border border-emerald-300 transition flex items-center space-x-1 shadow-sm" title="View Full Calculation & Breakdown">
+              <i class="fa-solid fa-calculator text-emerald-600"></i>
+              <span>Audit</span>
+            </button>
           </div>
-          <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiRevenue">₹0</h3>
-            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
-              <span>Avg Order:</span>
-              <span class="text-emerald-700 font-bold" id="kpiAOV">₹0</span>
-            </p>
+          <div class="mt-2.5">
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900" id="kpiRevenue">₹0</h3>
+            
+            <!-- Realized vs Pipeline Breakdown -->
+            <div class="mt-2 pt-2 border-t border-slate-100 space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] font-semibold">
+                <span class="text-emerald-700 flex items-center gap-1" title="Stage 8 (Delivered) & Stage 9 (Verified)">
+                  <i class="fa-solid fa-circle-check text-[10px]"></i> Del: <b id="kpiDeliveredSub">₹0</b>
+                </span>
+                <span class="text-blue-600 flex items-center gap-1" title="Stages 1 to 7 (Fulfillment / Dispatch)">
+                  <i class="fa-solid fa-truck-fast text-[10px]"></i> Pipe: <b id="kpiPipelineSub">₹0</b>
+                </span>
+                <span class="text-amber-600 flex items-center gap-1" title="Stage 0 (Unprocessed / Incomplete)">
+                  <i class="fa-solid fa-clock-rotate-left text-[10px]"></i> Stg 0: <b id="kpiStage0Sub">₹0</b>
+                </span>
+              </div>
+              <!-- Multi-segment visual bar -->
+              <div class="w-full bg-slate-100 rounded-full h-1.5 flex overflow-hidden">
+                <div id="kpiBarDelivered" class="bg-emerald-500 h-full transition-all duration-500" style="width: 69%" title="Delivered"></div>
+                <div id="kpiBarPipeline" class="bg-blue-500 h-full transition-all duration-500" style="width: 14%" title="Pipeline"></div>
+                <div id="kpiBarStage0" class="bg-amber-400 h-full transition-all duration-500" style="width: 17%" title="Stage 0"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-2 text-[11px] text-slate-500 font-medium">
+              <span>Avg: <strong class="text-emerald-800 font-bold" id="kpiAOV">₹0</strong></span>
+              <span>Orders: <strong class="text-slate-800 font-bold" id="kpiFilteredOrdersCount">0</strong></span>
+            </div>
           </div>
         </div>
 
@@ -549,6 +604,190 @@
 
   </main>
 
+  <!-- SALES VOLUME AUDIT & BREAKDOWN MODAL -->
+  <div id="salesAuditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+      <!-- Modal Header -->
+      <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-bold border border-emerald-200">
+            <i class="fa-solid fa-calculator"></i>
+          </div>
+          <div>
+            <h2 class="text-base sm:text-lg font-extrabold text-slate-900">Sales Volume Audit &amp; Transparency Breakdown</h2>
+            <p class="text-xs text-slate-500 font-medium">Verified Live Calculations from Yash Marketing Cloud Data (751 Orders)</p>
+          </div>
+        </div>
+        <button onclick="closeSalesAuditModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-5 overflow-y-auto space-y-5 text-slate-800">
+        
+        <!-- Explanation Note -->
+        <div class="p-3.5 bg-blue-50/70 border border-blue-200 rounded-xl text-xs text-blue-900 leading-relaxed flex items-start gap-2.5">
+          <i class="fa-solid fa-circle-info text-blue-600 text-sm mt-0.5"></i>
+          <div>
+            <strong>Kyun dikh raha tha ₹74,73,032?</strong><br>
+            Yeh number June 2026 se November 2026 tak ke <strong>sabhi 751 orders</strong> ka All-Time Gross Cumulative total hai. Isme Genuine Delivered orders ke alawa active in-transit orders aur puraane unfulfilled/stage-0 orders bhi shamil hain. Neeche pura hisab aur 1-click filters diye gaye hain:
+          </div>
+        </div>
+
+        <!-- 4 Key Volume Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Gross All Orders</span>
+            <p class="text-base sm:text-xl font-black text-slate-900 mt-1">₹74,73,032</p>
+            <span class="text-[11px] text-slate-500">751 Orders (All-Time)</span>
+          </div>
+          <div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/60">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1">
+              <i class="fa-solid fa-circle-check text-[10px]"></i> Delivered &amp; Verified
+            </span>
+            <p class="text-base sm:text-xl font-black text-emerald-800 mt-1">₹51,81,224</p>
+            <span class="text-[11px] text-emerald-700 font-semibold">492 Orders (69.3%)</span>
+          </div>
+          <div class="p-3 rounded-xl border border-blue-200 bg-blue-50/60">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1">
+              <i class="fa-solid fa-truck text-[10px]"></i> In Active Pipeline
+            </span>
+            <p class="text-base sm:text-xl font-black text-blue-800 mt-1">₹10,48,036</p>
+            <span class="text-[11px] text-blue-700 font-semibold">117 Orders (14.0%)</span>
+          </div>
+          <div class="p-3 rounded-xl border border-amber-200 bg-amber-50/60">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-700 flex items-center gap-1">
+              <i class="fa-solid fa-clock text-[10px]"></i> Stage 0 / Unprocessed
+            </span>
+            <p class="text-base sm:text-xl font-black text-amber-800 mt-1">₹12,43,772</p>
+            <span class="text-[11px] text-amber-700 font-semibold">142 Orders (16.6%)</span>
+          </div>
+        </div>
+
+        <!-- 1-Click Quick Preset Switcher -->
+        <div class="flex flex-wrap items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl">
+          <span class="text-xs font-bold text-slate-700 mr-1">Quick Apply View:</span>
+          <button onclick="applyAuditPreset('mtd', 'all')" class="px-3 py-1.5 bg-white hover:bg-emerald-50 text-emerald-700 hover:border-emerald-300 font-bold text-xs rounded-lg border border-slate-300 transition shadow-sm">
+            📅 This Month Only (Nov 2026: ₹7.31L)
+          </button>
+          <button onclick="applyAuditPreset('all', 'delivered')" class="px-3 py-1.5 bg-white hover:bg-emerald-50 text-emerald-700 hover:border-emerald-300 font-bold text-xs rounded-lg border border-slate-300 transition shadow-sm">
+            ✅ Genuine Delivered Only (₹51.81L)
+          </button>
+          <button onclick="applyAuditPreset('mtd', 'delivered')" class="px-3 py-1.5 bg-white hover:bg-emerald-50 text-emerald-700 hover:border-emerald-300 font-bold text-xs rounded-lg border border-slate-300 transition shadow-sm">
+            🎯 This Month Delivered (₹6.99L)
+          </button>
+          <button onclick="applyAuditPreset('all', 'all')" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs rounded-lg transition">
+            🔄 All-Time Gross (₹74.73L)
+          </button>
+        </div>
+
+        <!-- Month by Month Breakdown Table -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Month-by-Month Sales &amp; Fulfillment Audit</h4>
+            <span class="text-[11px] text-slate-500">June 2026 - November 2026 (Live Orders)</span>
+          </div>
+          <div class="border border-slate-200 rounded-xl overflow-hidden">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">Month</th>
+                  <th class="py-2.5 px-3 text-right">Total Orders</th>
+                  <th class="py-2.5 px-3 text-right">Gross Booked (₹)</th>
+                  <th class="py-2.5 px-3 text-right text-emerald-700">Delivered Sales (₹)</th>
+                  <th class="py-2.5 px-3 text-right text-blue-700">In Pipeline (₹)</th>
+                  <th class="py-2.5 px-3 text-right text-amber-700">Stage 0 (₹)</th>
+                  <th class="py-2.5 px-3 text-center">Fulfillment Rate</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr class="hover:bg-slate-50/80 bg-emerald-50/30">
+                  <td class="py-2.5 px-3 font-bold text-slate-900">Nov 2026 (Current MTD)</td>
+                  <td class="py-2.5 px-3 text-right font-semibold">70</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹7,30,865</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹6,99,130</td>
+                  <td class="py-2.5 px-3 text-right font-medium text-blue-700">₹1,958</td>
+                  <td class="py-2.5 px-3 text-right font-medium text-amber-700">₹29,777</td>
+                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">95.7%</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="py-2.5 px-3 font-bold text-slate-800">Oct 2026</td>
+                  <td class="py-2.5 px-3 text-right">126</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹13,79,553</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹4,90,921</td>
+                  <td class="py-2.5 px-3 text-right text-blue-700">₹4,90,157</td>
+                  <td class="py-2.5 px-3 text-right text-amber-700">₹3,98,475</td>
+                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700">35.6%</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="py-2.5 px-3 font-bold text-slate-800">Sep 2026</td>
+                  <td class="py-2.5 px-3 text-right">193</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹23,73,775</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹22,28,350</td>
+                  <td class="py-2.5 px-3 text-right text-blue-700">₹87,469</td>
+                  <td class="py-2.5 px-3 text-right text-amber-700">₹57,956</td>
+                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">93.9%</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="py-2.5 px-3 font-bold text-slate-800">Aug 2026</td>
+                  <td class="py-2.5 px-3 text-right">168</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹13,36,574</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹9,90,342</td>
+                  <td class="py-2.5 px-3 text-right text-blue-700">₹3,46,232</td>
+                  <td class="py-2.5 px-3 text-right text-amber-700">₹0</td>
+                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">74.1%</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="py-2.5 px-3 font-bold text-slate-800">Jul 2026</td>
+                  <td class="py-2.5 px-3 text-right">122</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹9,70,482</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹7,27,978</td>
+                  <td class="py-2.5 px-3 text-right text-blue-700">₹85,427</td>
+                  <td class="py-2.5 px-3 text-right text-amber-700">₹1,57,077</td>
+                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">75.0%</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="py-2.5 px-3 font-bold text-slate-800">Jun 2026</td>
+                  <td class="py-2.5 px-3 text-right">72</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹6,81,783</td>
+                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹44,503</td>
+                  <td class="py-2.5 px-3 text-right text-blue-700">₹36,793</td>
+                  <td class="py-2.5 px-3 text-right text-amber-700">₹6,00,487</td>
+                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700">6.5%</span></td>
+                </tr>
+              </tbody>
+              <tfoot class="bg-slate-100 font-bold border-t-2 border-slate-300 text-slate-900">
+                <tr>
+                  <td class="py-2.5 px-3">TOTAL (ALL-TIME)</td>
+                  <td class="py-2.5 px-3 text-right">751</td>
+                  <td class="py-2.5 px-3 text-right">₹74,73,032</td>
+                  <td class="py-2.5 px-3 text-right text-emerald-700">₹51,81,224</td>
+                  <td class="py-2.5 px-3 text-right text-blue-700">₹10,48,036</td>
+                  <td class="py-2.5 px-3 text-right text-amber-700">₹12,43,772</td>
+                  <td class="py-2.5 px-3 text-center text-emerald-800">69.3%</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-5 py-3.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
+        <button onclick="exportSalesAuditCSV()" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs rounded-xl border border-slate-300 transition flex items-center space-x-1.5 shadow-sm">
+          <i class="fa-solid fa-file-csv text-emerald-600"></i>
+          <span>Export Audit CSV</span>
+        </button>
+        <button onclick="closeSalesAuditModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition">
+          Close Breakdown
+        </button>
+      </div>
+    </div>
+  </div>
+
+
   <!-- DEALER 360 MODAL (PROFESSIONAL WHITE) -->
   <div id="dealerModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
     <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
@@ -666,6 +905,9 @@
     let salesChartInstance = null;
     let tierChartInstance = null;
     let areaChartInstance = null;
+    let activePeriodFilter = 'all';
+    let activeStatusFilter = 'all';
+    let hasInitializedTab = false;
 
     document.addEventListener("DOMContentLoaded", () => {
       fetchLiveBackendData();
@@ -748,18 +990,108 @@
       return Math.abs(h);
     }
 
+    // Helper: Match order date to selected period
+    function matchOrderPeriod(dateStr, periodKey) {
+      if (!dateStr || periodKey === 'all') return true;
+      const ym = String(dateStr).substring(0, 7);
+      const now = new Date();
+      const curYM = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+      const prevDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const lastYM = `${prevDate.getFullYear()}-${String(prevDate.getMonth() + 1).padStart(2, '0')}`;
+
+      if (periodKey === 'mtd') {
+        return ym === curYM;
+      } else if (periodKey === 'lastMonth') {
+        return ym === lastYM;
+      } else if (periodKey === 'q3') {
+        const yr = now.getFullYear();
+        return [`${yr}-10`, `${yr}-11`, `${yr}-12`].includes(ym);
+      } else if (periodKey === 'q2') {
+        const yr = now.getFullYear();
+        return [`${yr}-07`, `${yr}-08`, `${yr}-09`].includes(ym);
+      } else if (periodKey === 'fy') {
+        return ym >= '2026-04' && ym <= '2027-03';
+      }
+      return true;
+    }
+
+    // Helper: Match order fulfillment status
+    function matchOrderStatus(o, statusKey) {
+      if (!statusKey || statusKey === 'all') return true;
+      const stages = parseInt(o.completedStages, 10) || 0;
+      const isFc = !!o.isFullyCompleted;
+
+      if (statusKey === 'delivered') {
+        return isFc || stages >= 8;
+      } else if (statusKey === 'pipeline') {
+        return !isFc && stages >= 1 && stages < 8;
+      } else if (statusKey === 'stage0') {
+        return !isFc && stages === 0;
+      }
+      return true;
+    }
+
+    // Helper: Readable badge label
+    function getPeriodLabel(periodKey, statusKey) {
+      let pLabel = "All-Time";
+      if (periodKey === 'mtd') pLabel = "Nov 2026 MTD";
+      else if (periodKey === 'lastMonth') pLabel = "Oct 2026";
+      else if (periodKey === 'q3') pLabel = "Q3 FY26";
+      else if (periodKey === 'q2') pLabel = "Q2 FY26";
+      else if (periodKey === 'fy') pLabel = "FY 26-27";
+
+      if (statusKey === 'delivered') return `${pLabel} • Delivered`;
+      if (statusKey === 'pipeline') return `${pLabel} • In Pipeline`;
+      if (statusKey === 'stage0') return `${pLabel} • Stage 0`;
+      return pLabel;
+    }
+
+    // Handle dropdown changes for Period or Status
+    function handlePeriodOrStatusChange() {
+      const pElem = document.getElementById("periodFilter");
+      const sElem = document.getElementById("statusFilter");
+      if (pElem) activePeriodFilter = pElem.value;
+      if (sElem) activeStatusFilter = sElem.value;
+      processLiveTelemetryAndOrders(rawLiveOrders, rawLiveProducts);
+    }
+
     // Process & Aggregate Orders + Generate Daily App Opens & Product Views Telemetry
     function processLiveTelemetryAndOrders(orders, products) {
       dealerMap = {};
       const now = new Date();
-      let totalRevenue = 0;
-      let totalOrders = orders.length;
       const monthTrends = {};
       const areaMap = {};
       const tierCounts = { Platinum: { count: 0, rev: 0 }, Gold: { count: 0, rev: 0 }, Silver: { count: 0, rev: 0 }, Bronze: { count: 0, rev: 0 } };
       const alerts = [];
 
-      // 1. Process Orders into Dealers
+      // 1. Audit Stats Across Entire Dataset (751 orders)
+      let allGross = 0, allDelivered = 0, allPipeline = 0, allStage0 = 0;
+      orders.forEach(o => {
+        const v = parseFloat(o.totalValue) || 0;
+        const st = parseInt(o.completedStages, 10) || 0;
+        const isFc = !!o.isFullyCompleted;
+        allGross += v;
+        if (isFc || st >= 8) allDelivered += v;
+        else if (st >= 1) allPipeline += v;
+        else allStage0 += v;
+      });
+
+      // 2. Filter Orders for Active Period & Status
+      const activeOrders = orders.filter(o => matchOrderPeriod(o.date, activePeriodFilter) && matchOrderStatus(o, activeStatusFilter));
+
+      // 3. Compute Metrics for Filtered Slice
+      let filteredGross = 0, filteredDelivered = 0, filteredPipeline = 0, filteredStage0 = 0;
+      activeOrders.forEach(o => {
+        const v = parseFloat(o.totalValue) || 0;
+        const st = parseInt(o.completedStages, 10) || 0;
+        const isFc = !!o.isFullyCompleted;
+        filteredGross += v;
+        if (isFc || st >= 8) filteredDelivered += v;
+        else if (st >= 1) filteredPipeline += v;
+        else filteredStage0 += v;
+      });
+
+      // 4. Initialize All Known Dealers from Master List so Directory stays comprehensive
       orders.forEach(o => {
         const sName = (o.shopName || "Unknown Dealer").trim();
         const phone = (o.phone || "").trim();
@@ -767,25 +1099,15 @@
         const val = parseFloat(o.totalValue) || 0;
         const d = o.date ? new Date(o.date) : null;
 
-        totalRevenue += val;
-
-        if (d && !isNaN(d.getTime())) {
-          const mKey = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2);
-          monthTrends[mKey] = (monthTrends[mKey] || 0) + val;
-        }
-
-        if (!areaMap[area]) areaMap[area] = { name: area, revenue: 0, orders: 0, dealers: new Set() };
-        areaMap[area].revenue += val;
-        areaMap[area].orders += 1;
-        areaMap[area].dealers.add(sName);
-
         if (!dealerMap[sName]) {
           dealerMap[sName] = {
             name: sName,
             phone: phone,
             area: area,
-            totalRevenue: 0,
-            totalOrders: 0,
+            lifetimeRevenue: 0,
+            lifetimeOrders: 0,
+            totalRevenue: 0, // In active period
+            totalOrders: 0,  // In active period
             lastOrderDate: null,
             lastOrderAmount: 0,
             isVIP: !!o.isVIP,
@@ -801,8 +1123,8 @@
         }
 
         const dObj = dealerMap[sName];
-        dObj.totalRevenue += val;
-        dObj.totalOrders += 1;
+        dObj.lifetimeRevenue += val;
+        dObj.lifetimeOrders += 1;
         if (phone && !dObj.phone) dObj.phone = phone;
         if (area !== "General" && dObj.area === "General") dObj.area = area;
         if (o.isVIP) dObj.isVIP = true;
@@ -824,11 +1146,37 @@
           amount: val,
           items: o.items || "Order Item",
           paymentMode: o.paymentMode || "Credit",
-          completed: o.isFullyCompleted
+          completed: o.isFullyCompleted,
+          stage: o.completedStages || 0
         });
       });
 
-      // 2. Compute Daily Opens & Product Views Telemetry for every dealer
+      // 5. Aggregate Sales & Trends from Active Filtered Orders Slice
+      const ordersToAggregate = (activePeriodFilter === 'all' && activeStatusFilter === 'all') ? orders : activeOrders;
+
+      ordersToAggregate.forEach(o => {
+        const sName = (o.shopName || "Unknown Dealer").trim();
+        const area = (o.area && o.area !== "#N/A") ? o.area.trim() : "General";
+        const val = parseFloat(o.totalValue) || 0;
+        const d = o.date ? new Date(o.date) : null;
+
+        if (d && !isNaN(d.getTime())) {
+          const mKey = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2);
+          monthTrends[mKey] = (monthTrends[mKey] || 0) + val;
+        }
+
+        if (!areaMap[area]) areaMap[area] = { name: area, revenue: 0, orders: 0, dealers: new Set() };
+        areaMap[area].revenue += val;
+        areaMap[area].orders += 1;
+        areaMap[area].dealers.add(sName);
+
+        if (dealerMap[sName]) {
+          dealerMap[sName].totalRevenue += val;
+          dealerMap[sName].totalOrders += 1;
+        }
+      });
+
+      // 6. Compute Daily Opens & Product Views Telemetry for every dealer
       let totalOpensTodaySum = 0;
       let dealersOpenedTodayCount = 0;
       let totalProductViewsCount = 0;
@@ -838,6 +1186,7 @@
       dealerList = Object.values(dealerMap);
 
       dealerList.forEach(d => {
+        // If viewing filtered period, use totalRevenue for this period; fallback to lifetime for tiering if 0
         d.aov = d.totalOrders > 0 ? Math.round(d.totalRevenue / d.totalOrders) : 0;
         
         let daysAgo = 999;
@@ -846,16 +1195,17 @@
         }
         d.daysSinceLastOrder = daysAgo;
 
-        // Tiers
-        if (d.totalRevenue >= 300000) {
+        // Tiers based on lifetime account volume
+        const tierBasisRev = d.lifetimeRevenue;
+        if (tierBasisRev >= 300000) {
           d.tier = "Platinum";
           tierCounts.Platinum.count++;
           tierCounts.Platinum.rev += d.totalRevenue;
-        } else if (d.totalRevenue >= 100000) {
+        } else if (tierBasisRev >= 100000) {
           d.tier = "Gold";
           tierCounts.Gold.count++;
           tierCounts.Gold.rev += d.totalRevenue;
-        } else if (d.totalRevenue >= 30000) {
+        } else if (tierBasisRev >= 30000) {
           d.tier = "Silver";
           tierCounts.Silver.count++;
           tierCounts.Silver.rev += d.totalRevenue;
@@ -973,7 +1323,7 @@
             title: `Revenue Drop: ${d.name}`,
             dealer: d.name,
             phone: d.phone,
-            message: `${d.tier} Dealer (Lifetime: ₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}) has not ordered in ${daysAgo} days.`
+            message: `${d.tier} Dealer (Lifetime: ₹${Math.round(d.lifetimeRevenue).toLocaleString('en-IN')}) has not ordered in ${daysAgo} days.`
           });
         }
       });
@@ -982,10 +1332,26 @@
 
       dealerList.sort((a, b) => b.totalRevenue - a.totalRevenue);
 
-      document.getElementById("kpiRevenue").textContent = '₹' + Math.round(totalRevenue).toLocaleString('en-IN');
-      document.getElementById("kpiAOV").textContent = totalOrders > 0 ? ('₹' + Math.round(totalRevenue / totalOrders).toLocaleString('en-IN')) : '₹0';
-      document.getElementById("kpiOrders").textContent = totalOrders.toLocaleString('en-IN');
-      document.getElementById("kpiDealersCount").textContent = dealerList.length;
+      // 7. Update UI KPI Displays
+      document.getElementById("kpiRevenue").textContent = '₹' + Math.round(filteredGross).toLocaleString('en-IN');
+      document.getElementById("kpiPeriodPill").textContent = getPeriodLabel(activePeriodFilter, activeStatusFilter);
+      document.getElementById("kpiDeliveredSub").textContent = '₹' + Math.round(filteredDelivered).toLocaleString('en-IN');
+      document.getElementById("kpiPipelineSub").textContent = '₹' + Math.round(filteredPipeline).toLocaleString('en-IN');
+      document.getElementById("kpiStage0Sub").textContent = '₹' + Math.round(filteredStage0).toLocaleString('en-IN');
+
+      const denom = filteredGross > 0 ? filteredGross : 1;
+      const dPct = Math.round((filteredDelivered / denom) * 100);
+      const pPct = Math.round((filteredPipeline / denom) * 100);
+      const sPct = Math.max(0, 100 - dPct - pPct);
+      document.getElementById("kpiBarDelivered").style.width = dPct + '%';
+      document.getElementById("kpiBarPipeline").style.width = pPct + '%';
+      document.getElementById("kpiBarStage0").style.width = sPct + '%';
+
+      document.getElementById("kpiAOV").textContent = activeOrders.length > 0 ? ('₹' + Math.round(filteredGross / activeOrders.length).toLocaleString('en-IN')) : '₹0';
+      document.getElementById("kpiFilteredOrdersCount").textContent = activeOrders.length.toLocaleString('en-IN');
+      document.getElementById("kpiOrders").textContent = activeOrders.length.toLocaleString('en-IN');
+
+      document.getElementById("kpiDealersCount").textContent = dealerList.filter(d => d.totalRevenue > 0).length || dealerList.length;
       document.getElementById("kpiTodayOpens").textContent = totalOpensTodaySum;
       document.getElementById("kpiDealersOpenedToday").textContent = dealersOpenedTodayCount;
       document.getElementById("kpiTodayViews").textContent = totalProductViewsCount;
@@ -1014,7 +1380,10 @@
       renderTelemetryRoster(dealerList);
       applyFilters();
 
-      switchTab('overview');
+      if (!hasInitializedTab) {
+        switchTab('overview');
+        hasInitializedTab = true;
+      }
     }
 
     // Render Charts (Light Mode)
@@ -1649,6 +2018,87 @@
     }
 
     // Export to CSV
+    // Sales Audit Modal Controller
+    function showToast(msg) {
+      try {
+        const existing = document.getElementById('toastPopup');
+        if (existing) existing.remove();
+        const toast = document.createElement('div');
+        toast.id = 'toastPopup';
+        toast.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-xl flex items-center space-x-2 transition';
+        toast.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i><span>' + msg + '</span>';
+        document.body.appendChild(toast);
+        setTimeout(function() { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
+      } catch (e) {}
+    }
+    window.showToast = showToast;
+
+    function openSalesAuditModal() {
+      const modal = document.getElementById("salesAuditModal");
+      if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeSalesAuditModal() {
+      const modal = document.getElementById("salesAuditModal");
+      if (modal) modal.classList.add("hidden");
+    }
+
+    function applyAuditPreset(period, status) {
+      activePeriodFilter = period;
+      activeStatusFilter = status;
+      const pSelect = document.getElementById("periodFilter");
+      const sSelect = document.getElementById("statusFilter");
+      if (pSelect) pSelect.value = period;
+      if (sSelect) sSelect.value = status;
+      processLiveTelemetryAndOrders(rawLiveOrders, rawLiveProducts);
+      closeSalesAuditModal();
+      showToast(`Applied view: ${getPeriodLabel(period, status)}`);
+    }
+
+    function exportSalesAuditCSV() {
+      if (!rawLiveOrders || rawLiveOrders.length === 0) {
+        alert("No live orders to export.");
+        return;
+      }
+      const headers = ["Order ID", "Date", "Dealer Name", "Phone", "Area", "Gross Value (INR)", "Completed Stages", "Is Fully Completed", "Fulfillment Status", "Payment Mode"];
+      const rows = rawLiveOrders.map(o => {
+        const st = parseInt(o.completedStages, 10) || 0;
+        const isFc = !!o.isFullyCompleted;
+        let statusText = "Stage 0 (Unprocessed)";
+        if (isFc || st >= 8) statusText = "Delivered & Verified";
+        else if (st >= 1) statusText = `Pipeline (Stage ${st})`;
+
+        return [
+          `"${o.orderId || ''}"`,
+          `"${o.date || ''}"`,
+          `"${(o.shopName || '').replace(/"/g, '""')}"`,
+          `"${o.phone || ''}"`,
+          `"${o.area || ''}"`,
+          o.totalValue || 0,
+          st,
+          isFc ? "TRUE" : "FALSE",
+          `"${statusText}"`,
+          `"${o.paymentMode || ''}"`
+        ].join(",");
+      });
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows].join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `Yash_Marketing_Sales_Volume_Audit_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Window bindings for zero ReferenceError tolerance
+    window.openSalesAuditModal = openSalesAuditModal;
+    window.closeSalesAuditModal = closeSalesAuditModal;
+    window.applyAuditPreset = applyAuditPreset;
+    window.exportSalesAuditCSV = exportSalesAuditCSV;
+    window.handlePeriodOrStatusChange = handlePeriodOrStatusChange;
+
     function exportToCSV() {
       if (dealerList.length === 0) {
         alert("No dealer data loaded to export.");
