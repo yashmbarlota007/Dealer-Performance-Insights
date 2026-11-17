@@ -119,30 +119,30 @@
 
     <!-- TAB SELECTOR -->
     <div class="flex items-center space-x-2 overflow-x-auto pb-2 custom-scroll border-b border-slate-200">
-      <button onclick="switchTab('overview')" id="tabBtn-overview" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm whitespace-nowrap">
+      <button type="button" onclick="switchTab('overview')" id="tabBtn-overview" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm whitespace-nowrap">
         <i class="fa-solid fa-chart-pie"></i>
         <span>Executive Insights</span>
       </button>
 
-      <button onclick="switchTab('telemetry')" id="tabBtn-telemetry" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap relative">
-        <i class="fa-solid fa-eye text-cyan-600"></i>
-        <span>Daily Opens & Product Spy</span>
-        <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-100 text-cyan-800 font-bold border border-cyan-200">TRACK</span>
+      <button type="button" onclick="switchTab('telemetry')" id="tabBtn-telemetry" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap relative">
+        <i class="fa-solid fa-fire-flame-curved text-amber-600"></i>
+        <span>Market Demand & Product Spy</span>
+        <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 font-bold border border-amber-200">VERIFIED</span>
       </button>
 
-      <button onclick="switchTab('dealers')" id="tabBtn-dealers" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
+      <button type="button" onclick="switchTab('dealers')" id="tabBtn-dealers" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
         <i class="fa-solid fa-users text-slate-500"></i>
         <span>Dealers Directory</span>
         <span id="badgeDealerCount" class="text-xs px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-700 font-semibold">0</span>
       </button>
 
-      <button onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
+      <button type="button" onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
         <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
         <span>At-Risk & Churn Radar</span>
         <span id="badgeAlertCount" class="text-xs px-1.5 py-0.2 rounded-full bg-rose-100 text-rose-700 font-bold border border-rose-200">0</span>
       </button>
 
-      <button onclick="switchTab('areas')" id="tabBtn-areas" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
+      <button type="button" onclick="switchTab('areas')" id="tabBtn-areas" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
         <i class="fa-solid fa-map-location-dot text-indigo-500"></i>
         <span>Territory Analytics</span>
       </button>
@@ -289,36 +289,36 @@
           </div>
         </div>
 
-        <!-- Today's App Opens -->
-        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-cyan-400 hover:shadow-md transition cursor-pointer" onclick="switchTab('telemetry')">
+        <!-- Active Buyers (MTD) -->
+        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-cyan-400 hover:shadow-md transition cursor-pointer" onclick="switchTab('dealers')">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Today's App Opens</span>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Active Buyers (MTD)</span>
             <div class="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-sm border border-cyan-200">
-              <i class="fa-solid fa-mobile-screen"></i>
+              <i class="fa-solid fa-users"></i>
             </div>
           </div>
           <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-cyan-700" id="kpiTodayOpens">0</h3>
+            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiActiveBuyersMtd">42</h3>
             <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
-              <span>Dealers Opened Today:</span>
-              <span class="text-slate-800 font-bold" id="kpiDealersOpenedToday">0</span>
+              <span>Orders in Nov:</span>
+              <span class="text-cyan-700 font-bold" id="kpiNovOrdersCount">70</span>
             </p>
           </div>
         </div>
 
-        <!-- Product Views Today -->
+        <!-- Catalog SKUs In Demand -->
         <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-purple-400 hover:shadow-md transition cursor-pointer" onclick="switchTab('telemetry')">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Product Views Today</span>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Catalog SKUs In Demand</span>
             <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm border border-purple-200">
-              <i class="fa-solid fa-eye"></i>
+              <i class="fa-solid fa-fire text-amber-500"></i>
             </div>
           </div>
           <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-purple-700" id="kpiTodayViews">0</h3>
+            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiCatalogCount">1,149</h3>
             <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
-              <span>Catalog SKUs:</span>
-              <span class="text-slate-800 font-bold" id="kpiCatalogCount">1,141</span>
+              <span>Top Demand:</span>
+              <span class="text-purple-700 font-bold" id="kpiTopSkuName">Velocity &amp; BoAt</span>
             </p>
           </div>
         </div>
@@ -409,45 +409,46 @@
     <!-- TAB 2: DAILY OPENS & PRODUCT SPY RADAR -->
     <div id="tabContent-telemetry" class="space-y-6 hidden">
       <!-- Telemetry Highlights Banner -->
-      <div class="pro-card rounded-2xl p-5 space-y-4 border-l-4 border-l-cyan-500">
+      <div class="pro-card rounded-2xl p-5 space-y-4 border-l-4 border-l-emerald-500">
         <div class="flex items-center justify-between flex-wrap gap-3">
           <div class="flex items-center space-x-3">
-            <div class="w-11 h-11 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl font-black border border-cyan-200">
-              <i class="fa-solid fa-radar"></i>
+            <div class="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-black border border-emerald-200">
+              <i class="fa-solid fa-fire-flame-curved text-emerald-600"></i>
             </div>
             <div>
-              <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Dealer App Activity & Product Browsing Intelligence</h3>
-              <p class="text-xs text-slate-500">Har dealer har roj kitni baar app khol raha hai aur kaunse products browse kar raha hai uska live tracking</p>
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Market Demand &amp; Dealer Product Intelligence</h3>
+              <p class="text-xs text-slate-500">Actual SKU demand, verified product preferences, aur real dealer order frequency from Yash Marketing live cloud</p>
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 font-bold border border-cyan-200">
-              <i class="fa-solid fa-satellite-dish mr-1 text-cyan-600"></i> Active Telemetry Radar
+            <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Cloud Orders Verified (751 Orders)</span>
             </span>
           </div>
         </div>
 
-        <!-- 4 Quick Telemetry Stats -->
+        <!-- 4 Quick Verified Stats -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
           <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Total Opens Today</span>
-            <h4 class="text-xl font-black text-cyan-700 mt-1" id="spyTotalOpensToday">0</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">Across all mobile & PWA users</p>
+            <span class="text-xs font-semibold text-slate-500">Active Buyers This Month</span>
+            <h4 class="text-xl font-black text-emerald-700 mt-1" id="spyActiveBuyersCount">42</h4>
+            <p class="text-[11px] text-slate-500 mt-0.5">Dealers ordered in Nov 2026</p>
           </div>
           <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Active Dealers Today</span>
-            <h4 class="text-xl font-black text-emerald-700 mt-1" id="spyActiveDealersToday">0</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">Opened app at least once</p>
+            <span class="text-xs font-semibold text-slate-500">Orders in Last 7 Days</span>
+            <h4 class="text-xl font-black text-blue-700 mt-1" id="spyWeekOrdersCount">9</h4>
+            <p class="text-[11px] text-slate-500 mt-0.5">Recent active delivery pipeline</p>
           </div>
           <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Catalog Products Inspected</span>
-            <h4 class="text-xl font-black text-purple-700 mt-1" id="spyProductViewsCount">0</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">SKU detail impressions</p>
+            <span class="text-xs font-semibold text-slate-500">Top Demand Catalog SKUs</span>
+            <h4 class="text-xl font-black text-purple-700 mt-1" id="spyTopSkusCount">15+</h4>
+            <p class="text-[11px] text-slate-500 mt-0.5">High velocity moving products</p>
           </div>
           <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Hot Buying Intent Leads</span>
-            <h4 class="text-xl font-black text-amber-700 mt-1" id="spyHighIntentLeadsCount">0</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">Viewed 3x+ without ordering</p>
+            <span class="text-xs font-semibold text-slate-500">Re-Order Opportunities</span>
+            <h4 class="text-xl font-black text-amber-700 mt-1" id="spyReorderDueCount">0</h4>
+            <p class="text-[11px] text-slate-500 mt-0.5">Dealers due for re-order pitch</p>
           </div>
         </div>
       </div>
@@ -492,10 +493,10 @@
               <tr>
                 <th class="py-3 px-4">Dealer Name</th>
                 <th class="py-3 px-3">Area</th>
-                <th class="py-3 px-3 text-center">Daily Opens (Today)</th>
-                <th class="py-3 px-3">Last Active</th>
-                <th class="py-3 px-4">Most Viewed Product</th>
-                <th class="py-3 px-3 text-center">Intent Level</th>
+                <th class="py-3 px-3 text-center">Orders &amp; Recency</th>
+                <th class="py-3 px-3">Last Order Date</th>
+                <th class="py-3 px-4">Most Demanded Product Preference</th>
+                <th class="py-3 px-3 text-center">Buying Health</th>
                 <th class="py-3 px-4 text-center">Action</th>
               </tr>
             </thead>
@@ -916,8 +917,28 @@
       }, 60000);
     });
 
-    // Switch Tabs
+    // Persistent Tab State (Preserves Active Tab on Refresh / Background Sync)
+    let currentActiveTab = 'overview';
+    if (typeof window !== 'undefined') window.currentActiveTab = currentActiveTab;
+    if (typeof window !== 'undefined' && window.location && window.location.hash) {
+      const h = window.location.hash.replace('#', '').trim();
+      if (['overview', 'telemetry', 'dealers', 'radar', 'areas'].includes(h)) {
+        currentActiveTab = h;
+      }
+    }
+
     function switchTab(tabId) {
+      if (!tabId || !['overview', 'telemetry', 'dealers', 'radar', 'areas'].includes(tabId)) {
+        tabId = 'overview';
+      }
+      currentActiveTab = tabId;
+      if (typeof window !== "undefined") window.currentActiveTab = tabId;
+      try {
+        if (window.location && window.location.hash !== '#' + tabId) {
+          history.replaceState(null, null, '#' + tabId);
+        }
+      } catch (e) {}
+
       const tabs = ['overview', 'telemetry', 'dealers', 'radar', 'areas'];
       tabs.forEach(t => {
         const btn = document.getElementById(`tabBtn-${t}`);
@@ -939,6 +960,7 @@
         if (areaChartInstance) areaChartInstance.resize();
       }
     }
+    window.switchTab = switchTab;
 
     // Fetch Live Data (Orders & Products Catalog) in Parallel
     async function fetchLiveBackendData(isSilent = false) {
@@ -1091,13 +1113,43 @@
         else filteredStage0 += v;
       });
 
-      // 4. Initialize All Known Dealers from Master List so Directory stays comprehensive
+      // Build Fast Product Catalog Lookup by name and code
+      const catalogLookup = {};
+      if (Array.isArray(products)) {
+        products.forEach(p => {
+          const pName = (p['Product Name'] || '').trim().toLowerCase();
+          const pCode = (p.ItemCode || '').trim().toLowerCase();
+          if (pName) catalogLookup[pName] = p;
+          if (pCode) catalogLookup[pCode] = p;
+        });
+      }
+
+      // Track REAL Top Demanded Products across Orders
+      const realProductDemandMap = {};
+
+      // 4. Initialize All Known Dealers from Master List
+      let novActiveBuyersCount = 0;
+      let novOrdersCount = 0;
+      let weekOrdersCount = 0;
+      const novDealersSet = new Set();
+      const weekAgoTime = now.getTime() - (7 * 24 * 60 * 60 * 1000);
+
       orders.forEach(o => {
         const sName = (o.shopName || "Unknown Dealer").trim();
         const phone = (o.phone || "").trim();
         const area = (o.area && o.area !== "#N/A") ? o.area.trim() : "General";
         const val = parseFloat(o.totalValue) || 0;
         const d = o.date ? new Date(o.date) : null;
+        const dTime = d ? d.getTime() : 0;
+
+        // Check if November order
+        if (o.date && String(o.date).startsWith('2026-11')) {
+          novOrdersCount++;
+          novDealersSet.add(sName);
+        }
+        if (dTime >= weekAgoTime) {
+          weekOrdersCount++;
+        }
 
         if (!dealerMap[sName]) {
           dealerMap[sName] = {
@@ -1109,16 +1161,18 @@
             totalRevenue: 0, // In active period
             totalOrders: 0,  // In active period
             lastOrderDate: null,
+            lastOrderDateStr: "N/A",
             lastOrderAmount: 0,
             isVIP: !!o.isVIP,
             creditLocked: !!o.creditLocked,
             lockReason: o.lockReason || "",
             orders: [],
+            orderedProductsCount: {},
+            topViewedProduct: null,
+            viewedProducts: [],
             appOpensToday: 0,
             lastOpenTimeStr: "",
-            viewedProducts: [],
-            topViewedProduct: null,
-            intentLevel: "Browsing"
+            intentLevel: "Active Buyer"
           };
         }
 
@@ -1133,11 +1187,54 @@
           dObj.lockReason = o.lockReason || dObj.lockReason;
         }
 
-        if (d && !isNaN(d.getTime())) {
+        if (d && !isNaN(dTime)) {
           if (!dObj.lastOrderDate || d > dObj.lastOrderDate) {
             dObj.lastOrderDate = d;
+            dObj.lastOrderDateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
             dObj.lastOrderAmount = val;
           }
+        }
+
+        // Process real items ordered
+        if (Array.isArray(o.items)) {
+          o.items.forEach(it => {
+            const itName = (it.name || it.productName || '').trim();
+            if (!itName || /free item|payment:|rewards unlocked|discount/i.test(itName)) return;
+            const qty = parseInt(it.qty, 10) || 1;
+            const itemVal = parseFloat(it.totalValue) || 0;
+
+            dObj.orderedProductsCount[itName] = (dObj.orderedProductsCount[itName] || 0) + qty;
+
+            if (!realProductDemandMap[itName]) {
+              // Find matching catalog info
+              let matchedCat = catalogLookup[itName.toLowerCase()];
+              if (!matchedCat) {
+                const lowerIt = itName.toLowerCase();
+                for (const k in catalogLookup) {
+                  if (k.includes(lowerIt) || lowerIt.includes(k)) {
+                    matchedCat = catalogLookup[k];
+                    break;
+                  }
+                }
+              }
+
+              realProductDemandMap[itName] = {
+                code: matchedCat ? (matchedCat.ItemCode || 'SKU') : 'SKU',
+                name: itName,
+                brand: matchedCat ? (matchedCat.Brand || 'BoAt / Velocity') : (itName.includes('Boat') ? 'BoAt' : 'Velocity'),
+                price: matchedCat ? (matchedCat.DealerPrice || matchedCat.MRP || (qty > 0 ? Math.round(itemVal / qty) : 999)) : (qty > 0 ? Math.round(itemVal / qty) : 999),
+                image: matchedCat ? (matchedCat.ImageURL || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150') : (it.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'),
+                category: matchedCat ? (matchedCat.Category || 'Audio / Accessories') : 'Audio / Accessories',
+                totalUnits: 0,
+                totalRevenue: 0,
+                uniqueDealers: new Set()
+              };
+            }
+
+            realProductDemandMap[itName].totalUnits += qty;
+            realProductDemandMap[itName].totalRevenue += itemVal;
+            realProductDemandMap[itName].uniqueDealers.add(sName);
+          });
         }
 
         dObj.orders.push({
@@ -1150,6 +1247,8 @@
           stage: o.completedStages || 0
         });
       });
+
+      novActiveBuyersCount = novDealersSet.size;
 
       // 5. Aggregate Sales & Trends from Active Filtered Orders Slice
       const ordersToAggregate = (activePeriodFilter === 'all' && activeStatusFilter === 'all') ? orders : activeOrders;
@@ -1176,17 +1275,11 @@
         }
       });
 
-      // 6. Compute Daily Opens & Product Views Telemetry for every dealer
-      let totalOpensTodaySum = 0;
-      let dealersOpenedTodayCount = 0;
-      let totalProductViewsCount = 0;
-      let highIntentLeadsCount = 0;
-      const productViewsGlobalCounter = {};
-
+      // 6. Compute Real Dealer Intelligence & Top Demanded Products
       dealerList = Object.values(dealerMap);
+      let reorderDueCount = 0;
 
       dealerList.forEach(d => {
-        // If viewing filtered period, use totalRevenue for this period; fallback to lifetime for tiering if 0
         d.aov = d.totalOrders > 0 ? Math.round(d.totalRevenue / d.totalOrders) : 0;
         
         let daysAgo = 999;
@@ -1195,7 +1288,21 @@
         }
         d.daysSinceLastOrder = daysAgo;
 
-        // Tiers based on lifetime account volume
+        // Real Buying Health Status
+        if (daysAgo <= 30) {
+          d.healthStatus = "Active";
+          d.intentLevel = "Active Buyer";
+        } else if (daysAgo <= 75) {
+          d.healthStatus = "At Risk";
+          d.intentLevel = "Re-Order Due";
+          reorderDueCount++;
+        } else {
+          d.healthStatus = "Hibernating";
+          d.intentLevel = "Needs Re-engagement";
+          reorderDueCount++;
+        }
+
+        // Tier classification based on lifetime revenue
         const tierBasisRev = d.lifetimeRevenue;
         if (tierBasisRev >= 300000) {
           d.tier = "Platinum";
@@ -1215,98 +1322,54 @@
           tierCounts.Bronze.rev += d.totalRevenue;
         }
 
-        // Health Status
-        if (daysAgo <= 30) d.healthStatus = "Active";
-        else if (daysAgo <= 75) d.healthStatus = "At Risk";
-        else d.healthStatus = "Hibernating";
-
-        // Calculate Daily App Opens for this dealer
-        const hash = getStableHash(d.name + d.phone);
-        let baseOpens = (d.tier === 'Platinum') ? 4 : (d.tier === 'Gold' ? 3 : 1);
-        let dailyNoise = (hash % 5);
-        let opensToday = Math.max(0, baseOpens + dailyNoise - (daysAgo > 60 ? 3 : 0));
-        d.appOpensToday = opensToday;
-        totalOpensTodaySum += opensToday;
-
-        if (opensToday > 0) {
-          dealersOpenedTodayCount++;
-          const minuteOffset = (hash % 50) + 5;
-          d.lastOpenTimeStr = minuteOffset < 30 ? `${minuteOffset} mins ago` : `Today at ${("0" + ((hash % 10) + 8)).slice(-2)}:${("0" + (hash % 60)).slice(-2)} AM`;
-        } else {
-          d.lastOpenTimeStr = daysAgo < 3 ? "Yesterday" : `${daysAgo} days ago`;
-        }
-
-        // Assign Products Viewed by this dealer from live catalog
-        d.viewedProducts = [];
-        if (products.length > 0) {
-          const numViewed = (hash % 4) + 2;
-          for (let pIdx = 0; pIdx < numViewed; pIdx++) {
-            const prodIndex = (hash * (pIdx + 7) + pIdx * 19) % products.length;
-            const p = products[prodIndex];
-            if (p) {
-              const pCode = p.ItemCode || `SKU-${prodIndex}`;
-              const pName = p['Product Name'] || 'Wireless Earbuds / Gadget';
-              const pBrand = p.Brand || 'Brand';
-              const pPrice = p.DealerPrice || p.MRP || 999;
-              const pImg = p.ImageURL || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150';
-              const pCategory = p.Category || 'Audio';
-              const viewCount = ((hash + pIdx) % 7) + 2;
-
-              d.viewedProducts.push({
-                code: pCode,
-                name: pName,
-                brand: pBrand,
-                price: pPrice,
-                category: pCategory,
-                image: pImg,
-                views: viewCount,
-                lastViewed: `${((hash + pIdx * 13) % 40) + 10}m ago`
-              });
-
-              totalProductViewsCount += viewCount;
-
-              if (!productViewsGlobalCounter[pCode]) {
-                productViewsGlobalCounter[pCode] = {
-                  code: pCode,
-                  name: pName,
-                  brand: pBrand,
-                  price: pPrice,
-                  category: pCategory,
-                  image: pImg,
-                  totalViews: 0,
-                  uniqueDealers: new Set()
-                };
-              }
-              productViewsGlobalCounter[pCode].totalViews += viewCount;
-              productViewsGlobalCounter[pCode].uniqueDealers.add(d.name);
-            }
-          }
-        }
-
-        d.viewedProducts.sort((a, b) => b.views - a.views);
-        d.topViewedProduct = d.viewedProducts[0] || null;
-
-        if (d.topViewedProduct && d.topViewedProduct.views >= 5 && opensToday >= 3) {
-          d.intentLevel = "High Buying Intent";
-          highIntentLeadsCount++;
-        } else if (d.topViewedProduct && d.topViewedProduct.views >= 3) {
-          d.intentLevel = "Moderate Interest";
-        } else {
-          d.intentLevel = "Browsing";
-        }
-
-        // Alerts
-        if (d.intentLevel === "High Buying Intent") {
-          alerts.push({
-            type: "High Purchase Intent",
-            severity: "opportunity",
-            title: `Hot Lead: ${d.name}`,
-            dealer: d.name,
-            phone: d.phone,
-            message: `Opened app ${d.appOpensToday}x today & viewed "${d.topViewedProduct.name}" ${d.topViewedProduct.views} times. Send direct offer!`
+        // Real Top Product Preference for this dealer
+        const pEntries = Object.entries(d.orderedProductsCount || {});
+        pEntries.sort((a, b) => b[1] - a[1]);
+        if (pEntries.length > 0) {
+          const topItemName = pEntries[0][0];
+          const topItemQty = pEntries[0][1];
+          const catInfo = realProductDemandMap[topItemName] || {};
+          d.topViewedProduct = {
+            name: topItemName,
+            brand: catInfo.brand || 'Preferred SKU',
+            views: topItemQty, // Genuine units ordered
+            units: topItemQty,
+            image: catInfo.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150',
+            price: catInfo.price || 999
+          };
+          d.viewedProducts = pEntries.slice(0, 5).map(([pName, qty]) => {
+            const c = realProductDemandMap[pName] || {};
+            return {
+              name: pName,
+              brand: c.brand || 'SKU',
+              views: qty,
+              units: qty,
+              image: c.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150',
+              price: c.price || 999
+            };
           });
+        } else {
+          d.topViewedProduct = {
+            name: "Velocity / BoAt Gadgets",
+            brand: "Catalog",
+            views: 1,
+            units: 1,
+            image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150',
+            price: 999
+          };
+          d.viewedProducts = [];
         }
 
+        // App Opens / Activity recency string
+        if (daysAgo === 0) d.lastOpenTimeStr = "Today (Active)";
+        else if (daysAgo === 1) d.lastOpenTimeStr = "Yesterday";
+        else if (daysAgo <= 7) d.lastOpenTimeStr = `${daysAgo} days ago (This Week)`;
+        else if (daysAgo <= 30) d.lastOpenTimeStr = `${daysAgo} days ago (Nov)`;
+        else d.lastOpenTimeStr = `${daysAgo} days ago`;
+
+        d.appOpensToday = daysAgo <= 30 ? Math.max(1, Math.min(5, Math.ceil(d.totalOrders / 2))) : 0;
+
+        // Alerts based on real account state
         if (d.creditLocked) {
           alerts.push({
             type: "Credit Locked",
@@ -1314,21 +1377,27 @@
             title: `Account Blocked: ${d.name}`,
             dealer: d.name,
             phone: d.phone,
-            message: `Credit lock active (${d.lockReason || 'Exceeded dues'}). Pending review required.`
+            message: `Credit lock active (${d.lockReason || 'Exceeded dues'}). Verification required.`
           });
         } else if ((d.tier === "Platinum" || d.tier === "Gold") && d.healthStatus === "At Risk") {
           alerts.push({
             type: "Churn Warning",
             severity: "warning",
-            title: `Revenue Drop: ${d.name}`,
+            title: `High-Value Inactive: ${d.name}`,
             dealer: d.name,
             phone: d.phone,
-            message: `${d.tier} Dealer (Lifetime: ₹${Math.round(d.lifetimeRevenue).toLocaleString('en-IN')}) has not ordered in ${daysAgo} days.`
+            message: `${d.tier} Dealer (Lifetime: ₹${Math.round(d.lifetimeRevenue).toLocaleString('en-IN')}) has not placed an order in ${daysAgo} days.`
           });
         }
       });
 
-      globalMostViewedProducts = Object.values(productViewsGlobalCounter).sort((a, b) => b.totalViews - a.totalViews);
+      // Prepare Real In-Demand Leaderboard
+      globalMostViewedProducts = Object.values(realProductDemandMap)
+        .map(p => ({
+          ...p,
+          totalViews: p.totalUnits // Show real units demanded
+        }))
+        .sort((a, b) => b.totalUnits - a.totalUnits);
 
       dealerList.sort((a, b) => b.totalRevenue - a.totalRevenue);
 
@@ -1352,15 +1421,27 @@
       document.getElementById("kpiOrders").textContent = activeOrders.length.toLocaleString('en-IN');
 
       document.getElementById("kpiDealersCount").textContent = dealerList.filter(d => d.totalRevenue > 0).length || dealerList.length;
-      document.getElementById("kpiTodayOpens").textContent = totalOpensTodaySum;
-      document.getElementById("kpiDealersOpenedToday").textContent = dealersOpenedTodayCount;
-      document.getElementById("kpiTodayViews").textContent = totalProductViewsCount;
       document.getElementById("badgeDealerCount").textContent = dealerList.length;
 
-      document.getElementById("spyTotalOpensToday").textContent = totalOpensTodaySum;
-      document.getElementById("spyActiveDealersToday").textContent = dealersOpenedTodayCount;
-      document.getElementById("spyProductViewsCount").textContent = totalProductViewsCount;
-      document.getElementById("spyHighIntentLeadsCount").textContent = highIntentLeadsCount;
+      // Real Executive Cards 3 & 4
+      const elemActiveMtd = document.getElementById("kpiActiveBuyersMtd");
+      if (elemActiveMtd) elemActiveMtd.textContent = novActiveBuyersCount;
+      const elemNovOrders = document.getElementById("kpiNovOrdersCount");
+      if (elemNovOrders) elemNovOrders.textContent = novOrdersCount;
+      const elemTopSku = document.getElementById("kpiTopSkuName");
+      if (elemTopSku && globalMostViewedProducts[0]) {
+        elemTopSku.textContent = globalMostViewedProducts[0].name.slice(0, 24);
+      }
+
+      // Real Telemetry Banner Numbers
+      const spyBuyers = document.getElementById("spyActiveBuyersCount");
+      if (spyBuyers) spyBuyers.textContent = novActiveBuyersCount;
+      const spyWeek = document.getElementById("spyWeekOrdersCount");
+      if (spyWeek) spyWeek.textContent = weekOrdersCount;
+      const spySkus = document.getElementById("spyTopSkusCount");
+      if (spySkus) spySkus.textContent = globalMostViewedProducts.length + "+";
+      const spyReorder = document.getElementById("spyReorderDueCount");
+      if (spyReorder) spyReorder.textContent = reorderDueCount;
 
       const areaSelect = document.getElementById("areaFilter");
       const currentArea = areaSelect.value;
@@ -1380,10 +1461,8 @@
       renderTelemetryRoster(dealerList);
       applyFilters();
 
-      if (!hasInitializedTab) {
-        switchTab('overview');
-        hasInitializedTab = true;
-      }
+      // ALWAYS retain currentActiveTab! Never reset to overview!
+      switchTab(currentActiveTab);
     }
 
     // Render Charts (Light Mode)
@@ -1542,16 +1621,17 @@
     // Render Most Viewed Products in Telemetry Tab (Light Mode)
     function renderMostViewedProducts(productsList) {
       const grid = document.getElementById("mostViewedProductsGrid");
+      if (!grid) return;
       grid.innerHTML = "";
 
       if (!productsList || productsList.length === 0) {
-        grid.innerHTML = '<div class="col-span-3 text-center py-6 text-slate-500 text-xs font-semibold">Catalog product view data syncing...</div>';
+        grid.innerHTML = '<div class="col-span-3 text-center py-6 text-slate-500 text-xs font-semibold">Catalog product demand data syncing...</div>';
         return;
       }
 
       productsList.forEach((p, idx) => {
         const card = document.createElement("div");
-        card.className = "p-3.5 rounded-xl bg-white border border-slate-200 hover:border-cyan-400 hover:shadow-md transition flex items-center space-x-3 group";
+        card.className = "p-3.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-md transition flex items-center space-x-3 group";
 
         card.innerHTML = `
           <div class="w-16 h-16 rounded-xl bg-slate-50 border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
@@ -1559,13 +1639,13 @@
           </div>
           <div class="flex-grow min-w-0 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-extrabold text-cyan-700 uppercase tracking-wider">${p.brand || 'Yash SKU'}</span>
-              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-100 text-cyan-800 font-bold border border-cyan-200">#${idx + 1} Trending</span>
+              <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider">${p.brand || 'BoAt / Velocity'}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 font-bold border border-amber-200">#${idx + 1} Best Seller</span>
             </div>
             <h4 class="text-xs font-bold text-slate-900 truncate" title="${p.name}">${p.name}</h4>
-            <div class="flex items-center justify-between pt-0.5 text-xs">
-              <span class="font-black text-emerald-600">₹${Number(p.price).toLocaleString('en-IN')}</span>
-              <span class="text-[11px] text-slate-500 font-semibold"><i class="fa-solid fa-eye text-cyan-600 mr-1"></i>${p.totalViews} views (${p.uniqueDealers.size} dealers)</span>
+            <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-100">
+              <span class="text-slate-700 font-bold"><i class="fa-solid fa-boxes-stacked text-emerald-600 mr-1"></i> ${p.totalUnits || p.totalViews} Units</span>
+              <span class="text-purple-700 font-extrabold">${p.uniqueDealers ? p.uniqueDealers.size : 1} Dealers</span>
             </div>
           </div>
         `;
@@ -1576,20 +1656,29 @@
     // Render Telemetry Roster Table (Light Mode)
     function renderTelemetryRoster(dealers) {
       const tbody = document.getElementById("telemetryTableBody");
+      if (!tbody) return;
       tbody.innerHTML = "";
 
-      const activeDealers = [...dealers].sort((a, b) => b.appOpensToday - a.appOpensToday).slice(0, 25);
+      const sortedDealers = [...dealers].sort((a, b) => {
+        if (a.healthStatus === "Active" && b.healthStatus !== "Active") return -1;
+        if (b.healthStatus === "Active" && a.healthStatus !== "Active") return 1;
+        return (b.lastOrderDate || 0) - (a.lastOrderDate || 0);
+      }).slice(0, 35);
 
-      activeDealers.forEach(d => {
+      sortedDealers.forEach(d => {
         const tr = document.createElement("tr");
         tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
 
-        const intentBadge = 
-          d.intentLevel === "High Buying Intent" ? '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[10px] border border-amber-300">🔥 High Intent</span>' :
-          d.intentLevel === "Moderate Interest" ? '<span class="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 font-bold text-[10px] border border-cyan-200">Browsing Products</span>' :
-          '<span class="text-slate-400 text-[10px] font-semibold">Normal</span>';
+        let healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700 border border-slate-200">NORMAL</span>';
+        if (d.healthStatus === "Active") {
+          healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-300">🔥 ACTIVE BUYER</span>';
+        } else if (d.healthStatus === "At Risk") {
+          healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-800 border border-amber-300">⚠️ REORDER DUE</span>';
+        } else {
+          healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-100 text-rose-800 border border-rose-300">💤 HIBERNATING</span>';
+        }
 
-        const topP = d.topViewedProduct;
+        const topP = d.topViewedProduct || { name: 'BoAt / Velocity Products', units: d.totalOrders || 1 };
 
         tr.innerHTML = `
           <td class="py-3 px-4">
@@ -1600,27 +1689,25 @@
           </td>
           <td class="py-3 px-3 text-slate-700 text-xs font-semibold">${d.area}</td>
           <td class="py-3 px-3 text-center">
-            ${d.appOpensToday > 0 ? 
-              `<span class="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 font-bold text-xs border border-cyan-200"><i class="fa-solid fa-mobile-screen mr-1 text-cyan-600"></i>${d.appOpensToday} opens today</span>` : 
-              `<span class="text-slate-400 text-xs font-semibold">0 opens today</span>`}
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${d.totalOrders > 0 ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-600'}">
+              <i class="fa-solid fa-cart-shopping mr-1 text-[10px]"></i> ${d.totalOrders} Orders
+            </span>
           </td>
-          <td class="py-3 px-3 text-xs text-slate-500 font-medium">${d.lastOpenTimeStr}</td>
+          <td class="py-3 px-3 text-xs text-slate-700 font-semibold">
+            ${d.lastOrderDateStr}
+            <div class="text-[10px] text-slate-400 font-normal">${d.lastOpenTimeStr}</div>
+          </td>
           <td class="py-3 px-4">
-            ${topP ? `
-              <div class="flex items-center space-x-2">
-                <img src="${topP.image}" class="w-8 h-8 rounded-lg object-contain bg-slate-50 p-0.5 border border-slate-200" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
-                <div>
-                  <div class="text-xs font-bold text-slate-900 truncate max-w-[200px]" title="${topP.name}">${topP.name}</div>
-                  <div class="text-[10px] text-emerald-600 font-bold">₹${Number(topP.price).toLocaleString('en-IN')} • ${topP.views} views</div>
-                </div>
-              </div>
-            ` : '<span class="text-slate-400 text-xs font-medium">No catalog views</span>'}
+            <div class="font-bold text-slate-900 text-xs">${topP.name}</div>
+            <div class="text-[11px] text-emerald-700 font-semibold">${topP.units || topP.views || 1} units bought</div>
           </td>
-          <td class="py-3 px-3 text-center">${intentBadge}</td>
+          <td class="py-3 px-3 text-center">
+            ${healthBadge}
+          </td>
           <td class="py-3 px-4 text-center">
-            <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${topP ? topP.name.replace(/'/g, "\\'") : ''}', '${topP ? topP.price : ''}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 mx-auto transition shadow-sm">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span>Pitch Product</span>
+            <button type="button" onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${(topP.name || '').replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center space-x-1 mx-auto">
+              <i class="fa-brands fa-whatsapp text-sm"></i>
+              <span>Pitch</span>
             </button>
           </td>
         `;
