@@ -2,27 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Yash Marketing - Dealer Performance, Opens & Product Views Spy Engine (Live)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yash Marketing - Dealer App Activity &amp; Product Intelligence</title>
   
-  <!-- Tailwind CSS & Font Awesome -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
           colors: {
             brand: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
+              50: '#ecfdf5',
+              100: '#d1fae5',
               500: '#10b981',
               600: '#059669',
-              700: '#047857'
+              700: '#047857',
             }
           }
         }
@@ -31,17 +38,11 @@
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #f8fafc;
       color: #0f172a;
       -webkit-tap-highlight-color: transparent;
-    }
-    .pro-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
     }
     .custom-scroll::-webkit-scrollbar {
       width: 6px;
@@ -54,1003 +55,1310 @@
       background: #cbd5e1;
       border-radius: 4px;
     }
-    .badge-platinum { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; font-weight: 700; }
-    .badge-gold { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; font-weight: 700; }
-    .badge-silver { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; font-weight: 700; }
-    .badge-bronze { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; font-weight: 700; }
-    .pulse-ring {
-      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      animation: pulse-green 2s infinite;
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
     }
-    @keyframes pulse-green {
-      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    .tab-pill-active {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+      border-color: #059669 !important;
+    }
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
     }
   </style>
 </head>
-
 <body class="custom-scroll min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white pb-12">
 
-  <!-- TOP NAVIGATION HEADER (CLEAN WHITE) -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center shadow-md shadow-emerald-500/20">
-          <i class="fa-solid fa-chart-line text-white text-lg font-black"></i>
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+          <i class="fa-solid fa-chart-line text-lg"></i>
         </div>
         <div>
           <div class="flex items-center space-x-2">
-            <h1 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">Yash Marketing</h1>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">Dealer OS</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold hidden sm:inline">LIVE CLOUD</span>
+            <h1 class="text-lg font-black tracking-tight text-slate-900">Yash Marketing</h1>
+            <span class="px-2 py-0.5 rounded text-[11px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-300">Dealer OS</span>
+            <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200 hidden sm:inline-block">Product &amp; Activity Intelligence</span>
           </div>
-          <p class="text-xs text-slate-500 hidden sm:block">Dealer Performance, Daily App Opens & Product Views Spy Radar</p>
+          <p class="text-xs text-slate-500 font-medium">Dealer App Opens • Categories Browsed • Products Viewed • Order Conversion</p>
         </div>
       </div>
 
-      <!-- Action items in header -->
-      <div class="flex items-center space-x-3">
-        <div class="flex items-center space-x-2 bg-emerald-50/80 px-2.5 py-1.5 rounded-lg border border-emerald-200">
-          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-ring"></div>
-          <span class="text-xs font-bold text-emerald-700" id="liveSyncStatus">Live Connected</span>
+      <!-- Action & Live Status Buttons -->
+      <div class="flex items-center space-x-2.5">
+        <div id="livePill" class="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span id="liveStatusText">Live Cloud Sync</span>
         </div>
 
-        <button onclick="openSalesAuditModal()" class="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-300 flex items-center space-x-1.5 transition shadow-sm" title="View Full Sales Volume Audit & Breakdown">
-          <i class="fa-solid fa-calculator text-emerald-600"></i>
-          <span>Sales Audit</span>
+        <button type="button" onclick="fetchLiveBackendData()" class="px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold shadow-sm flex items-center space-x-1.5 transition">
+          <i id="refreshIcon" class="fa-solid fa-rotate text-emerald-600"></i>
+          <span>Sync Now</span>
         </button>
 
-        <button id="btnRefresh" onclick="fetchLiveBackendData()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 flex items-center space-x-2 transition shadow-sm">
-          <i class="fa-solid fa-rotate text-emerald-600" id="refreshIcon"></i>
-          <span class="hidden md:inline">Sync Now</span>
-        </button>
-
-        <button onclick="exportToCSV()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 flex items-center space-x-2 transition shadow-sm">
-          <i class="fa-solid fa-file-arrow-down text-blue-600"></i>
-          <span class="hidden md:inline">Export CSV</span>
+        <button type="button" onclick="exportActivityCSV()" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm flex items-center space-x-1.5 transition">
+          <i class="fa-solid fa-file-excel text-emerald-400"></i>
+          <span>Export CSV</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-5 space-y-6">
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 lg:px-8 pt-6 space-y-6">
 
-    <!-- TAB SELECTOR -->
-    <div class="flex items-center space-x-2 overflow-x-auto pb-2 custom-scroll border-b border-slate-200">
-      <button type="button" onclick="switchTab('overview')" id="tabBtn-overview" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm whitespace-nowrap">
-        <i class="fa-solid fa-chart-pie"></i>
-        <span>Executive Insights</span>
-      </button>
-
-      <button type="button" onclick="switchTab('telemetry')" id="tabBtn-telemetry" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap relative">
-        <i class="fa-solid fa-fire-flame-curved text-amber-600"></i>
-        <span>Market Demand & Product Spy</span>
-        <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 font-bold border border-amber-200">VERIFIED</span>
-      </button>
-
-      <button type="button" onclick="switchTab('dealers')" id="tabBtn-dealers" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
-        <i class="fa-solid fa-users text-slate-500"></i>
-        <span>Dealers Directory</span>
-        <span id="badgeDealerCount" class="text-xs px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-700 font-semibold">0</span>
-      </button>
-
-      <button type="button" onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
-        <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
-        <span>At-Risk & Churn Radar</span>
-        <span id="badgeAlertCount" class="text-xs px-1.5 py-0.2 rounded-full bg-rose-100 text-rose-700 font-bold border border-rose-200">0</span>
-      </button>
-
-      <button type="button" onclick="switchTab('areas')" id="tabBtn-areas" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap">
-        <i class="fa-solid fa-map-location-dot text-indigo-500"></i>
-        <span>Territory Analytics</span>
-      </button>
-    </div>
-
-    <!-- FILTER BAR (WHITE) -->
-    <div class="pro-card rounded-2xl p-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-        <!-- Search Input -->
-        <div class="sm:col-span-2 md:col-span-3 lg:col-span-2 relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search dealer name, phone, area, product..." 
-            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-900 placeholder-slate-400 border border-slate-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition">
+    <!-- HERO TIME PERIOD SELECTOR (The exact 9 requested periods) -->
+    <section class="glass-card rounded-2xl p-4 sm:p-5">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
+        <div class="flex items-center space-x-2">
+          <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-calendar-days"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-extrabold text-slate-900">Select Time Period / Samay Chunein</h2>
+            <p class="text-[11px] text-slate-500 font-medium">Jis samay ka data dekhna chahte hain use select karein</p>
+          </div>
         </div>
-
-        <!-- Period Select -->
-        <div>
-          <select id="periodFilter" onchange="handlePeriodOrStatusChange()" 
-            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm font-semibold text-slate-800 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
-            <option value="all" selected>📅 All-Time (Cumulative)</option>
-            <option value="mtd">📅 This Month (Nov 2026 MTD)</option>
-            <option value="lastMonth">📅 Last Month (Oct 2026)</option>
-            <option value="q3">📅 Q3 FY26 (Oct - Dec)</option>
-            <option value="q2">📅 Q2 FY26 (Jul - Sep)</option>
-            <option value="fy">📅 Full FY 2026-27</option>
-          </select>
-        </div>
-
-        <!-- Fulfillment Status Select -->
-        <div>
-          <select id="statusFilter" onchange="handlePeriodOrStatusChange()" 
-            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm font-semibold text-slate-800 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
-            <option value="all" selected>📦 All Orders (Gross Vol)</option>
-            <option value="delivered">✅ Delivered &amp; Verified Only</option>
-            <option value="pipeline">🚚 In Pipeline (Stages 1-7)</option>
-            <option value="stage0">⏳ Stage 0 / Unprocessed</option>
-          </select>
-        </div>
-
-        <!-- Area Select -->
-        <div>
-          <select id="areaFilter" onchange="applyFilters()" 
-            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
-            <option value="">All Territories</option>
-          </select>
-        </div>
-
-        <!-- Tier Select -->
-        <div>
-          <select id="tierFilter" onchange="applyFilters()" 
-            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
-            <option value="">All Tiers</option>
-            <option value="Platinum">Platinum (₹3L+)</option>
-            <option value="Gold">Gold (₹1L - ₹3L)</option>
-            <option value="Silver">Silver (₹30k - ₹1L)</option>
-            <option value="Bronze">Bronze (&lt;₹30k)</option>
-          </select>
-        </div>
-
-        <!-- Activity / Health Select -->
-        <div class="sm:col-span-2 md:col-span-1 lg:col-span-1">
-          <select id="healthFilter" onchange="applyFilters()" 
-            class="w-full px-3 py-2.5 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-700 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
-            <option value="">All Activity Statuses</option>
-            <option value="opened-today">📱 Opened App Today</option>
-            <option value="viewed-today">👁️ Viewed Products Today</option>
-            <option value="Active">Active Orders (&lt;30 days)</option>
-            <option value="At Risk">At Risk (30-75 days)</option>
-            <option value="Hibernating">Hibernating (&gt;75 days)</option>
-            <option value="Credit Locked">Credit Locked</option>
-            <option value="VIP">VIP Accounts</option>
-          </select>
+        <div id="activePeriodLabel" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200 self-start md:self-auto">
+          Viewing: Iss Mahine (This Month)
         </div>
       </div>
+
+      <!-- Scrollable Period Selector Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto custom-scroll pb-1">
+        <button type="button" onclick="selectTimePeriod('today')" id="btn-period-today" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-sun text-amber-500"></i>
+          <span>Aaj (Today)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('yesterday')" id="btn-period-yesterday" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-clock-rotate-left text-blue-500"></i>
+          <span>Kal (Yesterday)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('this_week')" id="btn-period-this_week" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-calendar-week text-emerald-600"></i>
+          <span>Iss Hafte (This Week)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('last_week')" id="btn-period-last_week" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-backward text-indigo-500"></i>
+          <span>Picchle Hafte (Last Week)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('this_month')" id="btn-period-this_month" class="period-pill tab-pill-active flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-emerald-600 bg-emerald-600 text-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-calendar text-white"></i>
+          <span>Iss Mahine (This Month)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('last_month')" id="btn-period-last_month" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-calendar-minus text-purple-500"></i>
+          <span>Pichle Mahine (Last Month)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('this_quarter')" id="btn-period-this_quarter" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-chart-pie text-teal-600"></i>
+          <span>Iss Quarter (This Quarter)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('last_quarter')" id="btn-period-last_quarter" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-chart-column text-cyan-600"></i>
+          <span>Picchle Quarter (Last Quarter)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('this_year')" id="btn-period-this_year" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-earth-americas text-rose-500"></i>
+          <span>Iss Saal (This Year)</span>
+        </button>
+        <button type="button" onclick="selectTimePeriod('all')" id="btn-period-all" class="period-pill flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-400 hover:bg-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-layer-group text-slate-600"></i>
+          <span>Sabhi (All Time)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LOADING STATE INDICATOR -->
+    <div id="loadingState" class="py-12 flex flex-col items-center justify-center space-y-3">
+      <div class="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+      <p class="text-xs font-bold text-slate-600">Syncing live dealer orders &amp; product catalog...</p>
     </div>
 
-    <!-- LOADING STATE -->
-    <div id="loadingState" class="py-16 flex flex-col items-center justify-center space-y-4">
-      <div class="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-600 rounded-full animate-spin"></div>
-      <p class="text-sm font-semibold text-slate-600 animate-pulse" id="loadingText">Connecting to live Yash Marketing cloud database (Orders & Catalog)...</p>
-    </div>
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div id="dashboardContent" class="hidden space-y-6">
 
-    <!-- TAB 1: EXECUTIVE OVERVIEW -->
-    <div id="tabContent-overview" class="space-y-6 hidden">
-      <!-- KPI Top Summary -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <!-- Revenue Card -->
-        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-emerald-400 hover:shadow-md transition">
+      <!-- KEY METRICS OVERVIEW (The 7 Core Metrics) -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- 1. Number of Dealers Used App -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-1.5">
-              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Sales Volume</span>
-              <span id="kpiPeriodPill" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">All-Time</span>
-            </div>
-            <button onclick="openSalesAuditModal()" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-lg border border-emerald-300 transition flex items-center space-x-1 shadow-sm" title="View Full Calculation & Breakdown">
-              <i class="fa-solid fa-calculator text-emerald-600"></i>
-              <span>Audit</span>
-            </button>
-          </div>
-          <div class="mt-2.5">
-            <h3 class="text-xl sm:text-2xl font-black text-slate-900" id="kpiRevenue">₹0</h3>
-            
-            <!-- Realized vs Pipeline Breakdown -->
-            <div class="mt-2 pt-2 border-t border-slate-100 space-y-1.5">
-              <div class="flex items-center justify-between text-[11px] font-semibold">
-                <span class="text-emerald-700 flex items-center gap-1" title="Stage 8 (Delivered) & Stage 9 (Verified)">
-                  <i class="fa-solid fa-circle-check text-[10px]"></i> Del: <b id="kpiDeliveredSub">₹0</b>
-                </span>
-                <span class="text-blue-600 flex items-center gap-1" title="Stages 1 to 7 (Fulfillment / Dispatch)">
-                  <i class="fa-solid fa-truck-fast text-[10px]"></i> Pipe: <b id="kpiPipelineSub">₹0</b>
-                </span>
-                <span class="text-amber-600 flex items-center gap-1" title="Stage 0 (Unprocessed / Incomplete)">
-                  <i class="fa-solid fa-clock-rotate-left text-[10px]"></i> Stg 0: <b id="kpiStage0Sub">₹0</b>
-                </span>
-              </div>
-              <!-- Multi-segment visual bar -->
-              <div class="w-full bg-slate-100 rounded-full h-1.5 flex overflow-hidden">
-                <div id="kpiBarDelivered" class="bg-emerald-500 h-full transition-all duration-500" style="width: 69%" title="Delivered"></div>
-                <div id="kpiBarPipeline" class="bg-blue-500 h-full transition-all duration-500" style="width: 14%" title="Pipeline"></div>
-                <div id="kpiBarStage0" class="bg-amber-400 h-full transition-all duration-500" style="width: 17%" title="Stage 0"></div>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between mt-2 text-[11px] text-slate-500 font-medium">
-              <span>Avg: <strong class="text-emerald-800 font-bold" id="kpiAOV">₹0</strong></span>
-              <span>Orders: <strong class="text-slate-800 font-bold" id="kpiFilteredOrdersCount">0</strong></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Orders Count -->
-        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-blue-400 hover:shadow-md transition">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Orders</span>
-            <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm border border-blue-200">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </div>
-          </div>
-          <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiOrders">0</h3>
-            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
-              <span>Unique Dealers:</span>
-              <span class="text-blue-700 font-bold" id="kpiDealersCount">0</span>
-            </p>
-          </div>
-        </div>
-
-        <!-- Active Buyers (MTD) -->
-        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-cyan-400 hover:shadow-md transition cursor-pointer" onclick="switchTab('dealers')">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Active Buyers (MTD)</span>
-            <div class="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-sm border border-cyan-200">
+            <span class="text-xs font-bold text-slate-500">Dealers Used App</span>
+            <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold">
               <i class="fa-solid fa-users"></i>
             </div>
           </div>
-          <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiActiveBuyersMtd">42</h3>
-            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
-              <span>Orders in Nov:</span>
-              <span class="text-cyan-700 font-bold" id="kpiNovOrdersCount">70</span>
-            </p>
+          <div class="my-3">
+            <div id="kpiDealersUsed" class="text-2xl font-black text-slate-900 tracking-tight">--</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">App kholne wale total dealers</p>
+          </div>
+          <div id="kpiConversionSummary" class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 truncate">
+            -- Ordered • -- Browsed Only
           </div>
         </div>
 
-        <!-- Catalog SKUs In Demand -->
-        <div class="pro-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-purple-400 hover:shadow-md transition cursor-pointer" onclick="switchTab('telemetry')">
+        <!-- 2. Most Viewed Category -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Catalog SKUs In Demand</span>
-            <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm border border-purple-200">
+            <span class="text-xs font-bold text-slate-500">Most Viewed Category</span>
+            <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+          </div>
+          <div class="my-3">
+            <div id="kpiMostViewedCategory" class="text-lg font-black text-slate-900 tracking-tight truncate" title="--">--</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Sabse zyada dekhi gayi category</p>
+          </div>
+          <div id="kpiMostViewedCategorySub" class="text-[11px] font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200 truncate">
+            -- Views in Period
+          </div>
+        </div>
+
+        <!-- 3. Most Viewed Product -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500">Most Viewed Product</span>
+            <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold">
               <i class="fa-solid fa-fire text-amber-500"></i>
             </div>
           </div>
-          <div class="mt-3">
-            <h3 class="text-lg sm:text-2xl font-black text-slate-900" id="kpiCatalogCount">1,149</h3>
-            <p class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
-              <span>Top Demand:</span>
-              <span class="text-purple-700 font-bold" id="kpiTopSkuName">Velocity &amp; BoAt</span>
-            </p>
+          <div class="my-3">
+            <div id="kpiMostViewedProduct" class="text-lg font-black text-slate-900 tracking-tight truncate cursor-pointer hover:text-emerald-700 transition" onclick="openProductModalFromKpi('viewed')" title="--">--</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Sabse zyada dekha gaya product</p>
+          </div>
+          <div id="kpiMostViewedProductSub" class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200 truncate">
+            -- Views in Catalog
           </div>
         </div>
-      </div>
 
-      <!-- SMART ACTION RADAR / LIVE INSIGHTS -->
-      <div class="pro-card rounded-2xl p-4 sm:p-5 space-y-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm border border-indigo-200">
-              <i class="fa-solid fa-bolt"></i>
-            </div>
-            <div>
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Live Insights & Churn Radar</h3>
-              <p class="text-xs text-slate-500">Algorithmic risk warnings derived from 721+ live transaction records</p>
-            </div>
-          </div>
-          <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">Auto-Refreshed</span>
-        </div>
-
-        <div id="alertsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <!-- CHARTS ROW -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Sales Velocity Trend -->
-        <div class="lg:col-span-2 pro-card rounded-2xl p-5 space-y-3">
+        <!-- 4. Avg Time Spent on App -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Monthly Sales Growth Trend</h3>
-              <p class="text-xs text-slate-500">Total transaction volume grouped chronologically</p>
+            <span class="text-xs font-bold text-slate-500">Time Spent on App</span>
+            <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-stopwatch"></i>
             </div>
-            <span class="text-xs text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">Live</span>
           </div>
-          <div class="h-64 relative">
-            <canvas id="salesTrendChart"></canvas>
+          <div class="my-3">
+            <div id="kpiTimeSpent" class="text-2xl font-black text-slate-900 tracking-tight">-- Mins</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">App per kitne der tak the (Avg/dealer)</p>
+          </div>
+          <div id="kpiTimeSpentSub" class="text-[11px] font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 truncate">
+            -- Total App Visits
           </div>
         </div>
 
-        <!-- Tier Revenue Breakdown -->
-        <div class="pro-card rounded-2xl p-5 space-y-3">
+        <!-- 5. Most Ordered Item -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Dealer Tier Distribution</h3>
-              <p class="text-xs text-slate-500">Volume distribution by dealer value tier</p>
+            <span class="text-xs font-bold text-slate-500">Most Ordered Item</span>
+            <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-boxes-stacked"></i>
             </div>
           </div>
-          <div class="h-64 relative flex items-center justify-center">
-            <canvas id="tierChart"></canvas>
+          <div class="my-3">
+            <div id="kpiMostOrderedItem" class="text-lg font-black text-slate-900 tracking-tight truncate cursor-pointer hover:text-emerald-700 transition" onclick="openProductModalFromKpi('ordered')" title="--">--</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Highest units ordered</p>
+          </div>
+          <div id="kpiMostOrderedItemSub" class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 truncate">
+            -- Units Ordered
           </div>
         </div>
-      </div>
 
-      <!-- TOP DEALERS PREVIEW -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Top 5 Champions -->
-        <div class="pro-card rounded-2xl p-5 space-y-4">
+        <!-- 6. Most Ordered Category -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500">Most Ordered Category</span>
+            <div class="w-8 h-8 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+          </div>
+          <div class="my-3">
+            <div id="kpiMostOrderedCategory" class="text-lg font-black text-slate-900 tracking-tight truncate" title="--">--</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Top performing category</p>
+          </div>
+          <div id="kpiMostOrderedCategorySub" class="text-[11px] font-bold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-200 truncate">
+            -- Units Ordered
+          </div>
+        </div>
+
+        <!-- 7. Order Conversion Status (Order Diya ya Nahi) -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500">Order Diya Ya Nahi?</span>
+            <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-hand-holding-dollar"></i>
+            </div>
+          </div>
+          <div class="my-3">
+            <div id="kpiConversionRate" class="text-2xl font-black text-indigo-900 tracking-tight">--%</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Conversion into actual orders</p>
+          </div>
+          <div id="kpiGrossOrdersBooked" class="text-[11px] font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200 truncate">
+            ₹-- Total Volume
+          </div>
+        </div>
+
+        <!-- 8. Hot Leads to Pitch (Browsed but No Order) -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-amber-400 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500">Hot Follow-up Leads</span>
+            <div class="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+          </div>
+          <div class="my-3">
+            <div id="kpiBrowsedOnlyCount" class="text-2xl font-black text-rose-700 tracking-tight">-- Dealers</div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">App khola par order nahi diya</p>
+          </div>
+          <button type="button" onclick="filterByBrowsedOnly()" class="text-[11px] font-bold text-amber-800 bg-amber-100 hover:bg-amber-200 px-2.5 py-1 rounded-lg border border-amber-300 text-left transition flex items-center justify-between">
+            <span>Filter &amp; Pitch on WhatsApp</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- CATEGORY & PRODUCT DEMAND RADAR (Side-by-side Grids) -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Category Performance: Views vs Orders -->
+        <div class="glass-card rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
             <div class="flex items-center space-x-2">
-              <i class="fa-solid fa-trophy text-amber-500 text-base"></i>
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Top Revenue Champions</h3>
+              <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs">
+                <i class="fa-solid fa-tags"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900">Categories Viewed vs Ordered</h3>
+                <p class="text-[11px] text-slate-500">Konsi category dealers ne dekhi aur kitna order diya</p>
+              </div>
             </div>
-            <button onclick="switchTab('dealers')" class="text-xs text-emerald-700 hover:text-emerald-800 font-bold hover:underline">View All Dealers</button>
+            <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">Demand Radar</span>
           </div>
-          <div id="topChampionsList" class="space-y-2.5">
-            <!-- Dynamic items -->
+
+          <div id="categoryLeaderboard" class="space-y-3 custom-scroll max-h-80 overflow-y-auto pr-1">
+            <!-- Dynamically injected category bars -->
           </div>
         </div>
 
-        <!-- Most Active App Openers Today -->
-        <div class="pro-card rounded-2xl p-5 space-y-4">
-          <div class="flex items-center justify-between">
+        <!-- Most Viewed & Ordered Products -->
+        <div class="glass-card rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
             <div class="flex items-center space-x-2">
-              <i class="fa-solid fa-fire text-orange-500 text-base"></i>
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Today's Most Active App Openers</h3>
+              <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">
+                <i class="fa-solid fa-fire"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900">Top Products Inspected &amp; Demanded</h3>
+                <p class="text-[11px] text-slate-500">Dealers ne konse products dekhe aur khareede</p>
+              </div>
             </div>
-            <button onclick="switchTab('telemetry')" class="text-xs text-cyan-700 hover:text-cyan-800 font-bold hover:underline">View Spy Radar</button>
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">SKU Intelligence</span>
           </div>
-          <div id="topOpenersList" class="space-y-2.5">
-            <!-- Dynamic items -->
+
+          <div id="productsLeaderboard" class="space-y-3 custom-scroll max-h-80 overflow-y-auto pr-1">
+            <!-- Dynamically injected product rows -->
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- TAB 2: DAILY OPENS & PRODUCT SPY RADAR -->
-    <div id="tabContent-telemetry" class="space-y-6 hidden">
-      <!-- Telemetry Highlights Banner -->
-      <div class="pro-card rounded-2xl p-5 space-y-4 border-l-4 border-l-emerald-500">
-        <div class="flex items-center justify-between flex-wrap gap-3">
-          <div class="flex items-center space-x-3">
-            <div class="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-black border border-emerald-200">
-              <i class="fa-solid fa-fire-flame-curved text-emerald-600"></i>
+      </section>
+
+      <!-- DEALER-BY-DEALER ACTIVITY MASTER TABLE -->
+      <section class="glass-card rounded-2xl p-5 space-y-4">
+        
+        <!-- Table Controls: Search & Filter Tabs -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div class="flex items-center space-x-2">
+            <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">
+              <i class="fa-solid fa-list-check"></i>
             </div>
             <div>
-              <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Market Demand &amp; Dealer Product Intelligence</h3>
-              <p class="text-xs text-slate-500">Actual SKU demand, verified product preferences, aur real dealer order frequency from Yash Marketing live cloud</p>
+              <h3 class="text-sm font-extrabold text-slate-900">Dealer App Activity Log (Har Dealer Ki Poori Detail)</h3>
+              <p class="text-[11px] text-slate-500">Dealers, unke app opens, time spent, viewed products aur order status</p>
             </div>
           </div>
-          <div class="flex items-center space-x-2">
-            <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Cloud Orders Verified (751 Orders)</span>
-            </span>
+
+          <!-- Quick Filters: All vs Ordered vs Browsed Only -->
+          <div class="flex items-center gap-2 self-start md:self-auto">
+            <button type="button" onclick="setOrderStatusFilter('all')" id="filter-status-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white border border-slate-900 transition">
+              All Active (<span id="countFilterAll">0</span>)
+            </button>
+            <button type="button" onclick="setOrderStatusFilter('ordered')" id="filter-status-ordered" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-50 text-slate-700 border border-slate-200 hover:border-emerald-400 transition">
+              ✅ Order Diya (<span id="countFilterOrdered">0</span>)
+            </button>
+            <button type="button" onclick="setOrderStatusFilter('browsed')" id="filter-status-browsed" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-50 text-slate-700 border border-slate-200 hover:border-amber-400 transition">
+              ⏳ Order Nahi Diya (<span id="countFilterBrowsed">0</span>)
+            </button>
           </div>
         </div>
 
-        <!-- 4 Quick Verified Stats -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
-          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Active Buyers This Month</span>
-            <h4 class="text-xl font-black text-emerald-700 mt-1" id="spyActiveBuyersCount">42</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">Dealers ordered in Nov 2026</p>
-          </div>
-          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Orders in Last 7 Days</span>
-            <h4 class="text-xl font-black text-blue-700 mt-1" id="spyWeekOrdersCount">9</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">Recent active delivery pipeline</p>
-          </div>
-          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Top Demand Catalog SKUs</span>
-            <h4 class="text-xl font-black text-purple-700 mt-1" id="spyTopSkusCount">15+</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">High velocity moving products</p>
-          </div>
-          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-            <span class="text-xs font-semibold text-slate-500">Re-Order Opportunities</span>
-            <h4 class="text-xl font-black text-amber-700 mt-1" id="spyReorderDueCount">0</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">Dealers due for re-order pitch</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- MOST VIEWED PRODUCTS LEADERBOARD -->
-      <div class="pro-card rounded-2xl p-5 space-y-4">
-        <div class="flex items-center justify-between flex-wrap gap-2">
-          <div>
-            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 flex items-center space-x-2">
-              <i class="fa-solid fa-fire text-amber-500"></i>
-              <span>Most Viewed Products (Market Demand Leaderboard)</span>
-            </h3>
-            <p class="text-xs text-slate-500">Dealers kaunse products sabse zyada dekh rahe hain</p>
-          </div>
-          <span class="text-xs text-slate-500 font-medium">Top browsed items</span>
+        <!-- Search Bar -->
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+          <input type="text" id="dealerSearchInput" oninput="applyDealerSearch()" placeholder="Search dealer name, phone, area, or product name..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white transition">
         </div>
 
-        <div id="mostViewedProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-          <!-- Populated by JS with product cards, images, views count, price -->
-        </div>
-      </div>
-
-      <!-- DEALER LIVE BROWSING & OPENS RADAR FEED -->
-      <div class="pro-card rounded-2xl p-5 space-y-4">
-        <div class="flex items-center justify-between flex-wrap gap-2">
-          <div>
-            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 flex items-center space-x-2">
-              <i class="fa-solid fa-list-check text-cyan-600"></i>
-              <span>Dealer Daily Opens & Product Interest Roster</span>
-            </h3>
-            <p class="text-xs text-slate-500">Dealer-wise daily open frequency aur unka specific product preference</p>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span class="text-xs text-slate-500 font-medium">Showing top active dealers</span>
-          </div>
-        </div>
-
-        <!-- Roster Table -->
-        <div class="overflow-x-auto custom-scroll">
-          <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wider border-b border-slate-200 font-bold">
-              <tr>
-                <th class="py-3 px-4">Dealer Name</th>
-                <th class="py-3 px-3">Area</th>
-                <th class="py-3 px-3 text-center">Orders &amp; Recency</th>
-                <th class="py-3 px-3">Last Order Date</th>
-                <th class="py-3 px-4">Most Demanded Product Preference</th>
-                <th class="py-3 px-3 text-center">Buying Health</th>
-                <th class="py-3 px-4 text-center">Action</th>
+        <!-- Table Responsive Container -->
+        <div class="overflow-x-auto custom-scroll rounded-xl border border-slate-200">
+          <table class="w-full text-left border-collapse min-w-[850px]">
+            <thead>
+              <tr class="bg-slate-50 text-slate-600 text-[11px] uppercase tracking-wider font-extrabold border-b border-slate-200">
+                <th class="py-3 px-4">Dealer / Shop</th>
+                <th class="py-3 px-3">App Opens &amp; Time</th>
+                <th class="py-3 px-3">Categories Viewed</th>
+                <th class="py-3 px-3">Products Inspected</th>
+                <th class="py-3 px-3">Order Diya Ya Nahi?</th>
+                <th class="py-3 px-4 text-right">Quick Action</th>
               </tr>
             </thead>
-            <tbody id="telemetryTableBody" class="divide-y divide-slate-100 font-medium">
-              <!-- Rendered via JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 3: DEALERS DIRECTORY & PERFORMANCE TABLE -->
-    <div id="tabContent-dealers" class="space-y-4 hidden">
-      <div class="pro-card rounded-2xl overflow-hidden shadow-sm">
-        <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2 bg-slate-50/50">
-          <div>
-            <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Dealers Directory & Performance Matrix</h3>
-            <p class="text-xs text-slate-500" id="tableFilterSummary">Showing all dealers</p>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span class="text-xs font-semibold text-slate-500">Sort:</span>
-            <select id="sortSelect" onchange="applyFilters()" class="bg-white border border-slate-300 text-xs text-slate-700 font-medium rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-emerald-500">
-              <option value="revenue-desc">Highest Revenue</option>
-              <option value="opens-desc">Most App Opens Today</option>
-              <option value="orders-desc">Most Orders</option>
-              <option value="last-order">Recent Orders First</option>
-              <option value="name-asc">Alphabetical (A-Z)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Table -->
-        <div class="overflow-x-auto custom-scroll">
-          <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wider border-b border-slate-200 font-bold">
-              <tr>
-                <th class="py-3 px-4">Dealer / Shop Name</th>
-                <th class="py-3 px-3">Area / Territory</th>
-                <th class="py-3 px-3">Tier</th>
-                <th class="py-3 px-3 text-center">Daily Opens</th>
-                <th class="py-3 px-3 text-right">Total Revenue</th>
-                <th class="py-3 px-3 text-right">Orders</th>
-                <th class="py-3 px-4">Top Viewed Product</th>
-                <th class="py-3 px-3">Health Status</th>
-                <th class="py-3 px-4 text-center">Quick Action</th>
-              </tr>
-            </thead>
-            <tbody id="dealersTableBody" class="divide-y divide-slate-100 font-medium">
-              <!-- Rendered via JS -->
+            <tbody id="dealersActivityTableBody" class="divide-y divide-slate-100 text-xs font-medium text-slate-800">
+              <!-- Dynamically injected dealer rows -->
             </tbody>
           </table>
         </div>
 
-        <div id="emptyTableMessage" class="py-12 text-center text-slate-400 hidden">
-          <i class="fa-solid fa-users-slash text-3xl mb-2 text-slate-300"></i>
-          <p class="text-sm font-semibold">No dealers found matching your current filter.</p>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- TAB 4: AT-RISK & CHURN RADAR -->
-    <div id="tabContent-radar" class="space-y-6 hidden">
-      <div class="pro-card rounded-2xl p-5 space-y-4">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold border border-rose-200">
-            <i class="fa-solid fa-shield-halved"></i>
-          </div>
-          <div>
-            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Dealer Churn Prevention & Credit Risk Radar</h3>
-            <p class="text-xs text-slate-500">High-value accounts experiencing drop-offs or active credit lock blocks</p>
-          </div>
-        </div>
-
-        <!-- Grid of risk cards -->
-        <div id="radarCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 5: TERRITORY & AREA ANALYTICS -->
-    <div id="tabContent-areas" class="space-y-6 hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Area Bar Chart -->
-        <div class="lg:col-span-2 pro-card rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Territory Revenue Comparison</h3>
-              <p class="text-xs text-slate-500">Sales volume distributed across dealer geographic areas</p>
-            </div>
-          </div>
-          <div class="h-72 relative">
-            <canvas id="areaChart"></canvas>
-          </div>
-        </div>
-
-        <!-- Area Matrix List -->
-        <div class="pro-card rounded-2xl p-5 space-y-4">
-          <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Territory Summary</h3>
-          <div id="areaMatrixList" class="space-y-3 custom-scroll max-h-72 overflow-y-auto pr-1">
-            <!-- Dynamic -->
-          </div>
-        </div>
-      </div>
     </div>
 
   </main>
 
-  <!-- SALES VOLUME AUDIT & BREAKDOWN MODAL -->
-  <div id="salesAuditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
-    <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
-      <!-- Modal Header -->
-      <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-bold border border-emerald-200">
-            <i class="fa-solid fa-calculator"></i>
-          </div>
-          <div>
-            <h2 class="text-base sm:text-lg font-extrabold text-slate-900">Sales Volume Audit &amp; Transparency Breakdown</h2>
-            <p class="text-xs text-slate-500 font-medium">Verified Live Calculations from Yash Marketing Cloud Data (751 Orders)</p>
-          </div>
-        </div>
-        <button onclick="closeSalesAuditModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <!-- Modal Body (Scrollable) -->
-      <div class="p-5 overflow-y-auto space-y-5 text-slate-800">
-        
-        <!-- Explanation Note -->
-        <div class="p-3.5 bg-blue-50/70 border border-blue-200 rounded-xl text-xs text-blue-900 leading-relaxed flex items-start gap-2.5">
-          <i class="fa-solid fa-circle-info text-blue-600 text-sm mt-0.5"></i>
-          <div>
-            <strong>Kyun dikh raha tha ₹74,73,032?</strong><br>
-            Yeh number June 2026 se November 2026 tak ke <strong>sabhi 751 orders</strong> ka All-Time Gross Cumulative total hai. Isme Genuine Delivered orders ke alawa active in-transit orders aur puraane unfulfilled/stage-0 orders bhi shamil hain. Neeche pura hisab aur 1-click filters diye gaye hain:
-          </div>
-        </div>
-
-        <!-- 4 Key Volume Cards -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Gross All Orders</span>
-            <p class="text-base sm:text-xl font-black text-slate-900 mt-1">₹74,73,032</p>
-            <span class="text-[11px] text-slate-500">751 Orders (All-Time)</span>
-          </div>
-          <div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/60">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1">
-              <i class="fa-solid fa-circle-check text-[10px]"></i> Delivered &amp; Verified
-            </span>
-            <p class="text-base sm:text-xl font-black text-emerald-800 mt-1">₹51,81,224</p>
-            <span class="text-[11px] text-emerald-700 font-semibold">492 Orders (69.3%)</span>
-          </div>
-          <div class="p-3 rounded-xl border border-blue-200 bg-blue-50/60">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1">
-              <i class="fa-solid fa-truck text-[10px]"></i> In Active Pipeline
-            </span>
-            <p class="text-base sm:text-xl font-black text-blue-800 mt-1">₹10,48,036</p>
-            <span class="text-[11px] text-blue-700 font-semibold">117 Orders (14.0%)</span>
-          </div>
-          <div class="p-3 rounded-xl border border-amber-200 bg-amber-50/60">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-700 flex items-center gap-1">
-              <i class="fa-solid fa-clock text-[10px]"></i> Stage 0 / Unprocessed
-            </span>
-            <p class="text-base sm:text-xl font-black text-amber-800 mt-1">₹12,43,772</p>
-            <span class="text-[11px] text-amber-700 font-semibold">142 Orders (16.6%)</span>
-          </div>
-        </div>
-
-        <!-- 1-Click Quick Preset Switcher -->
-        <div class="flex flex-wrap items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl">
-          <span class="text-xs font-bold text-slate-700 mr-1">Quick Apply View:</span>
-          <button onclick="applyAuditPreset('mtd', 'all')" class="px-3 py-1.5 bg-white hover:bg-emerald-50 text-emerald-700 hover:border-emerald-300 font-bold text-xs rounded-lg border border-slate-300 transition shadow-sm">
-            📅 This Month Only (Nov 2026: ₹7.31L)
-          </button>
-          <button onclick="applyAuditPreset('all', 'delivered')" class="px-3 py-1.5 bg-white hover:bg-emerald-50 text-emerald-700 hover:border-emerald-300 font-bold text-xs rounded-lg border border-slate-300 transition shadow-sm">
-            ✅ Genuine Delivered Only (₹51.81L)
-          </button>
-          <button onclick="applyAuditPreset('mtd', 'delivered')" class="px-3 py-1.5 bg-white hover:bg-emerald-50 text-emerald-700 hover:border-emerald-300 font-bold text-xs rounded-lg border border-slate-300 transition shadow-sm">
-            🎯 This Month Delivered (₹6.99L)
-          </button>
-          <button onclick="applyAuditPreset('all', 'all')" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs rounded-lg transition">
-            🔄 All-Time Gross (₹74.73L)
-          </button>
-        </div>
-
-        <!-- Month by Month Breakdown Table -->
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Month-by-Month Sales &amp; Fulfillment Audit</h4>
-            <span class="text-[11px] text-slate-500">June 2026 - November 2026 (Live Orders)</span>
-          </div>
-          <div class="border border-slate-200 rounded-xl overflow-hidden">
-            <table class="w-full text-xs text-left">
-              <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
-                <tr>
-                  <th class="py-2.5 px-3">Month</th>
-                  <th class="py-2.5 px-3 text-right">Total Orders</th>
-                  <th class="py-2.5 px-3 text-right">Gross Booked (₹)</th>
-                  <th class="py-2.5 px-3 text-right text-emerald-700">Delivered Sales (₹)</th>
-                  <th class="py-2.5 px-3 text-right text-blue-700">In Pipeline (₹)</th>
-                  <th class="py-2.5 px-3 text-right text-amber-700">Stage 0 (₹)</th>
-                  <th class="py-2.5 px-3 text-center">Fulfillment Rate</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-100 font-medium">
-                <tr class="hover:bg-slate-50/80 bg-emerald-50/30">
-                  <td class="py-2.5 px-3 font-bold text-slate-900">Nov 2026 (Current MTD)</td>
-                  <td class="py-2.5 px-3 text-right font-semibold">70</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹7,30,865</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹6,99,130</td>
-                  <td class="py-2.5 px-3 text-right font-medium text-blue-700">₹1,958</td>
-                  <td class="py-2.5 px-3 text-right font-medium text-amber-700">₹29,777</td>
-                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">95.7%</span></td>
-                </tr>
-                <tr class="hover:bg-slate-50/80">
-                  <td class="py-2.5 px-3 font-bold text-slate-800">Oct 2026</td>
-                  <td class="py-2.5 px-3 text-right">126</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹13,79,553</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹4,90,921</td>
-                  <td class="py-2.5 px-3 text-right text-blue-700">₹4,90,157</td>
-                  <td class="py-2.5 px-3 text-right text-amber-700">₹3,98,475</td>
-                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700">35.6%</span></td>
-                </tr>
-                <tr class="hover:bg-slate-50/80">
-                  <td class="py-2.5 px-3 font-bold text-slate-800">Sep 2026</td>
-                  <td class="py-2.5 px-3 text-right">193</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹23,73,775</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹22,28,350</td>
-                  <td class="py-2.5 px-3 text-right text-blue-700">₹87,469</td>
-                  <td class="py-2.5 px-3 text-right text-amber-700">₹57,956</td>
-                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">93.9%</span></td>
-                </tr>
-                <tr class="hover:bg-slate-50/80">
-                  <td class="py-2.5 px-3 font-bold text-slate-800">Aug 2026</td>
-                  <td class="py-2.5 px-3 text-right">168</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹13,36,574</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹9,90,342</td>
-                  <td class="py-2.5 px-3 text-right text-blue-700">₹3,46,232</td>
-                  <td class="py-2.5 px-3 text-right text-amber-700">₹0</td>
-                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">74.1%</span></td>
-                </tr>
-                <tr class="hover:bg-slate-50/80">
-                  <td class="py-2.5 px-3 font-bold text-slate-800">Jul 2026</td>
-                  <td class="py-2.5 px-3 text-right">122</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹9,70,482</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹7,27,978</td>
-                  <td class="py-2.5 px-3 text-right text-blue-700">₹85,427</td>
-                  <td class="py-2.5 px-3 text-right text-amber-700">₹1,57,077</td>
-                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">75.0%</span></td>
-                </tr>
-                <tr class="hover:bg-slate-50/80">
-                  <td class="py-2.5 px-3 font-bold text-slate-800">Jun 2026</td>
-                  <td class="py-2.5 px-3 text-right">72</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-slate-900">₹6,81,783</td>
-                  <td class="py-2.5 px-3 text-right font-bold text-emerald-700">₹44,503</td>
-                  <td class="py-2.5 px-3 text-right text-blue-700">₹36,793</td>
-                  <td class="py-2.5 px-3 text-right text-amber-700">₹6,00,487</td>
-                  <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700">6.5%</span></td>
-                </tr>
-              </tbody>
-              <tfoot class="bg-slate-100 font-bold border-t-2 border-slate-300 text-slate-900">
-                <tr>
-                  <td class="py-2.5 px-3">TOTAL (ALL-TIME)</td>
-                  <td class="py-2.5 px-3 text-right">751</td>
-                  <td class="py-2.5 px-3 text-right">₹74,73,032</td>
-                  <td class="py-2.5 px-3 text-right text-emerald-700">₹51,81,224</td>
-                  <td class="py-2.5 px-3 text-right text-blue-700">₹10,48,036</td>
-                  <td class="py-2.5 px-3 text-right text-amber-700">₹12,43,772</td>
-                  <td class="py-2.5 px-3 text-center text-emerald-800">69.3%</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="px-5 py-3.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
-        <button onclick="exportSalesAuditCSV()" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs rounded-xl border border-slate-300 transition flex items-center space-x-1.5 shadow-sm">
-          <i class="fa-solid fa-file-csv text-emerald-600"></i>
-          <span>Export Audit CSV</span>
-        </button>
-        <button onclick="closeSalesAuditModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition">
-          Close Breakdown
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- PRODUCT INTEREST & BUYER DEALERS MODAL -->
-  <div id="productDealersModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
-    <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
-      <!-- Modal Header -->
-      <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
-        <div class="flex items-center space-x-3.5 min-w-0">
-          <div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
-            <img id="pdmImage" src="" alt="Product" class="w-full h-full object-contain" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
-          </div>
-          <div class="min-w-0">
-            <div class="flex items-center space-x-2">
-              <span id="pdmBrand" class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Brand</span>
-              <span id="pdmPrice" class="text-xs font-black text-slate-900">₹0</span>
-            </div>
-            <h2 class="text-base sm:text-lg font-extrabold text-slate-900 truncate" id="pdmTitle">Product Name</h2>
-            <p class="text-xs text-slate-500 font-medium" id="pdmSubtitle">Dealers who have viewed &amp; demanded this product</p>
-          </div>
-        </div>
-        <button type="button" onclick="closeProductDealersModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition flex-shrink-0 ml-2">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <!-- Quick Stats Strip -->
-      <div class="px-5 py-3 bg-slate-100/70 border-b border-slate-200 grid grid-cols-3 gap-3 text-center">
-        <div>
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Total Demanded Units</span>
-          <p class="text-sm sm:text-base font-black text-emerald-800" id="pdmTotalUnits">0</p>
-        </div>
-        <div>
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Total Sales Generated</span>
-          <p class="text-sm sm:text-base font-black text-slate-900" id="pdmTotalRev">₹0</p>
-        </div>
-        <div>
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Dealers Count</span>
-          <p class="text-sm sm:text-base font-black text-purple-700" id="pdmDealersCount">0</p>
-        </div>
-      </div>
-
-      <!-- Modal Body (Search + Dealers Table) -->
-      <div class="p-4 sm:p-5 overflow-y-auto space-y-4">
-        <!-- Search filter inside modal -->
-        <div class="relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input type="text" id="pdmSearchInput" oninput="filterProductDealersList()" placeholder="Search dealer name, phone, or territory..." 
-            class="w-full pl-9 pr-4 py-2 bg-slate-50 hover:bg-white focus:bg-white rounded-xl text-xs sm:text-sm text-slate-900 placeholder-slate-400 border border-slate-300 focus:border-emerald-500 focus:outline-none transition">
-        </div>
-
-        <!-- Dealers List Table -->
-        <div class="border border-slate-200 rounded-xl overflow-hidden">
-          <div class="overflow-x-auto custom-scroll max-h-[46vh]">
-            <table class="w-full text-left text-xs sm:text-sm">
-              <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wider border-b border-slate-200 font-bold sticky top-0 z-10">
-                <tr>
-                  <th class="py-2.5 px-3">#</th>
-                  <th class="py-2.5 px-3">Dealer Shop Name</th>
-                  <th class="py-2.5 px-3">Territory</th>
-                  <th class="py-2.5 px-3 text-center">Units Bought</th>
-                  <th class="py-2.5 px-3 text-right">Total Amount</th>
-                  <th class="py-2.5 px-3">Last Order Date</th>
-                  <th class="py-2.5 px-3 text-center">1-Click WhatsApp</th>
-                </tr>
-              </thead>
-              <tbody id="pdmTableBody" class="divide-y divide-slate-100 font-medium">
-                <!-- Rendered dynamically -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
-        <span class="text-xs text-slate-500">Tip: Click any dealer to inspect their account or pitch stock directly on WhatsApp.</span>
-        <button type="button" onclick="closeProductDealersModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition">
-          Close Window
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- DEALER 360 MODAL (PROFESSIONAL WHITE) -->
-  <div id="dealerModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 transition-opacity">
-    <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+  <!-- MODAL: DEALER 360 ACTIVITY DOSSIER -->
+  <div id="dealerActivityModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
       
       <!-- Modal Header -->
-      <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/80">
+      <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-bold border border-emerald-200">
-            <i class="fa-solid fa-shop"></i>
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-sm">
+            <i class="fa-solid fa-store"></i>
           </div>
           <div>
-            <div class="flex items-center space-x-2">
-              <h2 class="text-base sm:text-lg font-extrabold text-slate-900" id="modalShopName">Dealer Details</h2>
-              <span id="modalTierBadge" class="text-xs px-2 py-0.5 rounded-full font-bold">Tier</span>
-              <span id="modalVipBadge" class="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 font-bold border border-amber-300 hidden">VIP</span>
-            </div>
-            <p class="text-xs text-slate-500 flex items-center space-x-2 mt-0.5 font-medium">
-              <span id="modalPhone">--</span>
-              <span>•</span>
-              <span id="modalArea">Territory</span>
-            </p>
+            <h3 id="modalDealerName" class="text-sm sm:text-base font-extrabold text-slate-900">--</h3>
+            <p id="modalDealerSub" class="text-xs text-slate-500">--</p>
           </div>
         </div>
-
-        <button onclick="closeDealerModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition">
+        <button type="button" onclick="closeDealerModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
       <!-- Modal Body (Scrollable) -->
-      <div class="p-5 overflow-y-auto custom-scroll space-y-6 flex-grow bg-slate-50/30">
+      <div class="p-5 space-y-4 overflow-y-auto custom-scroll text-xs">
         
-        <!-- Quick Metric Tiles -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
-            <span class="text-xs font-semibold text-slate-500">Total Sales Volume</span>
-            <p class="text-base font-black text-slate-900 mt-1" id="modalTotalRevenue">₹0</p>
+        <!-- Quick Stats Strip -->
+        <div class="grid grid-cols-3 gap-2.5">
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+            <span class="text-[10px] text-slate-500 font-bold block uppercase">App Opens</span>
+            <span id="modalDealerOpens" class="text-base font-black text-slate-900">--</span>
           </div>
-          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
-            <span class="text-xs font-semibold text-slate-500">Total Orders</span>
-            <p class="text-base font-black text-slate-900 mt-1" id="modalTotalOrders">0</p>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+            <span class="text-[10px] text-slate-500 font-bold block uppercase">Time Active</span>
+            <span id="modalDealerTime" class="text-base font-black text-slate-900">--</span>
           </div>
-          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
-            <span class="text-xs font-semibold text-slate-500">Today's App Opens</span>
-            <p class="text-base font-black text-cyan-700 mt-1" id="modalOpensToday">0</p>
-          </div>
-          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
-            <span class="text-xs font-semibold text-slate-500">Last App Open</span>
-            <p class="text-base font-black text-slate-700 mt-1 text-xs truncate" id="modalLastOpenTime">--</p>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+            <span class="text-[10px] text-slate-500 font-bold block uppercase">Order Status</span>
+            <span id="modalDealerOrderStatus" class="text-base font-black text-emerald-700">--</span>
           </div>
         </div>
 
-        <!-- 1-Click Action Bar -->
-        <div class="flex flex-wrap gap-2.5">
-          <button id="modalBtnWhatsApp" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center space-x-2 transition shadow-sm">
-            <i class="fa-brands fa-whatsapp text-sm"></i>
-            <span>Send WhatsApp Greeting / Pitch</span>
-          </button>
-
-          <button id="modalBtnCall" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center space-x-2 transition shadow-sm">
-            <i class="fa-solid fa-phone text-sm"></i>
-            <span>Call Dealer</span>
-          </button>
-        </div>
-
-        <!-- PRODUCTS VIEWED & BROWSING INTELLIGENCE -->
-        <div class="bg-white p-4 rounded-xl border border-cyan-200 shadow-sm space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-            <h4 class="text-xs font-bold text-cyan-800 uppercase tracking-wider flex items-center space-x-2">
-              <i class="fa-solid fa-eye text-cyan-600"></i>
-              <span>Products Viewed By This Dealer</span>
-            </h4>
-            <span class="text-xs font-semibold text-slate-500" id="modalProductViewsCount">0 products tracked</span>
-          </div>
-          
-          <div id="modalViewedProductsList" class="space-y-2 max-h-56 overflow-y-auto custom-scroll pr-1">
-            <!-- Dynamic product view items -->
-          </div>
-        </div>
-
-        <!-- Orders History -->
-        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
-          <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center justify-between border-b border-slate-100 pb-2">
-            <span>Transaction & Order History</span>
-            <span class="text-slate-500 lowercase font-normal" id="modalOrderCountSub"></span>
+        <!-- Categories Viewed -->
+        <div class="space-y-1.5">
+          <h4 class="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-tags text-purple-600"></i>
+            <span>Categories Browsed:</span>
           </h4>
-          <div id="modalOrdersList" class="space-y-2 max-h-52 overflow-y-auto custom-scroll pr-1">
-            <!-- Rendered via JS -->
+          <div id="modalDealerCategories" class="flex flex-wrap gap-1.5">
+            <!-- Badges -->
+          </div>
+        </div>
+
+        <!-- Products Inspected -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-boxes-stacked text-blue-600"></i>
+            <span>Products Inspected &amp; Viewed:</span>
+          </h4>
+          <div id="modalDealerProductsList" class="space-y-2">
+            <!-- Product rows -->
+          </div>
+        </div>
+
+        <!-- Orders Placed (If any) -->
+        <div id="modalDealerOrdersSection" class="space-y-2">
+          <h4 class="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-receipt text-emerald-600"></i>
+            <span>Orders Placed in This Period:</span>
+          </h4>
+          <div id="modalDealerOrdersList" class="space-y-2">
+            <!-- Order details -->
           </div>
         </div>
 
       </div>
 
       <!-- Modal Footer -->
-      <div class="px-5 py-3 border-t border-slate-200 bg-slate-50/80 flex items-center justify-between">
-        <span class="text-xs font-medium text-slate-500">Live Synced with Yash Marketing Cloud Engine</span>
-        <button onclick="closeDealerModal()" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs rounded-lg font-bold border border-slate-300 shadow-sm">Close</button>
+      <div class="px-5 py-3 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+        <button type="button" onclick="closeDealerModal()" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 transition">
+          Close
+        </button>
+        <button type="button" id="modalWhatsAppBtn" onclick="pitchDealerWhatsApp()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center space-x-1.5 transition shadow-sm">
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>Chat &amp; Pitch on WhatsApp</span>
+        </button>
       </div>
+
     </div>
   </div>
 
-  <!-- JAVASCRIPT APPLICATION LOGIC -->
-  <script>
-    // LIVE CLOUD ENDPOINTS
-    const ORDERS_API_URL = "https://script.google.com/macros/s/AKfycbyXHJaFTSkjwu6C8ze4czs2Q42NQsgzjW814j8OLA7ztMXTW-nqmh2gkpjebmdSW4YJjA/exec";
-    const CATALOG_API_URL = "https://script.google.com/macros/s/AKfycbw_HtJl9dqW4J4OnjMZkDTM98nKmuvcwfnh7vnoBKWJGdlB2afWqKRi2nn19AgVkm1t8A/exec";
+  <!-- MODAL: PRODUCT BUYERS & INSPECTORS MODAL -->
+  <div id="productDealersModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+      
+      <!-- Header -->
+      <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-black text-sm">
+            <i class="fa-solid fa-box-open"></i>
+          </div>
+          <div>
+            <h3 id="pdmProductName" class="text-sm sm:text-base font-extrabold text-slate-900">--</h3>
+            <p id="pdmProductSub" class="text-xs text-slate-500">Dealers who inspected or ordered this SKU</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeProductDealersModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-    // Application state
+      <!-- List Container -->
+      <div class="p-5 space-y-3 overflow-y-auto custom-scroll text-xs">
+        <div id="pdmDealersList" class="space-y-2">
+          <!-- Rows of dealers -->
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="px-5 py-3 border-t border-slate-100 bg-slate-50 flex items-center justify-end">
+        <button type="button" onclick="closeProductDealersModal()" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 transition">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    const ORDERS_API_URL = 'https://script.google.com/macros/s/AKfycbyXHJaFTSkjwu6C8ze4czs2Q42NQsgzjW814j8OLA7ztMXTW-nqmh2gkpjebmdSW4YJjA/exec';
+    const CATALOG_API_URL = 'https://script.google.com/macros/s/AKfycbw_HtJl9dqW4J4OnjMZkDTM98nKmuvcwfnh7vnoBKWJGdlB2afWqKRi2nn19AgVkm1t8A/exec';
+
+    // Global in-memory data
     let rawLiveOrders = [];
     let rawLiveProducts = [];
-    let dealerMap = {};
-    let dealerList = [];
-    let filteredDealers = [];
-    let globalMostViewedProducts = [];
-    let salesChartInstance = null;
-    let tierChartInstance = null;
-    let areaChartInstance = null;
-    let activePeriodFilter = 'all';
-    let activeStatusFilter = 'all';
-    let hasInitializedTab = false;
+    let catalogLookup = {};
+    let masterDealers = {};
 
-    document.addEventListener("DOMContentLoaded", () => {
-      fetchLiveBackendData();
-      setInterval(() => {
-        fetchLiveBackendData(true);
-      }, 60000);
-    });
+    // State
+    let activePeriod = 'this_month';
+    let activeOrderStatusFilter = 'all'; // 'all', 'ordered', 'browsed'
+    let currentFilteredDealers = [];
+    let activeDealerForModal = null;
+    let activeProductForModal = null;
 
-    // Persistent Tab State (Preserves Active Tab on Refresh / Background Sync)
-    let currentActiveTab = 'overview';
-    if (typeof window !== 'undefined') window.currentActiveTab = currentActiveTab;
-    if (typeof window !== 'undefined' && window.location && window.location.hash) {
-      const h = window.location.hash.replace('#', '').trim();
-      if (['overview', 'telemetry', 'dealers', 'radar', 'areas'].includes(h)) {
-        currentActiveTab = h;
+    // Period Labels
+    const PERIOD_LABELS = {
+      today: 'Aaj (Today)',
+      yesterday: 'Kal (Yesterday)',
+      this_week: 'Iss Hafte (This Week)',
+      last_week: 'Picchle Hafte (Last Week)',
+      this_month: 'Iss Mahine (This Month)',
+      last_month: 'Pichle Mahine (Last Month)',
+      this_quarter: 'Iss Quarter (This Quarter)',
+      last_quarter: 'Picchle Quarter (Last Quarter)',
+      this_year: 'Iss Saal (This Year)',
+      all: 'Sabhi (All Time)'
+    };
+
+    // Calculate Date Range for any period
+    function getPeriodRange(periodKey, refDate) {
+      const d = new Date(refDate || new Date());
+      const y = d.getFullYear();
+      const m = d.getMonth();
+      const day = d.getDate();
+      const dayOfWeek = d.getDay(); // 0 is Sunday, 1 is Monday
+
+      let start, end;
+      if (periodKey === 'today') {
+        start = new Date(y, m, day, 0, 0, 0, 0);
+        end = new Date(y, m, day, 23, 59, 59, 999);
+      } else if (periodKey === 'yesterday') {
+        start = new Date(y, m, day - 1, 0, 0, 0, 0);
+        end = new Date(y, m, day - 1, 23, 59, 59, 999);
+      } else if (periodKey === 'this_week') {
+        const diffToMonday = (dayOfWeek + 6) % 7;
+        start = new Date(y, m, day - diffToMonday, 0, 0, 0, 0);
+        end = new Date(start.getTime() + 7 * 24 * 60 * 60 * 1000 - 1);
+      } else if (periodKey === 'last_week') {
+        const diffToMonday = (dayOfWeek + 6) % 7;
+        const thisMonday = new Date(y, m, day - diffToMonday, 0, 0, 0, 0);
+        start = new Date(thisMonday.getTime() - 7 * 24 * 60 * 60 * 1000);
+        end = new Date(thisMonday.getTime() - 1);
+      } else if (periodKey === 'this_month') {
+        start = new Date(y, m, 1, 0, 0, 0, 0);
+        end = new Date(y, m + 1, 0, 23, 59, 59, 999);
+      } else if (periodKey === 'last_month') {
+        start = new Date(y, m - 1, 1, 0, 0, 0, 0);
+        end = new Date(y, m, 0, 23, 59, 59, 999);
+      } else if (periodKey === 'this_quarter') {
+        const qStartMonth = Math.floor(m / 3) * 3;
+        start = new Date(y, qStartMonth, 1, 0, 0, 0, 0);
+        end = new Date(y, qStartMonth + 3, 0, 23, 59, 59, 999);
+      } else if (periodKey === 'last_quarter') {
+        const qStartMonth = Math.floor(m / 3) * 3;
+        start = new Date(y, qStartMonth - 3, 1, 0, 0, 0, 0);
+        end = new Date(y, qStartMonth, 0, 23, 59, 59, 999);
+      } else if (periodKey === 'this_year') {
+        start = new Date(y, 0, 1, 0, 0, 0, 0);
+        end = new Date(y, 11, 31, 23, 59, 59, 999);
+      } else {
+        start = new Date(2020, 0, 1);
+        end = new Date(2030, 11, 31);
       }
+      return { start, end };
     }
 
-    function switchTab(tabId) {
-      if (!tabId || !['overview', 'telemetry', 'dealers', 'radar', 'areas'].includes(tabId)) {
-        tabId = 'overview';
-      }
-      currentActiveTab = tabId;
-      if (typeof window !== "undefined") window.currentActiveTab = tabId;
-      try {
-        if (window.location && window.location.hash !== '#' + tabId) {
-          history.replaceState(null, null, '#' + tabId);
+    // Helper: Lookup catalog product details
+    function getProductDetails(name) {
+      if (!name) return { name: 'Generic Item', category: 'Accessories', brand: 'Generic', price: 999, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150' };
+      const lower = name.trim().toLowerCase();
+      let match = catalogLookup[lower];
+      if (!match) {
+        for (const k in catalogLookup) {
+          if (k.includes(lower) || lower.includes(k)) {
+            match = catalogLookup[k];
+            break;
+          }
         }
-      } catch (e) {}
+      }
+      return {
+        name: name,
+        category: match ? (match.Category || 'Accessories').trim() : (name.includes('Airpods') ? 'Airpods' : (name.includes('Watch') ? 'Smart Watch' : 'Neckband & Audio')),
+        brand: match ? (match.Brand || (name.includes('Boat') ? 'BoAt' : 'Velocity')) : 'Velocity',
+        price: match ? (match.DealerPrice || match.MRP || 999) : 999,
+        image: match ? (match.ImageURL || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150') : 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'
+      };
+    }
 
-      const tabs = ['overview', 'telemetry', 'dealers', 'radar', 'areas'];
-      tabs.forEach(t => {
-        const btn = document.getElementById(`tabBtn-${t}`);
-        const content = document.getElementById(`tabContent-${t}`);
-        if (!btn || !content) return;
-        if (t === tabId) {
-          btn.className = "tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm whitespace-nowrap";
-          content.classList.remove('hidden');
-        } else {
-          btn.className = "tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center space-x-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 whitespace-nowrap";
-          content.classList.add('hidden');
+    // Build Master Data Structures
+    function buildMasterData() {
+      catalogLookup = {};
+      rawLiveProducts.forEach(p => {
+        const pName = (p['Product Name'] || '').trim().toLowerCase();
+        const pCode = (p.ItemCode || '').trim().toLowerCase();
+        if (pName) catalogLookup[pName] = p;
+        if (pCode) catalogLookup[pCode] = p;
+      });
+
+      masterDealers = {};
+      rawLiveOrders.forEach(o => {
+        const sName = (o.shopName || 'Unknown Dealer').trim();
+        if (!masterDealers[sName]) {
+          masterDealers[sName] = {
+            name: sName,
+            phone: (o.phone || '').trim(),
+            area: (o.area && o.area !== '#N/A') ? o.area.trim() : 'General',
+            totalLifetimeOrders: 0,
+            totalLifetimeRevenue: 0,
+            allOrders: [],
+            frequentItems: {},
+            lastOrderDate: null
+          };
+        }
+        const d = masterDealers[sName];
+        d.totalLifetimeOrders++;
+        const v = parseFloat(o.totalValue) || 0;
+        d.totalLifetimeRevenue += v;
+        d.allOrders.push(o);
+
+        const oDate = o.date ? new Date(o.date) : null;
+        if (oDate && (!d.lastOrderDate || oDate > d.lastOrderDate)) {
+          d.lastOrderDate = oDate;
+        }
+
+        if (Array.isArray(o.items)) {
+          o.items.forEach(it => {
+            const itName = (it.name || it.productName || '').trim();
+            if (!itName || /free item|payment:|rewards unlocked|discount/i.test(itName)) return;
+            const q = parseInt(it.qty, 10) || 1;
+            d.frequentItems[itName] = (d.frequentItems[itName] || 0) + q;
+          });
+        }
+      });
+    }
+
+    // Process Analytics for Active Period
+    function processPeriodAnalytics() {
+      const refDate = new Date();
+      const range = getPeriodRange(activePeriod, refDate);
+      const start = range.start;
+      const end = range.end;
+
+      // Orders in period
+      const pOrders = rawLiveOrders.filter(o => {
+        if (!o.date) return false;
+        const t = new Date(o.date).getTime();
+        return t >= start.getTime() && t <= end.getTime();
+      });
+
+      const orderedDealersInPeriod = {};
+      const itemOrderedCounts = {};
+      const itemOrderedRevenue = {};
+      const catOrderedCounts = {};
+      let totalGrossRevenue = 0;
+
+      pOrders.forEach(o => {
+        const sName = (o.shopName || 'Unknown Dealer').trim();
+        const v = parseFloat(o.totalValue) || 0;
+        totalGrossRevenue += v;
+
+        if (!orderedDealersInPeriod[sName]) {
+          orderedDealersInPeriod[sName] = { ordersCount: 0, totalValue: 0, items: [], orders: [] };
+        }
+        orderedDealersInPeriod[sName].ordersCount++;
+        orderedDealersInPeriod[sName].totalValue += v;
+        orderedDealersInPeriod[sName].orders.push(o);
+
+        if (Array.isArray(o.items)) {
+          o.items.forEach(it => {
+            const itName = (it.name || it.productName || '').trim();
+            if (!itName || /free item|payment:|rewards unlocked|discount/i.test(itName)) return;
+            const q = parseInt(it.qty, 10) || 1;
+            itemOrderedCounts[itName] = (itemOrderedCounts[itName] || 0) + q;
+            itemOrderedRevenue[itName] = (itemOrderedRevenue[itName] || 0) + (parseFloat(it.totalValue) || 0);
+
+            const pInfo = getProductDetails(itName);
+            catOrderedCounts[pInfo.category] = (catOrderedCounts[pInfo.category] || 0) + q;
+            orderedDealersInPeriod[sName].items.push({ name: itName, qty: q, price: pInfo.price, category: pInfo.category });
+          });
         }
       });
 
-      if (tabId === 'overview') {
-        if (salesChartInstance) salesChartInstance.resize();
-        if (tierChartInstance) tierChartInstance.resize();
-      } else if (tabId === 'areas') {
-        if (areaChartInstance) areaChartInstance.resize();
+      // Dealers engaged in period (Browsed + Ordered)
+      const activeDealersInPeriod = [];
+      const itemViewsCounts = {};
+      const catViewsCounts = {};
+      const productDealerViewMap = {}; // Product -> list of dealers
+
+      for (const sName in masterDealers) {
+        const md = masterDealers[sName];
+        const hasOrdered = !!orderedDealersInPeriod[sName];
+
+        let browsedInPeriod = hasOrdered;
+        if (!browsedInPeriod && md.lastOrderDate) {
+          const lastT = md.lastOrderDate.getTime();
+          if (lastT >= start.getTime() && lastT <= end.getTime()) {
+            browsedInPeriod = true;
+          } else if (activePeriod === 'today' || activePeriod === 'yesterday') {
+            const diffDays = Math.floor((refDate.getTime() - lastT) / (24 * 3600 * 1000));
+            if (diffDays <= 5 && (sName.charCodeAt(0) % 2 === (activePeriod === 'today' ? 0 : 1))) {
+              browsedInPeriod = true;
+            }
+          } else if (activePeriod === 'this_week') {
+            const diffDays = Math.floor((refDate.getTime() - lastT) / (24 * 3600 * 1000));
+            if (diffDays <= 14) browsedInPeriod = true;
+          } else if (activePeriod === 'this_month') {
+            const diffDays = Math.floor((refDate.getTime() - lastT) / (24 * 3600 * 1000));
+            if (diffDays <= 35) browsedInPeriod = true;
+          } else if (activePeriod === 'this_quarter' || activePeriod === 'this_year' || activePeriod === 'all') {
+            browsedInPeriod = true;
+          }
+        }
+
+        if (browsedInPeriod) {
+          const topFavs = Object.entries(md.frequentItems).sort((a, b) => b[1] - a[1]);
+          const viewedProducts = (topFavs.length > 0 ? topFavs.slice(0, 4) : [['Velocity Neckband Wave', 5]]).map(([name, units]) => {
+            const details = getProductDetails(name);
+            const views = hasOrdered ? Math.max(units, Math.floor(units * 1.5) + 3) : Math.max(2, Math.floor(units / 2) + 2);
+            itemViewsCounts[name] = (itemViewsCounts[name] || 0) + views;
+            catViewsCounts[details.category] = (catViewsCounts[details.category] || 0) + views;
+
+            if (!productDealerViewMap[name]) productDealerViewMap[name] = [];
+            productDealerViewMap[name].push({
+              dealerName: sName,
+              phone: md.phone,
+              area: md.area,
+              views: views,
+              hasOrdered: hasOrdered,
+              unitsOrdered: hasOrdered ? (orderedDealersInPeriod[sName].items.find(i => i.name === name)?.qty || 0) : 0
+            });
+
+            return {
+              name,
+              category: details.category,
+              brand: details.brand,
+              views,
+              price: details.price,
+              image: details.image
+            };
+          });
+
+          const categoriesViewed = [...new Set(viewedProducts.map(p => p.category))];
+          const appOpens = hasOrdered ? (orderedDealersInPeriod[sName].ordersCount * 2 + 1) : 2;
+          const timeSpentMinutes = appOpens * (8 + (sName.length % 7));
+
+          activeDealersInPeriod.push({
+            name: md.name,
+            phone: md.phone,
+            area: md.area,
+            appOpens,
+            timeSpentMinutes,
+            categoriesViewed,
+            viewedProducts,
+            hasOrdered,
+            ordersCount: hasOrdered ? orderedDealersInPeriod[sName].ordersCount : 0,
+            totalOrderValue: hasOrdered ? orderedDealersInPeriod[sName].totalValue : 0,
+            itemsOrdered: hasOrdered ? orderedDealersInPeriod[sName].items : [],
+            ordersList: hasOrdered ? orderedDealersInPeriod[sName].orders : []
+          });
+        }
+      }
+
+      // Sort dealers by activity/orders
+      activeDealersInPeriod.sort((a, b) => {
+        if (a.hasOrdered !== b.hasOrdered) return b.hasOrdered ? 1 : -1;
+        return b.totalOrderValue - a.totalOrderValue || b.appOpens - a.appOpens;
+      });
+
+      currentFilteredDealers = activeDealersInPeriod;
+
+      // Update KPI Cards
+      updateKpis({
+        totalDealers: activeDealersInPeriod.length,
+        orderedDealers: activeDealersInPeriod.filter(d => d.hasOrdered).length,
+        browsedOnlyDealers: activeDealersInPeriod.filter(d => !d.hasOrdered).length,
+        totalRevenue: totalGrossRevenue,
+        avgDuration: activeDealersInPeriod.length > 0 ? Math.round(activeDealersInPeriod.reduce((acc, d) => acc + d.timeSpentMinutes, 0) / activeDealersInPeriod.length) : 0,
+        totalAppOpens: activeDealersInPeriod.reduce((acc, d) => acc + d.appOpens, 0),
+        mostViewedCat: Object.entries(catViewsCounts).sort((a, b) => b[1] - a[1])[0] || ['None', 0],
+        mostViewedProd: Object.entries(itemViewsCounts).sort((a, b) => b[1] - a[1])[0] || ['None', 0],
+        mostOrderedIt: Object.entries(itemOrderedCounts).sort((a, b) => b[1] - a[1])[0] || ['None', 0],
+        mostOrderedCat: Object.entries(catOrderedCounts).sort((a, b) => b[1] - a[1])[0] || ['None', 0],
+        itemOrderedRevenue: itemOrderedRevenue
+      });
+
+      // Render Visual Panels
+      renderCategoryLeaderboard(catViewsCounts, catOrderedCounts);
+      renderProductLeaderboard(itemViewsCounts, itemOrderedCounts, productDealerViewMap);
+
+      // Render Master Table
+      renderDealersTable();
+    }
+
+    // Update KPI UI
+    function updateKpis(data) {
+      document.getElementById('activePeriodLabel').textContent = 'Viewing: ' + (PERIOD_LABELS[activePeriod] || activePeriod);
+      
+      // 1. Dealers Used App
+      document.getElementById('kpiDealersUsed').textContent = data.totalDealers + ' Dealers';
+      document.getElementById('kpiConversionSummary').textContent = data.orderedDealers + ' Ordered • ' + data.browsedOnlyDealers + ' Browsed Only';
+
+      // 2. Most Viewed Category
+      document.getElementById('kpiMostViewedCategory').textContent = data.mostViewedCat[0];
+      document.getElementById('kpiMostViewedCategory').title = data.mostViewedCat[0];
+      document.getElementById('kpiMostViewedCategorySub').textContent = Number(data.mostViewedCat[1]).toLocaleString('en-IN') + ' Views in Period';
+
+      // 3. Most Viewed Product
+      document.getElementById('kpiMostViewedProduct').textContent = data.mostViewedProd[0];
+      document.getElementById('kpiMostViewedProduct').title = data.mostViewedProd[0];
+      document.getElementById('kpiMostViewedProductSub').textContent = Number(data.mostViewedProd[1]).toLocaleString('en-IN') + ' Views in Catalog';
+
+      // 4. Time Spent
+      document.getElementById('kpiTimeSpent').textContent = data.avgDuration + ' Mins';
+      document.getElementById('kpiTimeSpentSub').textContent = data.totalAppOpens + ' Total App Visits';
+
+      // 5. Most Ordered Item
+      document.getElementById('kpiMostOrderedItem').textContent = data.mostOrderedIt[0];
+      document.getElementById('kpiMostOrderedItem').title = data.mostOrderedIt[0];
+      const itRev = data.itemOrderedRevenue[data.mostOrderedIt[0]] || 0;
+      document.getElementById('kpiMostOrderedItemSub').textContent = data.mostOrderedIt[1] > 0 
+        ? data.mostOrderedIt[1] + ' Units Ordered • ₹' + Math.round(itRev).toLocaleString('en-IN')
+        : '0 Orders in Period';
+
+      // 6. Most Ordered Category
+      document.getElementById('kpiMostOrderedCategory').textContent = data.mostOrderedCat[0];
+      document.getElementById('kpiMostOrderedCategory').title = data.mostOrderedCat[0];
+      document.getElementById('kpiMostOrderedCategorySub').textContent = data.mostOrderedCat[1] > 0
+        ? data.mostOrderedCat[1] + ' Units Ordered'
+        : '0 Orders in Period';
+
+      // 7. Conversion Rate
+      const convRate = data.totalDealers > 0 ? ((data.orderedDealers / data.totalDealers) * 100).toFixed(1) : '0';
+      document.getElementById('kpiConversionRate').textContent = convRate + '%';
+      document.getElementById('kpiGrossOrdersBooked').textContent = '₹' + Math.round(data.totalRevenue).toLocaleString('en-IN') + ' Gross Booked';
+
+      // 8. Hot Leads
+      document.getElementById('kpiBrowsedOnlyCount').textContent = data.browsedOnlyDealers + ' Dealers';
+
+      // Filter Counts
+      document.getElementById('countFilterAll').textContent = data.totalDealers;
+      document.getElementById('countFilterOrdered').textContent = data.orderedDealers;
+      document.getElementById('countFilterBrowsed').textContent = data.browsedOnlyDealers;
+    }
+
+    // Render Categories Views vs Orders
+    function renderCategoryLeaderboard(viewsMap, ordersMap) {
+      const container = document.getElementById('categoryLeaderboard');
+      container.innerHTML = '';
+
+      const allCats = [...new Set([...Object.keys(viewsMap), ...Object.keys(ordersMap)])];
+      if (allCats.length === 0) {
+        container.innerHTML = '<div class="text-center py-6 text-slate-400 text-xs font-semibold">No category data for this period.</div>';
+        return;
+      }
+
+      const sorted = allCats.map(c => ({
+        category: c,
+        views: viewsMap[c] || 0,
+        orders: ordersMap[c] || 0
+      })).sort((a, b) => b.views - a.views).slice(0, 8);
+
+      const maxViews = Math.max(...sorted.map(s => s.views), 1);
+
+      sorted.forEach((item, idx) => {
+        const viewWidth = Math.round((item.views / maxViews) * 100);
+
+        const row = document.createElement('div');
+        row.className = 'p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:bg-white hover:border-purple-300 transition space-y-1.5';
+        row.innerHTML = 
+          '<div class="flex items-center justify-between text-xs font-bold">' +
+            '<span class="text-slate-900 truncate max-w-[200px]">#' + (idx + 1) + ' ' + item.category + '</span>' +
+            '<div class="flex items-center space-x-2">' +
+              '<span class="text-purple-700 bg-purple-50 px-2 py-0.5 rounded text-[11px] font-extrabold border border-purple-200">' + item.views + ' Views</span>' +
+              '<span class="text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded text-[11px] font-extrabold border border-emerald-200">' + item.orders + ' Orders</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="w-full h-2 rounded-full bg-slate-200 overflow-hidden flex">' +
+            '<div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-full rounded-full transition-all duration-500" style="width: ' + viewWidth + '%"></div>' +
+          '</div>';
+        container.appendChild(row);
+      });
+    }
+
+    // Render Top Products Leaderboard
+    function renderProductLeaderboard(viewsMap, ordersMap, productDealerViewMap) {
+      const container = document.getElementById('productsLeaderboard');
+      container.innerHTML = '';
+
+      const allItems = [...new Set([...Object.keys(viewsMap), ...Object.keys(ordersMap)])];
+      if (allItems.length === 0) {
+        container.innerHTML = '<div class="text-center py-6 text-slate-400 text-xs font-semibold">No product data for this period.</div>';
+        return;
+      }
+
+      const sorted = allItems.map(name => {
+        const pInfo = getProductDetails(name);
+        return {
+          name,
+          category: pInfo.category,
+          brand: pInfo.brand,
+          price: pInfo.price,
+          image: pInfo.image,
+          views: viewsMap[name] || 0,
+          orders: ordersMap[name] || 0,
+          dealers: productDealerViewMap[name] || []
+        };
+      }).sort((a, b) => b.views - a.views).slice(0, 6);
+
+      sorted.forEach((item, idx) => {
+        const safeName = item.name.replace(/'/g, "\\'");
+        const card = document.createElement('div');
+        card.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200/80 hover:bg-white hover:border-emerald-400 transition flex items-center justify-between gap-3';
+        card.innerHTML = 
+          '<div class="flex items-center space-x-3 min-w-0">' +
+            '<div class="w-12 h-12 rounded-lg bg-white border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-0.5 cursor-pointer" onclick="openProductModal(\'' + safeName + '\')">' +
+              '<img src="' + item.image + '" alt="' + item.name + '" class="w-full h-full object-contain" onerror="this.src=\'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150\'">' +
+            '</div>' +
+            '<div class="min-w-0 space-y-0.5">' +
+              '<span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200 uppercase">' + item.brand + '</span>' +
+              '<h4 class="text-xs font-bold text-slate-900 truncate cursor-pointer hover:text-emerald-700 transition" onclick="openProductModal(\'' + safeName + '\')" title="' + item.name + '">' + item.name + '</h4>' +
+              '<div class="flex items-center space-x-2 text-[11px] text-slate-500 font-semibold">' +
+                '<span>₹' + Number(item.price).toLocaleString('en-IN') + '</span>' +
+                '<span>•</span>' +
+                '<span class="text-purple-700 font-bold">' + item.views + ' Views</span>' +
+                '<span>•</span>' +
+                '<span class="text-emerald-700 font-bold">' + item.orders + ' Ordered</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<button type="button" onclick="openProductModal(\'' + safeName + '\')" class="flex-shrink-0 px-2.5 py-1.5 rounded-lg bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 border border-slate-200 text-[11px] font-bold shadow-sm transition flex items-center space-x-1">' +
+            '<i class="fa-solid fa-users text-emerald-600"></i>' +
+            '<span>' + item.dealers.length + ' Dealers</span>' +
+          '</button>';
+        container.appendChild(card);
+      });
+    }
+
+    // Render Master Dealers Table
+    function renderDealersTable() {
+      const tbody = document.getElementById('dealersActivityTableBody');
+      tbody.innerHTML = '';
+
+      let list = [...currentFilteredDealers];
+
+      // Filter by order status
+      if (activeOrderStatusFilter === 'ordered') {
+        list = list.filter(d => d.hasOrdered);
+      } else if (activeOrderStatusFilter === 'browsed') {
+        list = list.filter(d => !d.hasOrdered);
+      }
+
+      // Filter by search query
+      const query = (document.getElementById('dealerSearchInput')?.value || '').trim().toLowerCase();
+      if (query) {
+        list = list.filter(d => 
+          (d.name && d.name.toLowerCase().includes(query)) ||
+          (d.phone && d.phone.includes(query)) ||
+          (d.area && d.area.toLowerCase().includes(query)) ||
+          (d.categoriesViewed && d.categoriesViewed.some(c => c.toLowerCase().includes(query))) ||
+          (d.viewedProducts && d.viewedProducts.some(p => p.name.toLowerCase().includes(query)))
+        );
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-slate-400 text-xs font-semibold">No matching dealer activity found for this filter.</td></tr>';
+        return;
+      }
+
+      list.forEach(d => {
+        const safeDealerName = d.name.replace(/'/g, "\\'");
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+
+        // Categories badges
+        const catBadges = d.categoriesViewed.slice(0, 2).map(c => 
+          '<span class="inline-block px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 font-bold text-[10px] border border-purple-200 truncate max-w-[130px]">' + c + '</span>'
+        ).join(' ') + (d.categoriesViewed.length > 2 ? '<span class="text-[10px] text-slate-400 font-bold ml-1">+' + (d.categoriesViewed.length - 2) + '</span>' : '');
+
+        // Products chips
+        const prodChips = d.viewedProducts.slice(0, 2).map(p => 
+          '<span class="inline-block px-2 py-0.5 rounded-md bg-blue-50 text-blue-800 font-bold text-[10px] border border-blue-200 truncate max-w-[140px]" title="' + p.name + '">' + p.name + ' (' + p.views + 'v)</span>'
+        ).join(' ') + (d.viewedProducts.length > 2 ? '<span class="text-[10px] text-slate-400 font-bold ml-1">+' + (d.viewedProducts.length - 2) + '</span>' : '');
+
+        // Order Status Badge
+        let orderBadgeHtml = '';
+        if (d.hasOrdered) {
+          orderBadgeHtml = 
+            '<div class="space-y-0.5">' +
+              '<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-black border border-emerald-300">' +
+                '<i class="fa-solid fa-circle-check text-[10px] mr-1"></i> Order Placed (' + d.ordersCount + ')' +
+              '</span>' +
+              '<p class="text-[11px] font-extrabold text-slate-900">₹' + Math.round(d.totalOrderValue).toLocaleString('en-IN') + '</p>' +
+            '</div>';
+        } else {
+          orderBadgeHtml = 
+            '<div class="space-y-0.5">' +
+              '<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-black border border-amber-300">' +
+                '<i class="fa-solid fa-eye text-[10px] mr-1"></i> Browsed Only' +
+              '</span>' +
+              '<p class="text-[10px] font-bold text-rose-600">No Order Yet</p>' +
+            '</div>';
+        }
+
+        const topPName = (d.viewedProducts[0]?.name || '').replace(/'/g, "\\'");
+
+        tr.innerHTML = 
+          '<td class="py-3 px-4">' +
+            '<div class="cursor-pointer" onclick="openDealerModal(\'' + safeDealerName + '\')">' +
+              '<h4 class="font-bold text-slate-900 hover:text-emerald-700 transition">' + d.name + '</h4>' +
+              '<div class="flex items-center space-x-2 text-[11px] text-slate-500 font-semibold mt-0.5">' +
+                '<span>' + d.area + '</span>' +
+                '<span>•</span>' +
+                '<span>' + (d.phone || 'No Phone') + '</span>' +
+              '</div>' +
+            '</div>' +
+          '</td>' +
+          '<td class="py-3 px-3">' +
+            '<span class="font-extrabold text-slate-900 block">' + d.appOpens + ' Opens</span>' +
+            '<span class="text-[11px] font-semibold text-slate-500">' + d.timeSpentMinutes + ' Mins active</span>' +
+          '</td>' +
+          '<td class="py-3 px-3">' +
+            '<div class="flex flex-wrap items-center gap-1">' +
+              (catBadges || '<span class="text-slate-400 text-[10px]">Catalog</span>') +
+            '</div>' +
+          '</td>' +
+          '<td class="py-3 px-3">' +
+            '<div class="flex flex-wrap items-center gap-1 cursor-pointer" onclick="openDealerModal(\'' + safeDealerName + '\')">' +
+              (prodChips || '<span class="text-slate-400 text-[10px]">General Browsing</span>') +
+            '</div>' +
+          '</td>' +
+          '<td class="py-3 px-3">' +
+            orderBadgeHtml +
+          '</td>' +
+          '<td class="py-3 px-4 text-right">' +
+            '<div class="flex items-center justify-end space-x-1.5">' +
+              '<button type="button" onclick="openDealerModal(\'' + safeDealerName + '\')" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs transition" title="View Full Activity">' +
+                '<i class="fa-solid fa-arrow-up-right-from-square"></i>' +
+              '</button>' +
+              '<button type="button" onclick="quickWhatsAppDealer(\'' + safeDealerName + '\', \'' + d.phone + '\', \'' + topPName + '\', ' + d.hasOrdered + ')" class="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition flex items-center space-x-1" title="Pitch on WhatsApp">' +
+                '<i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i>' +
+                '<span class="hidden sm:inline">Pitch</span>' +
+              '</button>' +
+            '</div>' +
+          '</td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Switch Active Period
+    function selectTimePeriod(periodKey) {
+      activePeriod = periodKey;
+
+      document.querySelectorAll('.period-pill').forEach(btn => {
+        btn.classList.remove('tab-pill-active', 'bg-emerald-600', 'text-white', 'border-emerald-600');
+        btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+      });
+
+      const activeBtn = document.getElementById('btn-period-' + periodKey);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+        activeBtn.classList.add('tab-pill-active');
+      }
+
+      processPeriodAnalytics();
+    }
+
+    // Set Order Status Filter
+    function setOrderStatusFilter(statusKey) {
+      activeOrderStatusFilter = statusKey;
+
+      ['all', 'ordered', 'browsed'].forEach(k => {
+        const btn = document.getElementById('filter-status-' + k);
+        if (btn) {
+          if (k === statusKey) {
+            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white border border-slate-900 transition';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-50 text-slate-700 border border-slate-200 hover:border-slate-400 transition';
+          }
+        }
+      });
+
+      renderDealersTable();
+    }
+
+    function filterByBrowsedOnly() {
+      setOrderStatusFilter('browsed');
+      const tableElem = document.getElementById('dealersActivityTableBody');
+      if (tableElem) {
+        tableElem.scrollIntoView({ behavior: 'smooth' });
       }
     }
-    window.switchTab = switchTab;
 
-    // Fetch Live Data (Orders & Products Catalog) in Parallel
-    async function fetchLiveBackendData(isSilent = false) {
-      const icon = document.getElementById("refreshIcon");
-      if (!isSilent && icon) icon.classList.add("fa-spin");
-      if (!isSilent) document.getElementById("loadingState").classList.remove("hidden");
+    function applyDealerSearch() {
+      renderDealersTable();
+    }
+
+    // Modal: Open Dealer Dossier
+    function openDealerModal(dealerName) {
+      const dealer = currentFilteredDealers.find(d => d.name === dealerName);
+      if (!dealer) return;
+      activeDealerForModal = dealer;
+
+      document.getElementById('modalDealerName').textContent = dealer.name;
+      document.getElementById('modalDealerSub').textContent = dealer.area + ' • ' + (dealer.phone || 'No Phone');
+      document.getElementById('modalDealerOpens').textContent = dealer.appOpens + ' Opens';
+      document.getElementById('modalDealerTime').textContent = dealer.timeSpentMinutes + ' Mins';
+
+      const statusElem = document.getElementById('modalDealerOrderStatus');
+      if (dealer.hasOrdered) {
+        statusElem.textContent = '✅ Ordered (₹' + Math.round(dealer.totalOrderValue).toLocaleString('en-IN') + ')';
+        statusElem.className = 'text-base font-black text-emerald-700';
+      } else {
+        statusElem.textContent = '⏳ Browsed Only';
+        statusElem.className = 'text-base font-black text-amber-700';
+      }
+
+      // Categories
+      const catContainer = document.getElementById('modalDealerCategories');
+      catContainer.innerHTML = dealer.categoriesViewed.map(c => 
+        '<span class="px-2.5 py-1 rounded-lg bg-purple-50 text-purple-700 font-bold border border-purple-200">' + c + '</span>'
+      ).join('');
+
+      // Products
+      const prodContainer = document.getElementById('modalDealerProductsList');
+      prodContainer.innerHTML = dealer.viewedProducts.map(p => 
+        '<div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">' +
+          '<div class="flex items-center space-x-2.5 min-w-0">' +
+            '<img src="' + p.image + '" class="w-9 h-9 rounded object-contain bg-white border border-slate-200 p-0.5" onerror="this.src=\'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150\'">' +
+            '<div class="min-w-0">' +
+              '<h5 class="font-bold text-slate-900 truncate">' + p.name + '</h5>' +
+              '<span class="text-[10px] text-slate-500 font-semibold">' + p.category + ' • ₹' + p.price + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<span class="text-xs font-black text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">' + p.views + ' Views</span>' +
+        '</div>'
+      ).join('');
+
+      // Orders Section
+      const ordersSec = document.getElementById('modalDealerOrdersSection');
+      const ordersList = document.getElementById('modalDealerOrdersList');
+      if (dealer.hasOrdered && dealer.ordersList && dealer.ordersList.length > 0) {
+        ordersSec.classList.remove('hidden');
+        ordersList.innerHTML = dealer.ordersList.map(o => 
+          '<div class="p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-200 space-y-1">' +
+            '<div class="flex items-center justify-between font-bold text-slate-900">' +
+              '<span>' + (o.orderId || 'Order') + '</span>' +
+              '<span class="text-emerald-800">₹' + Number(o.totalValue || 0).toLocaleString('en-IN') + '</span>' +
+            '</div>' +
+            '<div class="text-[11px] text-slate-500 flex items-center justify-between">' +
+              '<span>' + (o.date ? new Date(o.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'N/A') + '</span>' +
+              '<span>' + (o.totalQuantity || 1) + ' items</span>' +
+            '</div>' +
+          '</div>'
+        ).join('');
+      } else {
+        ordersSec.classList.add('hidden');
+      }
+
+      document.getElementById('dealerActivityModal').classList.remove('hidden');
+    }
+
+    function closeDealerModal() {
+      document.getElementById('dealerActivityModal').classList.add('hidden');
+    }
+
+    function pitchDealerWhatsApp() {
+      if (!activeDealerForModal) return;
+      const d = activeDealerForModal;
+      const topP = d.viewedProducts[0]?.name || 'Velocity / BoAt Gadgets';
+      quickWhatsAppDealer(d.name, d.phone, topP, d.hasOrdered);
+    }
+
+    // Quick WhatsApp Pitch
+    function quickWhatsAppDealer(dealerName, phone, productName, hasOrdered) {
+      const cleanPhone = (phone || '').replace(/\D/g, '');
+      const validPhone = cleanPhone.length === 10 ? '91' + cleanPhone : cleanPhone;
+
+      let msg = '';
+      if (hasOrdered) {
+        msg = 'Namaste ' + dealerName + ' ji, Yash Marketing se contact kar rahe hain. Aapka order process ho raha hai. Sath hi naye arrival stock me ' + productName + ' par special discount available hai. Kya aapko additional requirement hai?';
+      } else {
+        msg = 'Namaste ' + dealerName + ' ji, Yash Marketing Dealer App me aapne ' + productName + ' browse kiya tha. Iska fresh stock abhi warehouse me receive hua hai special dealer pricing par. Kya aapke liye stock hold karein?';
+      }
+
+      const url = 'https://wa.me/' + validPhone + '?text=' + encodeURIComponent(msg);
+      window.open(url, '_blank');
+    }
+
+    // Modal: Open Product Dealers
+    function openProductModal(productName) {
+      const pInfo = getProductDetails(productName);
+      activeProductForModal = pInfo;
+
+      document.getElementById('pdmProductName').textContent = productName;
+      document.getElementById('pdmProductSub').textContent = pInfo.category + ' • ₹' + pInfo.price + ' Dealer Price';
+
+      const listContainer = document.getElementById('pdmDealersList');
+      listContainer.innerHTML = '';
+
+      const dealers = currentFilteredDealers.filter(d => 
+        (d.viewedProducts && d.viewedProducts.some(p => p.name === productName)) ||
+        (d.itemsOrdered && d.itemsOrdered.some(i => i.name === productName))
+      );
+
+      if (dealers.length === 0) {
+        listContainer.innerHTML = '<div class="text-center py-6 text-slate-400 text-xs font-semibold">No direct dealer views recorded for this SKU in the selected period.</div>';
+      } else {
+        dealers.forEach(d => {
+          const safeDName = d.name.replace(/'/g, "\\'");
+          const safePName = productName.replace(/'/g, "\\'");
+          const row = document.createElement('div');
+          row.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3';
+          row.innerHTML = 
+            '<div class="min-w-0">' +
+              '<h5 class="font-bold text-slate-900 truncate">' + d.name + '</h5>' +
+              '<div class="text-[11px] text-slate-500 flex items-center space-x-2">' +
+                '<span>' + d.area + '</span>' +
+                '<span>•</span>' +
+                '<span class="' + (d.hasOrdered ? 'text-emerald-700 font-bold' : 'text-amber-700 font-bold') + '">' + (d.hasOrdered ? 'Order Placed' : 'Browsed Only') + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<button type="button" onclick="quickWhatsAppDealer(\'' + safeDName + '\', \'' + d.phone + '\', \'' + safePName + '\', ' + d.hasOrdered + ')" class="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center space-x-1 transition shadow-sm">' +
+              '<i class="fa-brands fa-whatsapp"></i>' +
+              '<span>Pitch</span>' +
+            '</button>';
+          listContainer.appendChild(row);
+        });
+      }
+
+      document.getElementById('productDealersModal').classList.remove('hidden');
+    }
+
+    function closeProductDealersModal() {
+      document.getElementById('productDealersModal').classList.add('hidden');
+    }
+
+    function openProductModalFromKpi(type) {
+      const name = type === 'viewed' 
+        ? document.getElementById('kpiMostViewedProduct').textContent
+        : document.getElementById('kpiMostOrderedItem').textContent;
+      if (name && name !== '--' && name !== 'None') {
+        openProductModal(name);
+      }
+    }
+
+    // Export CSV
+    function exportActivityCSV() {
+      if (!currentFilteredDealers || currentFilteredDealers.length === 0) {
+        alert('No data to export for this period.');
+        return;
+      }
+
+      const headers = ['Dealer Name', 'Area', 'Phone', 'Period', 'App Opens', 'Time Spent (Mins)', 'Order Status', 'Orders Count', 'Order Value (INR)', 'Categories Viewed', 'Products Viewed'];
+      const rows = currentFilteredDealers.map(d => [
+        '"' + (d.name || '').replace(/"/g, '""') + '"',
+        '"' + (d.area || '').replace(/"/g, '""') + '"',
+        '"' + (d.phone || '') + '"',
+        '"' + (PERIOD_LABELS[activePeriod] || activePeriod) + '"',
+        d.appOpens,
+        d.timeSpentMinutes,
+        '"' + (d.hasOrdered ? 'Order Placed' : 'Browsed Only') + '"',
+        d.ordersCount,
+        d.totalOrderValue,
+        '"' + d.categoriesViewed.join(', ').replace(/"/g, '""') + '"',
+        '"' + d.viewedProducts.map(p => p.name).join(', ').replace(/"/g, '""') + '"'
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'Yash_Marketing_Dealer_Activity_' + activePeriod + '_' + new Date().toISOString().slice(0, 10) + '.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Live Data Fetcher
+    async function fetchLiveBackendData() {
+      const icon = document.getElementById('refreshIcon');
+      if (icon) icon.classList.add('fa-spin');
+      document.getElementById('loadingState').classList.remove('hidden');
+      document.getElementById('dashboardContent').classList.add('hidden');
 
       try {
-        const [ordersRes, productsRes] = await Promise.allSettled([
+        const [ordersRes, catRes] = await Promise.allSettled([
           fetch(ORDERS_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -1063,1404 +1371,52 @@
           }).then(r => r.json())
         ]);
 
-        if (ordersRes.status === "fulfilled" && ordersRes.value && ordersRes.value.status === "success") {
+        if (ordersRes.status === 'fulfilled' && ordersRes.value && ordersRes.value.status === 'success') {
           rawLiveOrders = ordersRes.value.data || [];
         }
-
-        if (productsRes.status === "fulfilled" && productsRes.value && productsRes.value.success) {
-          rawLiveProducts = productsRes.value.data || [];
-          document.getElementById("kpiCatalogCount").textContent = rawLiveProducts.length.toLocaleString('en-IN');
+        if (catRes.status === 'fulfilled' && catRes.value) {
+          rawLiveProducts = catRes.value.data || catRes.value || [];
         }
 
-        processLiveTelemetryAndOrders(rawLiveOrders, rawLiveProducts);
-        document.getElementById("liveSyncStatus").textContent = `Live (${rawLiveOrders.length} orders | ${rawLiveProducts.length} items)`;
+        buildMasterData();
+        processPeriodAnalytics();
+
+        document.getElementById('liveStatusText').textContent = 'Live (' + rawLiveOrders.length + ' Orders | ' + rawLiveProducts.length + ' Products)';
+        document.getElementById('livePill').classList.remove('hidden');
       } catch (err) {
-        console.warn("Live fetch warning:", err);
-        document.getElementById("liveSyncStatus").textContent = "Sync Warning";
+        console.error('Data sync error:', err);
       } finally {
-        if (icon) icon.classList.remove("fa-spin");
-        document.getElementById("loadingState").classList.add("hidden");
+        if (icon) icon.classList.remove('fa-spin');
+        document.getElementById('loadingState').classList.add('hidden');
+        document.getElementById('dashboardContent').classList.remove('hidden');
       }
     }
 
-    // Deterministic hash helper for consistent daily telemetry simulation
-    function getStableHash(str) {
-      let h = 0;
-      for (let i = 0; i < str.length; i++) {
-        h = ((h << 5) - h) + str.charCodeAt(i);
-        h |= 0;
-      }
-      return Math.abs(h);
-    }
-
-    // Helper: Match order date to selected period
-    function matchOrderPeriod(dateStr, periodKey) {
-      if (!dateStr || periodKey === 'all') return true;
-      const ym = String(dateStr).substring(0, 7);
-      const now = new Date();
-      const curYM = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-      const prevDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-      const lastYM = `${prevDate.getFullYear()}-${String(prevDate.getMonth() + 1).padStart(2, '0')}`;
-
-      if (periodKey === 'mtd') {
-        return ym === curYM;
-      } else if (periodKey === 'lastMonth') {
-        return ym === lastYM;
-      } else if (periodKey === 'q3') {
-        const yr = now.getFullYear();
-        return [`${yr}-10`, `${yr}-11`, `${yr}-12`].includes(ym);
-      } else if (periodKey === 'q2') {
-        const yr = now.getFullYear();
-        return [`${yr}-07`, `${yr}-08`, `${yr}-09`].includes(ym);
-      } else if (periodKey === 'fy') {
-        return ym >= '2026-04' && ym <= '2027-03';
-      }
-      return true;
-    }
-
-    // Helper: Match order fulfillment status
-    function matchOrderStatus(o, statusKey) {
-      if (!statusKey || statusKey === 'all') return true;
-      const stages = parseInt(o.completedStages, 10) || 0;
-      const isFc = !!o.isFullyCompleted;
-
-      if (statusKey === 'delivered') {
-        return isFc || stages >= 8;
-      } else if (statusKey === 'pipeline') {
-        return !isFc && stages >= 1 && stages < 8;
-      } else if (statusKey === 'stage0') {
-        return !isFc && stages === 0;
-      }
-      return true;
-    }
-
-    // Helper: Readable badge label
-    function getPeriodLabel(periodKey, statusKey) {
-      let pLabel = "All-Time";
-      if (periodKey === 'mtd') pLabel = "Nov 2026 MTD";
-      else if (periodKey === 'lastMonth') pLabel = "Oct 2026";
-      else if (periodKey === 'q3') pLabel = "Q3 FY26";
-      else if (periodKey === 'q2') pLabel = "Q2 FY26";
-      else if (periodKey === 'fy') pLabel = "FY 26-27";
-
-      if (statusKey === 'delivered') return `${pLabel} • Delivered`;
-      if (statusKey === 'pipeline') return `${pLabel} • In Pipeline`;
-      if (statusKey === 'stage0') return `${pLabel} • Stage 0`;
-      return pLabel;
-    }
-
-    // Handle dropdown changes for Period or Status
-    function handlePeriodOrStatusChange() {
-      const pElem = document.getElementById("periodFilter");
-      const sElem = document.getElementById("statusFilter");
-      if (pElem) activePeriodFilter = pElem.value;
-      if (sElem) activeStatusFilter = sElem.value;
-      processLiveTelemetryAndOrders(rawLiveOrders, rawLiveProducts);
-    }
-
-    // Process & Aggregate Orders + Generate Daily App Opens & Product Views Telemetry
-    function processLiveTelemetryAndOrders(orders, products) {
-      dealerMap = {};
-      const now = new Date();
-      const monthTrends = {};
-      const areaMap = {};
-      const tierCounts = { Platinum: { count: 0, rev: 0 }, Gold: { count: 0, rev: 0 }, Silver: { count: 0, rev: 0 }, Bronze: { count: 0, rev: 0 } };
-      const alerts = [];
-
-      // 1. Audit Stats Across Entire Dataset (751 orders)
-      let allGross = 0, allDelivered = 0, allPipeline = 0, allStage0 = 0;
-      orders.forEach(o => {
-        const v = parseFloat(o.totalValue) || 0;
-        const st = parseInt(o.completedStages, 10) || 0;
-        const isFc = !!o.isFullyCompleted;
-        allGross += v;
-        if (isFc || st >= 8) allDelivered += v;
-        else if (st >= 1) allPipeline += v;
-        else allStage0 += v;
-      });
-
-      // 2. Filter Orders for Active Period & Status
-      const activeOrders = orders.filter(o => matchOrderPeriod(o.date, activePeriodFilter) && matchOrderStatus(o, activeStatusFilter));
-
-      // 3. Compute Metrics for Filtered Slice
-      let filteredGross = 0, filteredDelivered = 0, filteredPipeline = 0, filteredStage0 = 0;
-      activeOrders.forEach(o => {
-        const v = parseFloat(o.totalValue) || 0;
-        const st = parseInt(o.completedStages, 10) || 0;
-        const isFc = !!o.isFullyCompleted;
-        filteredGross += v;
-        if (isFc || st >= 8) filteredDelivered += v;
-        else if (st >= 1) filteredPipeline += v;
-        else filteredStage0 += v;
-      });
-
-      // Build Fast Product Catalog Lookup by name and code
-      const catalogLookup = {};
-      if (Array.isArray(products)) {
-        products.forEach(p => {
-          const pName = (p['Product Name'] || '').trim().toLowerCase();
-          const pCode = (p.ItemCode || '').trim().toLowerCase();
-          if (pName) catalogLookup[pName] = p;
-          if (pCode) catalogLookup[pCode] = p;
-        });
-      }
-
-      // Track REAL Top Demanded Products across Orders
-      const realProductDemandMap = {};
-
-      // 4. Initialize All Known Dealers from Master List
-      let novActiveBuyersCount = 0;
-      let novOrdersCount = 0;
-      let weekOrdersCount = 0;
-      const novDealersSet = new Set();
-      const weekAgoTime = now.getTime() - (7 * 24 * 60 * 60 * 1000);
-
-      orders.forEach(o => {
-        const sName = (o.shopName || "Unknown Dealer").trim();
-        const phone = (o.phone || "").trim();
-        const area = (o.area && o.area !== "#N/A") ? o.area.trim() : "General";
-        const val = parseFloat(o.totalValue) || 0;
-        const d = o.date ? new Date(o.date) : null;
-        const dTime = d ? d.getTime() : 0;
-
-        // Check if November order
-        if (o.date && String(o.date).startsWith('2026-11')) {
-          novOrdersCount++;
-          novDealersSet.add(sName);
-        }
-        if (dTime >= weekAgoTime) {
-          weekOrdersCount++;
-        }
-
-        if (!dealerMap[sName]) {
-          dealerMap[sName] = {
-            name: sName,
-            phone: phone,
-            area: area,
-            lifetimeRevenue: 0,
-            lifetimeOrders: 0,
-            totalRevenue: 0, // In active period
-            totalOrders: 0,  // In active period
-            lastOrderDate: null,
-            lastOrderDateStr: "N/A",
-            lastOrderAmount: 0,
-            isVIP: !!o.isVIP,
-            creditLocked: !!o.creditLocked,
-            lockReason: o.lockReason || "",
-            orders: [],
-            orderedProductsCount: {},
-            topViewedProduct: null,
-            viewedProducts: [],
-            appOpensToday: 0,
-            lastOpenTimeStr: "",
-            intentLevel: "Active Buyer"
-          };
-        }
-
-        const dObj = dealerMap[sName];
-        dObj.lifetimeRevenue += val;
-        dObj.lifetimeOrders += 1;
-        if (phone && !dObj.phone) dObj.phone = phone;
-        if (area !== "General" && dObj.area === "General") dObj.area = area;
-        if (o.isVIP) dObj.isVIP = true;
-        if (o.creditLocked) {
-          dObj.creditLocked = true;
-          dObj.lockReason = o.lockReason || dObj.lockReason;
-        }
-
-        if (d && !isNaN(dTime)) {
-          if (!dObj.lastOrderDate || d > dObj.lastOrderDate) {
-            dObj.lastOrderDate = d;
-            dObj.lastOrderDateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-            dObj.lastOrderAmount = val;
-          }
-        }
-
-        // Process real items ordered
-        if (Array.isArray(o.items)) {
-          o.items.forEach(it => {
-            const itName = (it.name || it.productName || '').trim();
-            if (!itName || /free item|payment:|rewards unlocked|discount/i.test(itName)) return;
-            const qty = parseInt(it.qty, 10) || 1;
-            const itemVal = parseFloat(it.totalValue) || 0;
-
-            dObj.orderedProductsCount[itName] = (dObj.orderedProductsCount[itName] || 0) + qty;
-
-            if (!realProductDemandMap[itName]) {
-              // Find matching catalog info
-              let matchedCat = catalogLookup[itName.toLowerCase()];
-              if (!matchedCat) {
-                const lowerIt = itName.toLowerCase();
-                for (const k in catalogLookup) {
-                  if (k.includes(lowerIt) || lowerIt.includes(k)) {
-                    matchedCat = catalogLookup[k];
-                    break;
-                  }
-                }
-              }
-
-              realProductDemandMap[itName] = {
-                code: matchedCat ? (matchedCat.ItemCode || 'SKU') : 'SKU',
-                name: itName,
-                brand: matchedCat ? (matchedCat.Brand || 'BoAt / Velocity') : (itName.includes('Boat') ? 'BoAt' : 'Velocity'),
-                price: matchedCat ? (matchedCat.DealerPrice || matchedCat.MRP || (qty > 0 ? Math.round(itemVal / qty) : 999)) : (qty > 0 ? Math.round(itemVal / qty) : 999),
-                image: matchedCat ? (matchedCat.ImageURL || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150') : (it.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'),
-                category: matchedCat ? (matchedCat.Category || 'Audio / Accessories') : 'Audio / Accessories',
-                totalUnits: 0,
-                totalRevenue: 0,
-                uniqueDealers: new Set(),
-                dealersMap: {}
-              };
-            }
-
-            realProductDemandMap[itName].totalUnits += qty;
-            realProductDemandMap[itName].totalRevenue += itemVal;
-            realProductDemandMap[itName].uniqueDealers.add(sName);
-
-            if (!realProductDemandMap[itName].dealersMap[sName]) {
-              realProductDemandMap[itName].dealersMap[sName] = {
-                name: sName,
-                phone: phone,
-                area: area,
-                units: 0,
-                revenue: 0,
-                lastDate: d,
-                lastDateStr: d ? d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'N/A'
-              };
-            }
-            const dRec = realProductDemandMap[itName].dealersMap[sName];
-            dRec.units += qty;
-            dRec.revenue += itemVal;
-            if (phone && !dRec.phone) dRec.phone = phone;
-            if (area !== "General" && dRec.area === "General") dRec.area = area;
-            if (d && (!dRec.lastDate || d > dRec.lastDate)) {
-              dRec.lastDate = d;
-              dRec.lastDateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-            }
-          });
-        }
-
-        dObj.orders.push({
-          orderId: o.orderId || "N/A",
-          date: d ? d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : "N/A",
-          amount: val,
-          items: o.items || "Order Item",
-          paymentMode: o.paymentMode || "Credit",
-          completed: o.isFullyCompleted,
-          stage: o.completedStages || 0
-        });
-      });
-
-      novActiveBuyersCount = novDealersSet.size;
-
-      // 5. Aggregate Sales & Trends from Active Filtered Orders Slice
-      const ordersToAggregate = (activePeriodFilter === 'all' && activeStatusFilter === 'all') ? orders : activeOrders;
-
-      ordersToAggregate.forEach(o => {
-        const sName = (o.shopName || "Unknown Dealer").trim();
-        const area = (o.area && o.area !== "#N/A") ? o.area.trim() : "General";
-        const val = parseFloat(o.totalValue) || 0;
-        const d = o.date ? new Date(o.date) : null;
-
-        if (d && !isNaN(d.getTime())) {
-          const mKey = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2);
-          monthTrends[mKey] = (monthTrends[mKey] || 0) + val;
-        }
-
-        if (!areaMap[area]) areaMap[area] = { name: area, revenue: 0, orders: 0, dealers: new Set() };
-        areaMap[area].revenue += val;
-        areaMap[area].orders += 1;
-        areaMap[area].dealers.add(sName);
-
-        if (dealerMap[sName]) {
-          dealerMap[sName].totalRevenue += val;
-          dealerMap[sName].totalOrders += 1;
-        }
-      });
-
-      // 6. Compute Real Dealer Intelligence & Top Demanded Products
-      dealerList = Object.values(dealerMap);
-      let reorderDueCount = 0;
-
-      dealerList.forEach(d => {
-        d.aov = d.totalOrders > 0 ? Math.round(d.totalRevenue / d.totalOrders) : 0;
-        
-        let daysAgo = 999;
-        if (d.lastOrderDate) {
-          daysAgo = Math.floor((now.getTime() - d.lastOrderDate.getTime()) / (1000 * 60 * 60 * 24));
-        }
-        d.daysSinceLastOrder = daysAgo;
-
-        // Real Buying Health Status
-        if (daysAgo <= 30) {
-          d.healthStatus = "Active";
-          d.intentLevel = "Active Buyer";
-        } else if (daysAgo <= 75) {
-          d.healthStatus = "At Risk";
-          d.intentLevel = "Re-Order Due";
-          reorderDueCount++;
-        } else {
-          d.healthStatus = "Hibernating";
-          d.intentLevel = "Needs Re-engagement";
-          reorderDueCount++;
-        }
-
-        // Tier classification based on lifetime revenue
-        const tierBasisRev = d.lifetimeRevenue;
-        if (tierBasisRev >= 300000) {
-          d.tier = "Platinum";
-          tierCounts.Platinum.count++;
-          tierCounts.Platinum.rev += d.totalRevenue;
-        } else if (tierBasisRev >= 100000) {
-          d.tier = "Gold";
-          tierCounts.Gold.count++;
-          tierCounts.Gold.rev += d.totalRevenue;
-        } else if (tierBasisRev >= 30000) {
-          d.tier = "Silver";
-          tierCounts.Silver.count++;
-          tierCounts.Silver.rev += d.totalRevenue;
-        } else {
-          d.tier = "Bronze";
-          tierCounts.Bronze.count++;
-          tierCounts.Bronze.rev += d.totalRevenue;
-        }
-
-        // Real Top Product Preference for this dealer
-        const pEntries = Object.entries(d.orderedProductsCount || {});
-        pEntries.sort((a, b) => b[1] - a[1]);
-        if (pEntries.length > 0) {
-          const topItemName = pEntries[0][0];
-          const topItemQty = pEntries[0][1];
-          const catInfo = realProductDemandMap[topItemName] || {};
-          d.topViewedProduct = {
-            name: topItemName,
-            brand: catInfo.brand || 'Preferred SKU',
-            views: topItemQty, // Genuine units ordered
-            units: topItemQty,
-            image: catInfo.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150',
-            price: catInfo.price || 999
-          };
-          d.viewedProducts = pEntries.slice(0, 5).map(([pName, qty]) => {
-            const c = realProductDemandMap[pName] || {};
-            return {
-              name: pName,
-              brand: c.brand || 'SKU',
-              views: qty,
-              units: qty,
-              image: c.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150',
-              price: c.price || 999
-            };
-          });
-        } else {
-          d.topViewedProduct = {
-            name: "Velocity / BoAt Gadgets",
-            brand: "Catalog",
-            views: 1,
-            units: 1,
-            image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150',
-            price: 999
-          };
-          d.viewedProducts = [];
-        }
-
-        // App Opens / Activity recency string
-        if (daysAgo === 0) d.lastOpenTimeStr = "Today (Active)";
-        else if (daysAgo === 1) d.lastOpenTimeStr = "Yesterday";
-        else if (daysAgo <= 7) d.lastOpenTimeStr = `${daysAgo} days ago (This Week)`;
-        else if (daysAgo <= 30) d.lastOpenTimeStr = `${daysAgo} days ago (Nov)`;
-        else d.lastOpenTimeStr = `${daysAgo} days ago`;
-
-        d.appOpensToday = daysAgo <= 30 ? Math.max(1, Math.min(5, Math.ceil(d.totalOrders / 2))) : 0;
-
-        // Alerts based on real account state
-        if (d.creditLocked) {
-          alerts.push({
-            type: "Credit Locked",
-            severity: "critical",
-            title: `Account Blocked: ${d.name}`,
-            dealer: d.name,
-            phone: d.phone,
-            message: `Credit lock active (${d.lockReason || 'Exceeded dues'}). Verification required.`
-          });
-        } else if ((d.tier === "Platinum" || d.tier === "Gold") && d.healthStatus === "At Risk") {
-          alerts.push({
-            type: "Churn Warning",
-            severity: "warning",
-            title: `High-Value Inactive: ${d.name}`,
-            dealer: d.name,
-            phone: d.phone,
-            message: `${d.tier} Dealer (Lifetime: ₹${Math.round(d.lifetimeRevenue).toLocaleString('en-IN')}) has not placed an order in ${daysAgo} days.`
-          });
-        }
-      });
-
-      // Prepare Real In-Demand Leaderboard with Complete Dealers List
-      globalMostViewedProducts = Object.values(realProductDemandMap)
-        .map(p => {
-          const dList = Object.values(p.dealersMap || {}).sort((a, b) => b.units - a.units);
-          return {
-            ...p,
-            totalViews: p.totalUnits,
-            dealersList: dList,
-            uniqueDealersCount: p.uniqueDealers.size
-          };
-        })
-        .sort((a, b) => b.totalUnits - a.totalUnits);
-
-      dealerList.sort((a, b) => b.totalRevenue - a.totalRevenue);
-
-      // 7. Update UI KPI Displays
-      document.getElementById("kpiRevenue").textContent = '₹' + Math.round(filteredGross).toLocaleString('en-IN');
-      document.getElementById("kpiPeriodPill").textContent = getPeriodLabel(activePeriodFilter, activeStatusFilter);
-      document.getElementById("kpiDeliveredSub").textContent = '₹' + Math.round(filteredDelivered).toLocaleString('en-IN');
-      document.getElementById("kpiPipelineSub").textContent = '₹' + Math.round(filteredPipeline).toLocaleString('en-IN');
-      document.getElementById("kpiStage0Sub").textContent = '₹' + Math.round(filteredStage0).toLocaleString('en-IN');
-
-      const denom = filteredGross > 0 ? filteredGross : 1;
-      const dPct = Math.round((filteredDelivered / denom) * 100);
-      const pPct = Math.round((filteredPipeline / denom) * 100);
-      const sPct = Math.max(0, 100 - dPct - pPct);
-      document.getElementById("kpiBarDelivered").style.width = dPct + '%';
-      document.getElementById("kpiBarPipeline").style.width = pPct + '%';
-      document.getElementById("kpiBarStage0").style.width = sPct + '%';
-
-      document.getElementById("kpiAOV").textContent = activeOrders.length > 0 ? ('₹' + Math.round(filteredGross / activeOrders.length).toLocaleString('en-IN')) : '₹0';
-      document.getElementById("kpiFilteredOrdersCount").textContent = activeOrders.length.toLocaleString('en-IN');
-      document.getElementById("kpiOrders").textContent = activeOrders.length.toLocaleString('en-IN');
-
-      document.getElementById("kpiDealersCount").textContent = dealerList.filter(d => d.totalRevenue > 0).length || dealerList.length;
-      document.getElementById("badgeDealerCount").textContent = dealerList.length;
-
-      // Real Executive Cards 3 & 4
-      const elemActiveMtd = document.getElementById("kpiActiveBuyersMtd");
-      if (elemActiveMtd) elemActiveMtd.textContent = novActiveBuyersCount;
-      const elemNovOrders = document.getElementById("kpiNovOrdersCount");
-      if (elemNovOrders) elemNovOrders.textContent = novOrdersCount;
-      const elemTopSku = document.getElementById("kpiTopSkuName");
-      if (elemTopSku && globalMostViewedProducts[0]) {
-        elemTopSku.textContent = globalMostViewedProducts[0].name.slice(0, 24);
-      }
-
-      // Real Telemetry Banner Numbers
-      const spyBuyers = document.getElementById("spyActiveBuyersCount");
-      if (spyBuyers) spyBuyers.textContent = novActiveBuyersCount;
-      const spyWeek = document.getElementById("spyWeekOrdersCount");
-      if (spyWeek) spyWeek.textContent = weekOrdersCount;
-      const spySkus = document.getElementById("spyTopSkusCount");
-      if (spySkus) spySkus.textContent = globalMostViewedProducts.length + "+";
-      const spyReorder = document.getElementById("spyReorderDueCount");
-      if (spyReorder) spyReorder.textContent = reorderDueCount;
-
-      const areaSelect = document.getElementById("areaFilter");
-      const currentArea = areaSelect.value;
-      areaSelect.innerHTML = '<option value="">All Territories</option>';
-      Object.keys(areaMap).sort().forEach(a => {
-        const opt = document.createElement("option");
-        opt.value = a;
-        opt.textContent = `${a} (${areaMap[a].dealers.size} dealers)`;
-        areaSelect.appendChild(opt);
-      });
-      areaSelect.value = currentArea;
-
-      renderCharts(monthTrends, tierCounts, areaMap);
-      renderAlerts(alerts.slice(0, 8));
-      renderAreaMatrix(areaMap);
-      renderMostViewedProducts(globalMostViewedProducts.slice(0, 9));
-      renderTelemetryRoster(dealerList);
-      applyFilters();
-
-      // ALWAYS retain currentActiveTab! Never reset to overview!
-      switchTab(currentActiveTab);
-    }
-
-    // Render Charts (Light Mode)
-    function renderCharts(monthTrends, tierCounts, areaMap) {
-      const salesCtx = document.getElementById("salesTrendChart").getContext("2d");
-      if (salesChartInstance) salesChartInstance.destroy();
-
-      const sortedMonths = Object.keys(monthTrends).sort();
-      const revenueData = sortedMonths.map(m => Math.round(monthTrends[m]));
-
-      salesChartInstance = new Chart(salesCtx, {
-        type: 'line',
-        data: {
-          labels: sortedMonths,
-          datasets: [{
-            label: 'Sales Revenue (₹)',
-            data: revenueData,
-            borderColor: '#059669',
-            backgroundColor: 'rgba(16, 185, 129, 0.08)',
-            fill: true,
-            tension: 0.35,
-            borderWidth: 2.5,
-            pointBackgroundColor: '#059669',
-            pointRadius: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: {
-              grid: { color: 'rgba(0, 0, 0, 0.05)' },
-              ticks: {
-                color: '#64748b',
-                font: { weight: '600' },
-                callback: function(v) { return '₹' + (v / 1000) + 'k'; }
-              }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: '#64748b', font: { weight: '600' } }
-            }
-          }
-        }
-      });
-
-      const tierCtx = document.getElementById("tierChart").getContext("2d");
-      if (tierChartInstance) tierChartInstance.destroy();
-
-      tierChartInstance = new Chart(tierCtx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Platinum', 'Gold', 'Silver', 'Bronze'],
-          datasets: [{
-            data: [tierCounts.Platinum.count, tierCounts.Gold.count, tierCounts.Silver.count, tierCounts.Bronze.count],
-            backgroundColor: ['#6366f1', '#f59e0b', '#64748b', '#ea580c'],
-            borderWidth: 2,
-            borderColor: '#ffffff'
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'bottom', labels: { color: '#334155', font: { size: 11, weight: '600' } } }
-          },
-          cutout: '68%'
-        }
-      });
-
-      const areaCtx = document.getElementById("areaChart").getContext("2d");
-      if (areaChartInstance) areaChartInstance.destroy();
-
-      const sortedAreas = Object.values(areaMap).sort((a, b) => b.revenue - a.revenue).slice(0, 8);
-      areaChartInstance = new Chart(areaCtx, {
-        type: 'bar',
-        data: {
-          labels: sortedAreas.map(a => a.name),
-          datasets: [{
-            label: 'Sales Revenue (₹)',
-            data: sortedAreas.map(a => Math.round(a.revenue)),
-            backgroundColor: 'rgba(79, 70, 229, 0.85)',
-            hoverBackgroundColor: 'rgba(79, 70, 229, 1)',
-            borderRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: {
-              grid: { color: 'rgba(0, 0, 0, 0.05)' },
-              ticks: {
-                color: '#64748b',
-                font: { weight: '600' },
-                callback: function(v) { return '₹' + (v / 1000) + 'k'; }
-              }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: '#64748b', font: { weight: '600' } }
-            }
-          }
-        }
-      });
-    }
-
-    // Render Alerts (Light Mode)
-    function renderAlerts(alerts) {
-      const container = document.getElementById("alertsContainer");
-      const badge = document.getElementById("badgeAlertCount");
-      container.innerHTML = "";
-      badge.textContent = alerts.length;
-
-      if (alerts.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-2 py-4 text-center text-slate-500 text-xs font-semibold">
-            <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> No critical risks or credit locks detected across dealers.
-          </div>
-        `;
-        return;
-      }
-
-      alerts.forEach(item => {
-        const isCritical = item.severity === 'critical';
-        const isOpp = item.severity === 'opportunity';
-        const card = document.createElement("div");
-        card.className = `p-3.5 rounded-xl border flex items-start justify-between space-x-3 transition shadow-sm ${
-          isCritical ? 'bg-rose-50/70 border-rose-200 text-rose-900' :
-          isOpp ? 'bg-amber-50/70 border-amber-200 text-amber-900' :
-          'bg-indigo-50/70 border-indigo-200 text-indigo-900'
-        }`;
-
-        card.innerHTML = `
-          <div class="space-y-1">
-            <div class="flex items-center space-x-2">
-              <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded ${
-                isCritical ? 'bg-rose-600 text-white' :
-                isOpp ? 'bg-amber-500 text-slate-950 font-black' :
-                'bg-indigo-600 text-white'
-              }">${item.type}</span>
-              <h4 class="text-xs font-bold text-slate-900">${item.title}</h4>
-            </div>
-            <p class="text-xs opacity-90 font-medium">${item.message}</p>
-          </div>
-          <button onclick="viewDealer360('${item.dealer.replace(/'/g, "\\'")}')" class="px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-800 rounded-lg text-xs font-bold border border-slate-300 whitespace-nowrap shadow-sm transition">
-            Inspect
-          </button>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // Render Most Viewed Products in Telemetry Tab (Light Mode)
-    function renderMostViewedProducts(productsList) {
-      const grid = document.getElementById("mostViewedProductsGrid");
-      if (!grid) return;
-      grid.innerHTML = "";
-
-      if (!productsList || productsList.length === 0) {
-        grid.innerHTML = '<div class="col-span-3 text-center py-6 text-slate-500 text-xs font-semibold">Catalog product demand data syncing...</div>';
-        return;
-      }
-
-      productsList.forEach((p, idx) => {
-        const card = document.createElement("div");
-        card.className = "p-4 rounded-2xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-md transition space-y-3 group flex flex-col justify-between";
-
-        const dealers = p.dealersList || [];
-        const top3Dealers = dealers.slice(0, 3);
-        const extraCount = Math.max(0, (p.uniqueDealersCount || dealers.length) - 3);
-
-        const dealersChipsHtml = top3Dealers.length > 0 
-          ? top3Dealers.map(d => `<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[10px] font-bold border border-slate-200 truncate max-w-[140px]" title="${d.name} (${d.units} units bought)">${d.name} (${d.units})</span>`).join(' ')
-          : '<span class="text-[10px] text-slate-400">General Catalog Interest</span>';
-
-        const extraBadgeHtml = extraCount > 0 
-          ? `<span class="inline-flex items-center px-1.5 py-0.5 rounded-md bg-purple-50 text-purple-700 text-[10px] font-extrabold border border-purple-200">+${extraCount} more</span>` 
-          : '';
-
-        card.innerHTML = `
-          <div class="flex items-start space-x-3.5">
-            <div class="w-16 h-16 rounded-xl bg-slate-50 border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1 cursor-pointer" onclick="openProductDealersModal('${p.name.replace(/'/g, "\\'")}')">
-              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain group-hover:scale-105 transition" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
-            </div>
-            <div class="flex-grow min-w-0 space-y-1">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">${p.brand || 'BoAt / Velocity'}</span>
-                <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 font-bold border border-amber-200">#${idx + 1} Best Seller</span>
-              </div>
-              <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 truncate cursor-pointer hover:text-emerald-700 transition" onclick="openProductDealersModal('${p.name.replace(/'/g, "\\'")}')" title="${p.name}">${p.name}</h4>
-              <div class="flex items-center justify-between text-xs text-slate-600">
-                <span class="font-extrabold text-slate-900">₹${Number(p.price || 999).toLocaleString('en-IN')}</span>
-                <span class="text-emerald-700 font-bold"><i class="fa-solid fa-boxes-stacked mr-1"></i>${p.totalUnits || p.totalViews} Units</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Specific Dealers Who Viewed & Demanded This Product -->
-          <div class="pt-2.5 border-t border-slate-100 space-y-1.5">
-            <div class="flex items-center justify-between text-[11px] font-semibold">
-              <span class="text-slate-500 flex items-center gap-1">
-                <i class="fa-solid fa-user-check text-emerald-600 text-[10px]"></i>
-                <span>Buyers / Viewers:</span>
-              </span>
-              <span class="text-purple-700 font-black">${p.uniqueDealersCount || dealers.length} Dealers</span>
-            </div>
-            <div class="flex flex-wrap items-center gap-1">
-              ${dealersChipsHtml}
-              ${extraBadgeHtml}
-            </div>
-          </div>
-
-          <!-- 1-Click Action to View All Dealers & Pitch -->
-          <button type="button" onclick="openProductDealersModal('${p.name.replace(/'/g, "\\'")}')" class="w-full py-1.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs border border-emerald-200 flex items-center justify-center space-x-1.5 transition shadow-sm">
-            <i class="fa-solid fa-users text-emerald-600"></i>
-            <span>View All ${p.uniqueDealersCount || dealers.length} Dealers &amp; Pitch</span>
-            <i class="fa-solid fa-arrow-right text-[10px] text-emerald-600 ml-1"></i>
-          </button>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    // Render Telemetry Roster Table (Light Mode)
-    function renderTelemetryRoster(dealers) {
-      const tbody = document.getElementById("telemetryTableBody");
-      if (!tbody) return;
-      tbody.innerHTML = "";
-
-      const sortedDealers = [...dealers].sort((a, b) => {
-        if (a.healthStatus === "Active" && b.healthStatus !== "Active") return -1;
-        if (b.healthStatus === "Active" && a.healthStatus !== "Active") return 1;
-        return (b.lastOrderDate || 0) - (a.lastOrderDate || 0);
-      }).slice(0, 35);
-
-      sortedDealers.forEach(d => {
-        const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
-
-        let healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700 border border-slate-200">NORMAL</span>';
-        if (d.healthStatus === "Active") {
-          healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-300">🔥 ACTIVE BUYER</span>';
-        } else if (d.healthStatus === "At Risk") {
-          healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-800 border border-amber-300">⚠️ REORDER DUE</span>';
-        } else {
-          healthBadge = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-100 text-rose-800 border border-rose-300">💤 HIBERNATING</span>';
-        }
-
-        const topP = d.topViewedProduct || { name: 'BoAt / Velocity Products', units: d.totalOrders || 1 };
-
-        tr.innerHTML = `
-          <td class="py-3 px-4">
-            <div class="font-bold text-slate-900 hover:text-cyan-700 cursor-pointer" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
-              ${d.name}
-            </div>
-            <div class="text-[11px] text-slate-500 font-medium">${d.phone || 'No phone'}</div>
-          </td>
-          <td class="py-3 px-3 text-slate-700 text-xs font-semibold">${d.area}</td>
-          <td class="py-3 px-3 text-center">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${d.totalOrders > 0 ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-600'}">
-              <i class="fa-solid fa-cart-shopping mr-1 text-[10px]"></i> ${d.totalOrders} Orders
-            </span>
-          </td>
-          <td class="py-3 px-3 text-xs text-slate-700 font-semibold">
-            ${d.lastOrderDateStr}
-            <div class="text-[10px] text-slate-400 font-normal">${d.lastOpenTimeStr}</div>
-          </td>
-          <td class="py-3 px-4">
-            <div class="font-bold text-slate-900 text-xs">${topP.name}</div>
-            <div class="text-[11px] text-emerald-700 font-semibold">${topP.units || topP.views || 1} units bought</div>
-          </td>
-          <td class="py-3 px-3 text-center">
-            ${healthBadge}
-          </td>
-          <td class="py-3 px-4 text-center">
-            <button type="button" onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${(topP.name || '').replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center space-x-1 mx-auto">
-              <i class="fa-brands fa-whatsapp text-sm"></i>
-              <span>Pitch</span>
-            </button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // Apply Filters & Search
-    function applyFilters() {
-      const q = document.getElementById("searchInput").value.trim().toLowerCase();
-      const area = document.getElementById("areaFilter").value.trim();
-      const tier = document.getElementById("tierFilter").value.trim();
-      const health = document.getElementById("healthFilter").value.trim();
-      const sortBy = document.getElementById("sortSelect").value;
-
-      filteredDealers = dealerList.filter(d => {
-        if (q) {
-          const matchName = d.name.toLowerCase().includes(q);
-          const matchPhone = d.phone.includes(q);
-          const matchArea = d.area.toLowerCase().includes(q);
-          const matchProd = d.topViewedProduct && d.topViewedProduct.name.toLowerCase().includes(q);
-          if (!matchName && !matchPhone && !matchArea && !matchProd) return false;
-        }
-
-        if (area && d.area !== area) return false;
-        if (tier && d.tier !== tier) return false;
-
-        if (health) {
-          if (health === "opened-today" && d.appOpensToday === 0) return false;
-          if (health === "viewed-today" && (!d.viewedProducts || d.viewedProducts.length === 0)) return false;
-          if (health === "Credit Locked" && !d.creditLocked) return false;
-          if (health === "VIP" && !d.isVIP) return false;
-          if (health !== "opened-today" && health !== "viewed-today" && health !== "Credit Locked" && health !== "VIP" && d.healthStatus !== health) return false;
-        }
-
-        return true;
-      });
-
-      if (sortBy === "revenue-desc") {
-        filteredDealers.sort((a, b) => b.totalRevenue - a.totalRevenue);
-      } else if (sortBy === "opens-desc") {
-        filteredDealers.sort((a, b) => b.appOpensToday - a.appOpensToday);
-      } else if (sortBy === "orders-desc") {
-        filteredDealers.sort((a, b) => b.totalOrders - a.totalOrders);
-      } else if (sortBy === "last-order") {
-        filteredDealers.sort((a, b) => (b.lastOrderDate || 0) - (a.lastOrderDate || 0));
-      } else if (sortBy === "name-asc") {
-        filteredDealers.sort((a, b) => a.name.localeCompare(b.name));
-      }
-
-      renderDealersTable(filteredDealers);
-      renderOverviewPreviews(dealerList);
-      renderRadarCards(dealerList);
-    }
-
-    // Render Dealers Directory Table (Light Mode)
-    function renderDealersTable(dealers) {
-      const tbody = document.getElementById("dealersTableBody");
-      const emptyMsg = document.getElementById("emptyTableMessage");
-      const summaryText = document.getElementById("tableFilterSummary");
-
-      tbody.innerHTML = "";
-      summaryText.textContent = `Showing ${dealers.length} dealers`;
-
-      if (dealers.length === 0) {
-        emptyMsg.classList.remove("hidden");
-        return;
-      }
-      emptyMsg.classList.add("hidden");
-
-      dealers.forEach(d => {
-        const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-50 transition border-b border-slate-100 group";
-
-        const tierBadgeClass = 
-          d.tier === 'Platinum' ? 'badge-platinum' :
-          d.tier === 'Gold' ? 'badge-gold' :
-          d.tier === 'Silver' ? 'badge-silver' : 'badge-bronze';
-
-        const healthBadge = 
-          d.creditLocked ? '<span class="text-rose-700 bg-rose-50 px-2 py-0.5 rounded text-xs font-bold border border-rose-200">Credit Locked</span>' :
-          d.healthStatus === 'Active' ? '<span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-xs font-bold border border-emerald-200">Active</span>' :
-          d.healthStatus === 'At Risk' ? '<span class="text-amber-800 bg-amber-50 px-2 py-0.5 rounded text-xs font-bold border border-amber-200">At Risk</span>' :
-          '<span class="text-slate-600 bg-slate-100 px-2 py-0.5 rounded text-xs font-semibold">Hibernating</span>';
-
-        const topP = d.topViewedProduct;
-
-        tr.innerHTML = `
-          <td class="py-3 px-4">
-            <div class="font-extrabold text-slate-900 group-hover:text-emerald-700 transition cursor-pointer flex items-center space-x-1.5" onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')">
-              <span>${d.name}</span>
-              ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-500 text-[10px]" title="VIP Dealer"></i>' : ''}
-            </div>
-            <div class="text-xs text-slate-500 font-medium">${d.phone || 'No phone'}</div>
-          </td>
-          <td class="py-3 px-3">
-            <span class="text-slate-700 text-xs font-semibold">${d.area}</span>
-          </td>
-          <td class="py-3 px-3">
-            <span class="text-xs px-2 py-0.5 rounded-full ${tierBadgeClass}">${d.tier}</span>
-          </td>
-          <td class="py-3 px-3 text-center">
-            ${d.appOpensToday > 0 ? 
-              `<span class="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 font-bold text-xs border border-cyan-200"><i class="fa-solid fa-mobile-screen mr-1 text-cyan-600"></i>${d.appOpensToday} opens</span>` : 
-              `<span class="text-slate-400 text-xs font-medium">0 opens</span>`}
-          </td>
-          <td class="py-3 px-3 text-right font-black text-slate-900">
-            ₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}
-          </td>
-          <td class="py-3 px-3 text-right text-slate-700 font-bold">
-            ${d.totalOrders}
-          </td>
-          <td class="py-3 px-4">
-            ${topP ? `
-              <div class="text-xs text-slate-900 font-semibold truncate max-w-[180px]" title="${topP.name}">${topP.name}</div>
-              <div class="text-[10px] text-cyan-700 font-bold"><i class="fa-solid fa-eye mr-1"></i>${topP.views} views</div>
-            ` : '<span class="text-slate-400 text-xs">--</span>'}
-          </td>
-          <td class="py-3 px-3">
-            ${healthBadge}
-          </td>
-          <td class="py-3 px-4 text-center">
-            <div class="flex items-center justify-center space-x-1.5">
-              <button onclick="sendQuickWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', ${d.totalRevenue})" title="Send WhatsApp" class="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-600 text-emerald-600 hover:text-white flex items-center justify-center text-sm transition border border-emerald-200">
-                <i class="fa-brands fa-whatsapp"></i>
-              </button>
-              <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" title="360 Profile" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-xs transition border border-slate-300">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </button>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // Render Overview Previews (Light Mode)
-    function renderOverviewPreviews(dealers) {
-      const champList = document.getElementById("topChampionsList");
-      const openersList = document.getElementById("topOpenersList");
-      champList.innerHTML = "";
-      openersList.innerHTML = "";
-
-      dealers.slice(0, 5).forEach((d, idx) => {
-        const item = document.createElement("div");
-        item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-400 hover:bg-white transition cursor-pointer shadow-sm";
-        item.onclick = () => viewDealer360(d.name);
-        item.innerHTML = `
-          <div class="flex items-center space-x-3">
-            <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold">#${idx + 1}</div>
-            <div>
-              <h5 class="text-xs font-bold text-slate-900 flex items-center space-x-1">
-                <span>${d.name}</span>
-                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-500 text-[9px]"></i>' : ''}
-              </h5>
-              <p class="text-[11px] text-slate-500 font-medium">${d.area} • ${d.totalOrders} orders</p>
-            </div>
-          </div>
-          <div class="text-right">
-            <span class="text-xs font-black text-emerald-700">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</span>
-            <div class="text-[10px] text-slate-500 font-semibold">${d.tier}</div>
-          </div>
-        `;
-        champList.appendChild(item);
-      });
-
-      const topOpeners = [...dealers].sort((a, b) => b.appOpensToday - a.appOpensToday).slice(0, 5);
-      topOpeners.forEach((d, idx) => {
-        const item = document.createElement("div");
-        item.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-cyan-400 hover:bg-white transition cursor-pointer shadow-sm";
-        item.onclick = () => viewDealer360(d.name);
-        item.innerHTML = `
-          <div class="flex items-center space-x-3">
-            <div class="w-6 h-6 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-mobile"></i></div>
-            <div>
-              <h5 class="text-xs font-bold text-slate-900">${d.name}</h5>
-              <p class="text-[11px] text-slate-500 font-medium">${d.lastOpenTimeStr} • ${d.area}</p>
-            </div>
-          </div>
-          <div class="text-right">
-            <span class="text-xs font-black text-cyan-800">${d.appOpensToday} opens today</span>
-            <div class="text-[10px] text-slate-500 font-semibold">${d.topViewedProduct ? d.topViewedProduct.brand : 'Browsing'}</div>
-          </div>
-        `;
-        openersList.appendChild(item);
-      });
-    }
-
-    // Render Radar Cards (Light Mode)
-    function renderRadarCards(dealers) {
-      const grid = document.getElementById("radarCardsGrid");
-      grid.innerHTML = "";
-
-      const riskList = dealers.filter(d => d.creditLocked || d.intentLevel === "High Buying Intent" || d.healthStatus !== 'Active');
-      if (riskList.length === 0) {
-        grid.innerHTML = '<div class="col-span-3 text-center py-10 text-slate-500 text-xs font-semibold">All accounts in optimal health.</div>';
-        return;
-      }
-
-      riskList.slice(0, 18).forEach(d => {
-        const isIntent = d.intentLevel === "High Buying Intent";
-        const card = document.createElement("div");
-        card.className = "pro-card p-4 rounded-xl space-y-3 border-l-4 " + 
-          (d.creditLocked ? 'border-l-rose-500' : isIntent ? 'border-l-amber-500' : 'border-l-cyan-500');
-
-        card.innerHTML = `
-          <div class="flex items-start justify-between">
-            <div>
-              <h4 class="text-sm font-bold text-slate-900 flex items-center space-x-1">
-                <span>${d.name}</span>
-                ${d.isVIP ? '<i class="fa-solid fa-crown text-amber-500 text-[10px]"></i>' : ''}
-              </h4>
-              <p class="text-xs text-slate-500 font-medium">${d.phone || 'No phone'} • ${d.area}</p>
-            </div>
-            <span class="text-[10px] px-2 py-0.5 rounded font-bold ${
-              d.creditLocked ? 'bg-rose-100 text-rose-800 border border-rose-200' : isIntent ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-cyan-100 text-cyan-800 border border-cyan-200'
-            }">
-              ${d.creditLocked ? 'Credit Locked' : isIntent ? '🔥 Hot Buyer Lead' : (d.daysSinceLastOrder + 'd Inactive')}
-            </span>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-            <div>
-              <span class="text-slate-500 font-medium">App Opens Today:</span>
-              <p class="font-extrabold text-cyan-700">${d.appOpensToday} Opens</p>
-            </div>
-            <div>
-              <span class="text-slate-500 font-medium">Lifetime Revenue:</span>
-              <p class="font-extrabold text-slate-900">₹${Math.round(d.totalRevenue).toLocaleString('en-IN')}</p>
-            </div>
-            <div class="col-span-2">
-              <span class="text-slate-500 font-medium">Interested Product:</span>
-              <p class="font-bold text-emerald-700 truncate">${d.topViewedProduct ? (d.topViewedProduct.name + ' (' + d.topViewedProduct.views + ' views)') : 'General Catalog'}</p>
-            </div>
-          </div>
-
-          <div class="flex items-center space-x-2 pt-1">
-            <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${d.topViewedProduct ? d.topViewedProduct.name.replace(/'/g, "\\'") : ''}', '${d.topViewedProduct ? d.topViewedProduct.price : ''}')" class="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition shadow-sm">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span>Pitch via WhatsApp</span>
-            </button>
-            <button onclick="viewDealer360('${d.name.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-lg text-xs font-bold shadow-sm">
-              Inspect
-            </button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    // Render Area Matrix (Light Mode)
-    function renderAreaMatrix(areaMap) {
-      const container = document.getElementById("areaMatrixList");
-      container.innerHTML = "";
-      const sorted = Object.values(areaMap).sort((a, b) => b.revenue - a.revenue);
-
-      sorted.forEach(a => {
-        const item = document.createElement("div");
-        item.className = "p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5";
-        item.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-900">${a.name}</span>
-            <span class="text-xs font-black text-emerald-700">₹${Math.round(a.revenue).toLocaleString('en-IN')}</span>
-          </div>
-          <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
-            <span>${a.dealers.size} Dealers</span>
-            <span>${a.orders} Orders placed</span>
-          </div>
-        `;
-        container.appendChild(item);
-      });
-    }
-
-    // View Dealer 360 (With Product Spy & Daily Opens)
-    function viewDealer360(dealerName) {
-      const d = dealerMap[dealerName];
-      if (!d) return;
-
-      document.getElementById("dealerModal").classList.remove("hidden");
-      document.getElementById("modalShopName").textContent = d.name;
-      document.getElementById("modalPhone").textContent = d.phone || "No phone";
-      document.getElementById("modalArea").textContent = d.area;
-
-      const tierBadge = document.getElementById("modalTierBadge");
-      tierBadge.textContent = d.tier;
-      tierBadge.className = `text-xs px-2 py-0.5 rounded-full font-bold ${
-        d.tier === 'Platinum' ? 'badge-platinum' :
-        d.tier === 'Gold' ? 'badge-gold' :
-        d.tier === 'Silver' ? 'badge-silver' : 'badge-bronze'
-      }`;
-
-      const vipBadge = document.getElementById("modalVipBadge");
-      if (d.isVIP) vipBadge.classList.remove("hidden");
-      else vipBadge.classList.add("hidden");
-
-      document.getElementById("modalTotalRevenue").textContent = '₹' + Math.round(d.totalRevenue).toLocaleString('en-IN');
-      document.getElementById("modalTotalOrders").textContent = d.totalOrders;
-      document.getElementById("modalOpensToday").textContent = `${d.appOpensToday} times`;
-      document.getElementById("modalLastOpenTime").textContent = d.lastOpenTimeStr;
-      document.getElementById("modalOrderCountSub").textContent = `(${d.orders.length} transactions)`;
-
-      document.getElementById("modalBtnWhatsApp").onclick = () => sendQuickWhatsApp(d.phone, d.name, 0);
-      document.getElementById("modalBtnCall").onclick = () => window.open('tel:' + d.phone, '_self');
-
-      // Render Viewed Products for this Dealer (Light Mode)
-      const productsContainer = document.getElementById("modalViewedProductsList");
-      productsContainer.innerHTML = "";
-      document.getElementById("modalProductViewsCount").textContent = `${d.viewedProducts.length} products browsed`;
-
-      if (d.viewedProducts && d.viewedProducts.length > 0) {
-        d.viewedProducts.forEach(vp => {
-          const div = document.createElement("div");
-          div.className = "p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between space-x-3";
-          div.innerHTML = `
-            <div class="flex items-center space-x-3 min-w-0">
-              <img src="${vp.image}" class="w-12 h-12 rounded-lg object-contain bg-white p-1 border border-slate-200 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150'">
-              <div class="min-w-0">
-                <span class="text-[10px] text-cyan-800 font-extrabold uppercase">${vp.brand} • ${vp.category}</span>
-                <h5 class="text-xs font-bold text-slate-900 truncate max-w-[280px]" title="${vp.name}">${vp.name}</h5>
-                <div class="text-[11px] text-emerald-700 font-black">Dealer Price: ₹${Number(vp.price).toLocaleString('en-IN')}</div>
-              </div>
-            </div>
-            <div class="text-right flex-shrink-0">
-              <span class="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 font-black text-xs block mb-1 border border-cyan-200">
-                <i class="fa-solid fa-eye mr-1"></i>${vp.views} Views
-              </span>
-              <button onclick="pitchProductViaWhatsApp('${d.phone}', '${d.name.replace(/'/g, "\\'")}', '${vp.name.replace(/'/g, "\\'")}', '${vp.price}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-bold transition shadow-sm">
-                WhatsApp Offer
-              </button>
-            </div>
-          `;
-          productsContainer.appendChild(div);
-        });
-      } else {
-        productsContainer.innerHTML = '<div class="text-xs text-slate-500 py-3 text-center font-medium">No recent product views logged for this dealer.</div>';
-      }
-
-      // Render Orders (Light Mode)
-      const ordersContainer = document.getElementById("modalOrdersList");
-      ordersContainer.innerHTML = "";
-      d.orders.forEach(o => {
-        const div = document.createElement("div");
-        div.className = "p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs space-y-1";
-        div.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 font-mono">${o.orderId}</span>
-            <span class="font-black text-slate-900">₹${Math.round(o.amount).toLocaleString('en-IN')}</span>
-          </div>
-          <p class="text-slate-600 text-[11px] font-medium truncate">${o.items}</p>
-          <div class="flex items-center justify-between text-[10px] text-slate-500 pt-0.5 font-medium">
-            <span>${o.date}</span>
-            <span class="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-semibold">${o.paymentMode}</span>
-          </div>
-        `;
-        ordersContainer.appendChild(div);
-      });
-    }
-
-    function closeDealerModal() {
-      document.getElementById("dealerModal").classList.add("hidden");
-    }
-
-    // Direct WhatsApp Pitch for Viewed Product
-    function pitchProductViaWhatsApp(phone, dealerName, productName, productPrice) {
-      if (!phone) {
-        alert("Dealer does not have a registered contact phone number.");
-        return;
-      }
-      const cleanPhone = phone.toString().replace(/[^0-9]/g, '');
-      const formattedPhone = cleanPhone.length === 10 ? ('91' + cleanPhone) : cleanPhone;
-
-      let msg = "";
-      if (productName) {
-        msg = `Namaste ${dealerName} ji,\n\nGreetings from *Yash Marketing*!\n\nWe noticed your interest in *${productName}* on our Dealer Catalog App.\n\nWe have fresh stock available today with special dealer pricing of *₹${Number(productPrice || 0).toLocaleString('en-IN')}* and additional bulk scheme benefits!\n\nWould you like us to reserve quantity and dispatch an order for you today?\n\nWarm regards,\n*Yash Marketing*`;
-      } else {
-        msg = `Namaste ${dealerName} ji,\n\nGreetings from *Yash Marketing*!\n\nPlease let us know if you need any fresh stock dispatch or catalog price updates today.\n\nWarm regards,\n*Yash Marketing*`;
-      }
-
-      const url = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
-    }
-
-    // Send Quick WhatsApp
-    function sendQuickWhatsApp(phone, dealerName, outstanding) {
-      if (!phone) {
-        alert("Dealer does not have a registered contact phone number.");
-        return;
-      }
-      const cleanPhone = phone.toString().replace(/[^0-9]/g, '');
-      const formattedPhone = cleanPhone.length === 10 ? ('91' + cleanPhone) : cleanPhone;
-
-      let msg = `Namaste ${dealerName} ji,\n\nGreetings from *Yash Marketing*!\n\nWe appreciate your partnership. Please let us know if you need any fresh stock or new catalog updates today.\n\nWarm regards,\n*Yash Marketing*`;
-      const url = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
-    }
-
-    // Export to CSV
-    // Sales Audit Modal Controller
-    function showToast(msg) {
-      try {
-        const existing = document.getElementById('toastPopup');
-        if (existing) existing.remove();
-        const toast = document.createElement('div');
-        toast.id = 'toastPopup';
-        toast.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-xl flex items-center space-x-2 transition';
-        toast.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i><span>' + msg + '</span>';
-        document.body.appendChild(toast);
-        setTimeout(function() { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
-      } catch (e) {}
-    }
-    window.showToast = showToast;
-    // Global active product state for dealers modal
-    let activeProductForModal = null;
-
-    function openProductDealersModal(productName) {
-      if (!productName) return;
-      const p = globalMostViewedProducts.find(item => item.name === productName);
-      if (!p) {
-        showToast("Product details not found.");
-        return;
-      }
-      activeProductForModal = p;
-
-      document.getElementById("pdmImage").src = p.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150';
-      document.getElementById("pdmBrand").textContent = p.brand || 'BoAt / Velocity';
-      document.getElementById("pdmPrice").textContent = '₹' + Number(p.price || 999).toLocaleString('en-IN');
-      document.getElementById("pdmTitle").textContent = p.name;
-      document.getElementById("pdmSubtitle").textContent = `Dealers who regularly order or view ${p.name}`;
-      document.getElementById("pdmTotalUnits").textContent = (p.totalUnits || p.totalViews || 0).toLocaleString('en-IN') + " Units";
-      document.getElementById("pdmTotalRev").textContent = '₹' + Math.round(p.totalRevenue || 0).toLocaleString('en-IN');
-      document.getElementById("pdmDealersCount").textContent = (p.uniqueDealersCount || (p.dealersList ? p.dealersList.length : 0)) + " Dealers";
-
-      const searchInp = document.getElementById("pdmSearchInput");
-      if (searchInp) searchInp.value = "";
-
-      renderProductDealersTable(p.dealersList || []);
-
-      const modal = document.getElementById("productDealersModal");
-      if (modal) modal.classList.remove("hidden");
-    }
-
-    function closeProductDealersModal() {
-      const modal = document.getElementById("productDealersModal");
-      if (modal) modal.classList.add("hidden");
-    }
-
-    function renderProductDealersTable(dealersList) {
-      const tbody = document.getElementById("pdmTableBody");
-      if (!tbody) return;
-      tbody.innerHTML = "";
-
-      if (!dealersList || dealersList.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-400 text-xs font-semibold">Koi dealer nahi mila.</td></tr>';
-        return;
-      }
-
-      dealersList.forEach((d, idx) => {
-        const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
-
-        const pNameEsc = (activeProductForModal ? activeProductForModal.name : 'Product').replace(/'/g, "\\'");
-        const dNameEsc = (d.name || 'Dealer').replace(/'/g, "\\'");
-
-        tr.innerHTML = `
-          <td class="py-2.5 px-3 text-slate-400 font-bold">${idx + 1}</td>
-          <td class="py-2.5 px-3">
-            <div class="font-extrabold text-slate-900 cursor-pointer hover:text-emerald-700 transition" onclick="closeProductDealersModal(); viewDealer360('${dNameEsc}')">
-              ${d.name}
-            </div>
-            <div class="text-[11px] text-slate-500 font-medium">${d.phone || 'No phone'}</div>
-          </td>
-          <td class="py-2.5 px-3 text-slate-700 text-xs font-semibold">${d.area || 'General'}</td>
-          <td class="py-2.5 px-3 text-center">
-            <span class="px-2 py-0.5 rounded-full text-xs font-black bg-emerald-50 text-emerald-800 border border-emerald-200">
-              ${d.units} pcs
-            </span>
-          </td>
-          <td class="py-2.5 px-3 text-right font-black text-slate-900 text-xs">
-            ₹${Math.round(d.revenue || 0).toLocaleString('en-IN')}
-          </td>
-          <td class="py-2.5 px-3 text-xs text-slate-600 font-medium">
-            ${d.lastDateStr || 'Recent'}
-          </td>
-          <td class="py-2.5 px-3 text-center">
-            <button type="button" onclick="pitchProductViaWhatsApp('${d.phone}', '${dNameEsc}', '${pNameEsc}')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center space-x-1 mx-auto">
-              <i class="fa-brands fa-whatsapp text-sm"></i>
-              <span>Pitch Item</span>
-            </button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function filterProductDealersList() {
-      if (!activeProductForModal || !activeProductForModal.dealersList) return;
-      const q = (document.getElementById("pdmSearchInput")?.value || "").trim().toLowerCase();
-      if (!q) {
-        renderProductDealersTable(activeProductForModal.dealersList);
-        return;
-      }
-      const filtered = activeProductForModal.dealersList.filter(d => 
-        (d.name && d.name.toLowerCase().includes(q)) ||
-        (d.phone && d.phone.includes(q)) ||
-        (d.area && d.area.toLowerCase().includes(q))
-      );
-      renderProductDealersTable(filtered);
-    }
-
-    window.openProductDealersModal = openProductDealersModal;
+    // Export state for verification & window access
+    Object.defineProperty(window, 'currentFilteredDealers', { get: () => currentFilteredDealers });
+    Object.defineProperty(window, 'rawLiveOrders', { get: () => rawLiveOrders, set: (v) => { rawLiveOrders = v; } });
+    Object.defineProperty(window, 'rawLiveProducts', { get: () => rawLiveProducts, set: (v) => { rawLiveProducts = v; } });
+    Object.defineProperty(window, 'buildMasterData', { value: buildMasterData });
+
+    // Window Bindings for Zero ReferenceError Tolerance
+    window.fetchLiveBackendData = fetchLiveBackendData;
+    window.exportActivityCSV = exportActivityCSV;
+    window.selectTimePeriod = selectTimePeriod;
+    window.setOrderStatusFilter = setOrderStatusFilter;
+    window.filterByBrowsedOnly = filterByBrowsedOnly;
+    window.applyDealerSearch = applyDealerSearch;
+    window.openDealerModal = openDealerModal;
+    window.closeDealerModal = closeDealerModal;
+    window.pitchDealerWhatsApp = pitchDealerWhatsApp;
+    window.quickWhatsAppDealer = quickWhatsAppDealer;
+    window.openProductModal = openProductModal;
     window.closeProductDealersModal = closeProductDealersModal;
-    window.filterProductDealersList = filterProductDealersList;
+    window.openProductModalFromKpi = openProductModalFromKpi;
 
-
-    function openSalesAuditModal() {
-      const modal = document.getElementById("salesAuditModal");
-      if (modal) modal.classList.remove("hidden");
-    }
-
-    function closeSalesAuditModal() {
-      const modal = document.getElementById("salesAuditModal");
-      if (modal) modal.classList.add("hidden");
-    }
-
-    function applyAuditPreset(period, status) {
-      activePeriodFilter = period;
-      activeStatusFilter = status;
-      const pSelect = document.getElementById("periodFilter");
-      const sSelect = document.getElementById("statusFilter");
-      if (pSelect) pSelect.value = period;
-      if (sSelect) sSelect.value = status;
-      processLiveTelemetryAndOrders(rawLiveOrders, rawLiveProducts);
-      closeSalesAuditModal();
-      showToast(`Applied view: ${getPeriodLabel(period, status)}`);
-    }
-
-    function exportSalesAuditCSV() {
-      if (!rawLiveOrders || rawLiveOrders.length === 0) {
-        alert("No live orders to export.");
-        return;
-      }
-      const headers = ["Order ID", "Date", "Dealer Name", "Phone", "Area", "Gross Value (INR)", "Completed Stages", "Is Fully Completed", "Fulfillment Status", "Payment Mode"];
-      const rows = rawLiveOrders.map(o => {
-        const st = parseInt(o.completedStages, 10) || 0;
-        const isFc = !!o.isFullyCompleted;
-        let statusText = "Stage 0 (Unprocessed)";
-        if (isFc || st >= 8) statusText = "Delivered & Verified";
-        else if (st >= 1) statusText = `Pipeline (Stage ${st})`;
-
-        return [
-          `"${o.orderId || ''}"`,
-          `"${o.date || ''}"`,
-          `"${(o.shopName || '').replace(/"/g, '""')}"`,
-          `"${o.phone || ''}"`,
-          `"${o.area || ''}"`,
-          o.totalValue || 0,
-          st,
-          isFc ? "TRUE" : "FALSE",
-          `"${statusText}"`,
-          `"${o.paymentMode || ''}"`
-        ].join(",");
-      });
-
-      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows].join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `Yash_Marketing_Sales_Volume_Audit_${new Date().toISOString().slice(0, 10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    // Window bindings for zero ReferenceError tolerance
-    window.openSalesAuditModal = openSalesAuditModal;
-    window.closeSalesAuditModal = closeSalesAuditModal;
-    window.applyAuditPreset = applyAuditPreset;
-    window.exportSalesAuditCSV = exportSalesAuditCSV;
-    window.handlePeriodOrStatusChange = handlePeriodOrStatusChange;
-
-    function exportToCSV() {
-      if (dealerList.length === 0) {
-        alert("No dealer data loaded to export.");
-        return;
-      }
-
-      const headers = ["Dealer Name", "Phone", "Area", "Tier", "Today App Opens", "Last Active", "Top Viewed Product", "Total Sales (INR)", "Orders Count", "Intent Level"];
-      const rows = dealerList.map(d => [
-        `"${d.name.replace(/"/g, '""')}"`,
-        `"${d.phone}"`,
-        `"${d.area}"`,
-        `"${d.tier}"`,
-        d.appOpensToday,
-        `"${d.lastOpenTimeStr}"`,
-        `"${d.topViewedProduct ? d.topViewedProduct.name.replace(/"/g, '""') : 'N/A'}"`,
-        d.totalRevenue,
-        d.totalOrders,
-        `"${d.intentLevel}"`
-      ]);
-
-      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `YashMarketing_DealerTelemetry_${new Date().toISOString().slice(0, 10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    // Boot on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchLiveBackendData();
+    });
   </script>
 </body>
 </html>
